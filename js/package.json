@@ -1,0 +1,36 @@
+{
+  "name": "hardware-wallet-nanopb",
+  "version": "1.7.0",
+  "description": "[![Build Status](https://travis-ci.com/skycoin/hardware-wallet-nanopb.svg?branch=master)](https://travis-ci.com/skycoin/hardware-wallet-nanopb)",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ./*.js",
+    "gen-proto": "./node_modules/.bin/pbjs -t static-module -w commonjs -o protob/skycoin.js protob/messages.proto protob/types.proto"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skycoin/hardware-wallet-protob.git"
+  },
+  "author": "Skycoin project",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/skycoin/hardware-wallet-protob/issues"
+  },
+  "homepage": "https://github.com/skycoin/hardware-wallet-protob#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "protobufjs": "^6.8.8",
+    "scanf": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^1.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^5.4.0",
+    "js-sha256": "^0.9.0",
+    "node-test": "^1.2.4"
+  }
+}

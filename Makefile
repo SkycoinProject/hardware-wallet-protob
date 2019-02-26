@@ -48,8 +48,10 @@ build-go: install-go ## Generate protobuf classes for go lang
 #----------------
 
 install-deps-js: ## Install tools to generate protobuf classes for javascript
+	cd $(REPO_ROOT)/js && npm install
 
 build-js: install-js ## Generate protobuf classes for javascript
+	cd $(REPO_ROOT)/js
 
 #----------------
 # C with nanopb
