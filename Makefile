@@ -10,10 +10,13 @@ PYTHON ?= python
 
 ifeq ($(TRAVIS),true)
   OS_NAME=$(TRAVIS_OS_NAME)
-else ifeq ($(UNAME_S,Linux))
-  OS_NAME=linux
-else ifeq ($(UNAME_S,Darwin))
-  OS_NAME=osx
+else
+  ifeq ($(UNAME_S),Linux)
+    OS_NAME=linux
+  endif
+  ifeq ($(UNAME_S),Darwin)
+    OS_NAME=osx
+  endif
 endif
 
 PROTOB_SPEC_DIR = $(REPO_ROOT)/protob
@@ -41,8 +44,10 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	git clone --branch v1.2.0 --depth 1 https://github.com/gogo/protobuf $(GOPATH)/src/github.com/gogo/protobuf
 	( cd $(GOPATH)/src/github.com/gogo/protobuf/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go ## Generate protobuf classes for go lang
-	protoc -I protob  --gogofast_out=go/ device-wallet/messages/messages.proto device-wallet/messages/types.proto device-wallet/messages/descriptor.proto
+build-go: install-deps-go go/messages.pb.go go/types.pb.go ## Generate protobuf classes for go lang
+
+go/%.pb.go: protob/messages/%.proto
+	protoc -I protob/messages --gogofast_out=$@ $<
 
 #----------------
 # Javascript
