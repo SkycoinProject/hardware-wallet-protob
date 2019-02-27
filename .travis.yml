@@ -1,8 +1,8 @@
-language: python
 matrix:
   include:
     - os: linux
       python: 3.5
+      language: python
       addons:
         apt:
           sources:
@@ -10,6 +10,7 @@ matrix:
       env:
         - PROTOBUF_VERSION=3.4.0
     - os: osx
+      language: generic
       env:
         - PROTOBUF_VERSION=3.6.1
 install:
