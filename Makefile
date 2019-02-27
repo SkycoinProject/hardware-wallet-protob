@@ -20,6 +20,8 @@ else
 endif
 
 PROTOB_SPEC_DIR = $(REPO_ROOT)/protob
+PROTOB_REPO_URL = github.com/gogo/protobuf
+PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOB_REPO_URL)
 
 PROTOC_VERSION ?= 3.6.1
 PROTOC_ZIP ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
@@ -43,8 +45,14 @@ install-protoc: /usr/local/bin/protoc
 #----------------
 
 install-deps-go: install-protoc ## Install tools to generate protobuf classes for go lang
-	git clone --branch v1.2.0 --depth 1 https://github.com/gogo/protobuf $(GOPATH)/src/github.com/gogo/protobuf
-	( cd $(GOPATH)/src/github.com/gogo/protobuf/protoc-gen-gogofast && go install )
+	if [ ! ( [ -d $(PROTOB_SRC_DIR) ] -o [ -e $(PROTOB_SRC_DIR) ] ) ] ; then \
+		@echo 'Cloning $(PROTOB_REPO_URL)' ; \
+		git clone --branch v1.2.0 --depth 1 https://$(PROTOB_REPO_URL) $(PROTOB_SRC_DIR) ; \
+	else \
+		@echo 'Detected $(PROTOB_REPO_URL) on local file system. Checking v1.2.0' \
+		cd $(PROTOB_SRC_DIR) && git checkout v1.2.0 ; \
+		endif
+	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
 build-go: install-deps-go go/messages.pb.go go/types.pb.go ## Generate protobuf classes for go lang
 
