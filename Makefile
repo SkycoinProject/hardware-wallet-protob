@@ -29,7 +29,9 @@ PROTO_FILES = $(shell find $(PROTOB_SPEC_DIR) -type f -name "*.go")
 
 all: build-go build-js build-nanopb ## Generate protobuf classes for all languages
 
-install-protoc:
+install-protoc: /usr/local/bin/protoc
+
+/usr/local/bin/protoc:
 	@echo "Downloading protobuf from $(PROTOC_URL)"
 	curl -OL $(PROTOC_URL)
 	@echo "Installing protoc"
