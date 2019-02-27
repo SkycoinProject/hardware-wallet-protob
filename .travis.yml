@@ -1,8 +1,8 @@
 language: python
-python: 3.5
 matrix:
   include:
     - os: linux
+      python: 3.5
       addons:
         apt:
           sources:
@@ -10,6 +10,7 @@ matrix:
       env:
         - PROTOBUF_VERSION=3.4.0
     - os: osx
+      python: 3.6
       env:
         - PROTOBUF_VERSION=3.6.1
 install:
@@ -20,9 +21,9 @@ install:
   # Install OS-specific dependencies
   - sh "./ci-scripts/install-${TRAVIS_OS_NAME}.sh"
   # Upgrade protobuf python
-  - pip3 install --user --upgrade protobuf
-  - pip3 install --user "protobuf==${PROTOBUF_VERSION}" ecdsa
-  - pip install --user --upgrade protobuf
+  - pip3 install --upgrade protobuf
+  - pip3 install "protobuf==${PROTOBUF_VERSION}" ecdsa
+  - pip install --upgrade protobuf
   # Install go
   - eval "$(gimme 1.10)"
 script:
