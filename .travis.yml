@@ -1,0 +1,30 @@
+language: generic
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+      env:
+        - PROTOBUF_VERSION=3.4.0
+    - os: osx
+      env:
+        - PROTOBUF_VERSION=3.6.1
+before_script:
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
+    export PATH="$PATH:$(pwd)/protoc/bin" ;
+    echo "PATH=$PATH";
+    fi
+  # Install OS-specific dependencies
+  - source "./ci-scripts/install-${TRAVIS_OS_NAME}.sh"
+  # Upgrade protobuf python
+  - pip3 install --user --upgrade protobuf
+  - pip3 install --user "protobuf==${PROTOBUF_VERSION}" ecdsa
+  - pip install --user --upgrade protobuf
+script:
+  - make all
+notifications:
+  # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
+  webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
+
