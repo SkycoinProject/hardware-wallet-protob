@@ -19,7 +19,13 @@ else
   endif
 endif
 
-PROTOB_SPEC_DIR = $(REPO_ROOT)/protob
+PROTOB_SPEC_DIR = protob
+PROTOB_MSG_DIR  = $(PROTOB_SPEC_DIR)/messages
+
+PROTOB_GO_DIR = go
+PROTOB_JS_DIR = js
+PROTOB_PY_DIR = nanopb/py
+PROTOB_C_DIR  = nanopb/c
 PROTOB_REPO_URL = github.com/gogo/protobuf
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOB_REPO_URL)
 
@@ -27,7 +33,12 @@ PROTOC_VERSION ?= 3.6.1
 PROTOC_ZIP ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
 PROTOC_URL ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 
-PROTO_FILES = $(shell find $(PROTOB_SPEC_DIR) -type f -name "*.go")
+PROTOB_MSG_FILES = $(shell ls -1 $(REPO_ROOT)/$(PROTOB_MSG_DIR)/*.proto)
+PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(PROTOB_MSG_FILES))
+PROTOB_MSG_GO    = $(patsubst %,$(PROTOB_GO_DIR)/%,$(PROTOB_MSG_FILES:.proto=.pb.go))
+PROTOB_MSG_JS    = $(patsubst %,$(PROTOB_JS_DIR)/%,$(PROTOB_MSG_FILES:.proto=.pb.js))
+PROTOB_MSG_PY    = $(patsubst %,$(PROTOB_PY_DIR)/%,$(PROTOB_MSG_FILES:.proto=_pb2.py))
+PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(PROTOB_MSG_FILES:.proto=.pb.c))
 
 all: build-go build-js build-nanopb ## Generate protobuf classes for all languages
 
@@ -54,9 +65,9 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 		endif
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go go/messages.pb.go go/types.pb.go ## Generate protobuf classes for go lang
+build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
 
-go/%.pb.go: protob/messages/%.proto
+$(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I protob/messages --gogofast_out=$@ $<
 
 #----------------
@@ -76,25 +87,25 @@ build-js: install-deps-js ## Generate protobuf classes for javascript
 install-deps-nanopb: ## Install tools to generate protobuf classes for C with nanopb
 	make -C vendor/nanopb/generator/proto/
 
-build-nanopb: install-deps-nanopb nanopb/c/messages.pb.c nanopb/c/types.pb.c nanopb/c/messages_map.h ## Generate protobuf classes for C with nanopb
+build-nanopb: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## Generate protobuf classes for C with nanopb
 
-nanopb/c/%.pb.c: nanopb/c/%.pb nanopb/c/%.options
+$(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(PYTHON) vendor/nanopb/generator/nanopb_generator.py $< -L '#include "%s"' -T
 
-nanopb/c/%.pb: protob/%.proto
-	protoc -I./vendor/nanopb/generator/proto/ -I. -I./protob $< -o $@
+$(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
+	protoc -I./vendor/nanopb/generator/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
 
-nanopb/messages_map.h: nanopb/py/messages_map.py nanopb/py/messages_pb2.py nanopb/py/types_pb2.py
+$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
 	$(PYTHON) $< > $@
 
 #----------------
 # Python with nanopb
 #----------------
 
-build-py: install-deps-nanopb nanopb/py/messages_pb2.py nanopb/py/types_pb2.py ## Generate protobuf classes for Python with nanopb
+build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for Python with nanopb
 
-nanopb/py/%_pb2.py: protob/%.proto
-	protoc -I../vendor/nanopb/generator/proto/ -I. $< --python_out=nanopb/py
+$(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
+	protoc -I../vendor/nanopb/generator/proto/ -I. -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
