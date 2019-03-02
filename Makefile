@@ -68,7 +68,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
 
 $(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I protob/messages --gogofast_out=$(PROTOB_MSG_GO) $<
+	protoc -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
 
 #----------------
 # Javascript
