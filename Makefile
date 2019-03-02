@@ -56,13 +56,13 @@ install-protoc: /usr/local/bin/protoc
 #----------------
 
 install-deps-go: install-protoc ## Install tools to generate protobuf classes for go lang
-	if [ ! ( [ -d $(PROTOB_SRC_DIR) ] -o [ -e $(PROTOB_SRC_DIR) ] ) ] ; then \
-		@echo 'Cloning $(PROTOB_REPO_URL)' ; \
-		git clone --branch v1.2.0 --depth 1 https://$(PROTOB_REPO_URL) $(PROTOB_SRC_DIR) ; \
-	else \
+	if [[ -d $(PROTOB_SRC_DIR) ]] || [[ -s $(PROTOB_SRC_DIR) ]] ; then \
 		@echo 'Detected $(PROTOB_REPO_URL) on local file system. Checking v1.2.0' \
 		cd $(PROTOB_SRC_DIR) && git checkout v1.2.0 ; \
-		endif
+	else \
+		@echo 'Cloning $(PROTOB_REPO_URL)' ; \
+		git clone --branch v1.2.0 --depth 1 https://$(PROTOB_REPO_URL) $(PROTOB_SRC_DIR) ; \
+	endif
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
