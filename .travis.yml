@@ -20,7 +20,8 @@ install:
     fi
   # Install OS-specific dependencies
   - sh "./ci-scripts/install-${TRAVIS_OS_NAME}.sh"
-  # Python 3.5.0 on osx
+  # Setup osx workspace
+  # Run Python 3.5.0 by default
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
     pyenv global 3.5.0;
     pyenv versions;
@@ -32,6 +33,10 @@ install:
   - pip install --upgrade protobuf
   # Install go
   - eval "$(gimme 1.10)"
+  - if [ -z "$GOPATH" ] ; then
+    mkdir -p $HOME/gopath ;
+    export GOPATH=$HOME/gopath ;
+    fi
 script:
   - make build-go
 #  - make build-nanopb
