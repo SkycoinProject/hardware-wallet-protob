@@ -35,7 +35,8 @@ install:
   - eval "$(gimme 1.10)"
   - if [ -z "$GOPATH" ] ; then
     mkdir -p $HOME/gopath ;
-    export GOPATH=$HOME/gopath ;
+    export GOPATH="$HOME/gopath" ;
+    export PATH="$PATH:$GOPATH/bin" ;
     fi
 script:
   - make build-go
