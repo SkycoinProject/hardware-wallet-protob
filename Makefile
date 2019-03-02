@@ -45,9 +45,9 @@ all: build-go build-js build-nanopb ## Generate protobuf classes for all languag
 install-protoc: /usr/local/bin/protoc
 
 /usr/local/bin/protoc:
-	@echo "Downloading protobuf from $(PROTOC_URL)"
+	echo "Downloading protobuf from $(PROTOC_URL)"
 	curl -OL $(PROTOC_URL)
-	@echo "Installing protoc"
+	echo "Installing protoc"
 	sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
 	rm -f $(PROTOC_ZIP)
 
@@ -57,10 +57,10 @@ install-protoc: /usr/local/bin/protoc
 
 install-deps-go: install-protoc ## Install tools to generate protobuf classes for go lang
 	if [[ -e $(PROTOB_SRC_DIR) ]] ; then \
-		@echo 'Detected $(PROTOB_REPO_URL) on local file system. Checking v1.2.0' \
+		echo 'Detected $(PROTOB_REPO_URL) on local file system. Checking v1.2.0' \
 		cd $(PROTOB_SRC_DIR) && git checkout v1.2.0 ; \
 	else \
-		@echo 'Cloning $(PROTOB_REPO_URL)' ; \
+		echo 'Cloning $(PROTOB_REPO_URL)' ; \
 		git clone --branch v1.2.0 --depth 1 https://$(PROTOB_REPO_URL) $(PROTOB_SRC_DIR) ; \
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
