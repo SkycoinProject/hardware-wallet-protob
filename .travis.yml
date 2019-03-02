@@ -33,7 +33,10 @@ install:
   # Install go
   - eval "$(gimme 1.10)"
 script:
-  - make all
+  - make build-go
+  - make build-nanopb
+  - make build-py
+  - make build-js
 notifications:
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
