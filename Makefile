@@ -68,7 +68,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
 
 $(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I protob/messages --gogofast_out=$@ $<
+	protoc -I protob/messages --gogofast_out=$(PROTOB_MSG_GO) $<
 
 #----------------
 # Javascript
@@ -93,7 +93,7 @@ $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(PYTHON) vendor/nanopb/generator/nanopb_generator.py $< -L '#include "%s"' -T
 
 $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./vendor/nanopb/generator/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
+	protoc -I./vendor/nanopb/generator/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $(PROTOB_C_DIR)
 
 $(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
 	$(PYTHON) $< > $@
