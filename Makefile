@@ -33,12 +33,12 @@ PROTOC_VERSION ?= 3.6.1
 PROTOC_ZIP ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
 PROTOC_URL ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 
-PROTOB_MSG_FILES = $(shell ls -1 $(REPO_ROOT)/$(PROTOB_MSG_DIR)/*.proto)
-PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(PROTOB_MSG_FILES))
-PROTOB_MSG_GO    = $(patsubst %,$(PROTOB_GO_DIR)/%,$(PROTOB_MSG_FILES:.proto=.pb.go))
-PROTOB_MSG_JS    = $(patsubst %,$(PROTOB_JS_DIR)/%,$(PROTOB_MSG_FILES:.proto=.pb.js))
-PROTOB_MSG_PY    = $(patsubst %,$(PROTOB_PY_DIR)/%,$(PROTOB_MSG_FILES:.proto=_pb2.py))
-PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(PROTOB_MSG_FILES:.proto=.pb.c))
+PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
+PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(notdir $(PROTOB_MSG_FILES)))
+PROTOB_MSG_GO    = $(patsubst %,$(PROTOB_GO_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.go)))
+PROTOB_MSG_JS    = $(patsubst %,$(PROTOB_JS_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.js)))
+PROTOB_MSG_PY    = $(patsubst %,$(PROTOB_PY_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=_pb2.py)))
+PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.c)))
 
 all: build-go build-js build-nanopb ## Generate protobuf classes for all languages
 
