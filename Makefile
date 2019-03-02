@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
-.PHONY: help
-.PHONY: build-go   build-js   build-nanopb
-.PHONY: install-deps-go install-deps-js install-deps-nanopb
+.PHONY: help all
+.PHONY: build-go build-js build-nanopb build-py
+.PHONY: install-deps-go install-deps-js install-deps-nanopb install-protoc
 
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
