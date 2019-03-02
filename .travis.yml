@@ -40,8 +40,8 @@ install:
     fi
 script:
   - make build-go
-#  - make build-nanopb
-#  - make build-py
+  - make build-nanopb
+  - make build-py
   - make build-js
 notifications:
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
