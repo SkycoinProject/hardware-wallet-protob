@@ -30,8 +30,8 @@ PROTOB_MSG_DIR  = $(PROTOB_SPEC_DIR)/messages
 
 PROTOB_GO_DIR = go
 PROTOB_JS_DIR = js
-PROTOB_PY_DIR = nanopb/py
-PROTOB_C_DIR  = nanopb/c
+PROTOB_PY_DIR = py
+PROTOB_C_DIR  = c
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 
 PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
