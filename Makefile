@@ -56,8 +56,8 @@ install-protoc: /usr/local/bin/protoc
 #----------------
 
 install-deps-go: install-protoc ## Install tools to generate protobuf classes for go lang
-	if [[ -e $(PROTOB_SRC_DIR) ]] ; then \
-		echo 'Detected $(PROTOB_REPO_URL) on local file system. Checking v1.2.0' \
+	@if [ -e $(PROTOB_SRC_DIR) ] ; then \
+		echo 'Detected $(PROTOB_REPO_URL) on local file system. Checking v1.2.0' ; \
 		cd $(PROTOB_SRC_DIR) && git checkout v1.2.0 ; \
 	else \
 		echo 'Cloning $(PROTOB_REPO_URL)' ; \
