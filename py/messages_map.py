@@ -48,8 +48,13 @@ for message in MessageType.DESCRIPTOR.values:
     extensions = message.GetOptions().Extensions
 
     for extension in (wire_in, wire_out, wire_debug_in, wire_debug_out):
-        if extensions[extension]:
-            messages[extension].append(message)
+        try:
+            value = extensions[extension]
+        except KeyError:
+            pass
+        else:
+            if value:
+                messages[extension].append(message)
 
 for extension in (wire_in, wire_out, wire_debug_in, wire_debug_out):
     if extension == wire_debug_in:

@@ -91,13 +91,14 @@ install-deps-nanopb: ## Install tools to generate protobuf classes for C with na
 build-c: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## Generate protobuf classes for C with nanopb
 
 $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
+#c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py $< -L '#include "%s"' -T
 
 $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $(PROTOB_C_DIR)
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
 
-$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
-	$(PYTHON) $< > $@
+$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py $(PROTOB_PY_DIR)/descriptor_pb2.py
+	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
 #----------------
 # Python with nanopb
@@ -106,7 +107,7 @@ $(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR
 build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for Python with nanopb
 
 $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
+	protoc -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
