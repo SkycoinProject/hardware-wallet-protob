@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Generate protobuffer classes for go lang with `gogofast` plugin for `protoc`
+- Generate protobuffer classes for Javascript with `pbjs`
+- Generate protobuffer classes for C and Python with `nanopb` and Python plugin for `protoc`
 
 ### Fixed
 
