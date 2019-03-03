@@ -44,7 +44,7 @@ script:
   - make build-py
   - make build-js
   - make clean
-  - git status
+  - git checkout -- js/package-lock.json && git status
   - test -z "$(git status --porcelain)"
 notifications:
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration

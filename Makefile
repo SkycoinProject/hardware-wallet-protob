@@ -88,7 +88,7 @@ build-js: install-deps-js ## Generate protobuf classes for javascript
 	cd $(REPO_ROOT)/js && npm run gen-proto
 
 clean-js:
-	rm -rf $(PROTOB_JS_DIR)/skycoin.js $(PROTOB_JS_DIR)/node-modules
+	rm -rf $(PROTOB_JS_DIR)/skycoin.js $(PROTOB_JS_DIR)/node_modules
 
 #----------------
 # C with nanopb
@@ -110,7 +110,7 @@ $(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR
 	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
 clean-c:
-	rm -rf $(PROTOB_C_DIR)/*.pb.{c,h} $(PROTOB_C_DIR)/messages_map.h
+	rm -rf $(PROTOB_C_DIR)/*.pb.c $(PROTOB_C_DIR)/*.pb.h $(PROTOB_C_DIR)/messages_map.h
 
 #----------------
 # Python with nanopb
