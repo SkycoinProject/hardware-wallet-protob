@@ -40,9 +40,12 @@ install:
     fi
 script:
   - make build-go
-#  - make build-nanopb
-#  - make build-py
-#  - make build-js
+  - make build-c
+  - make build-py
+  - make build-js
+  - make clean
+  - git checkout -- js/package-lock.json && git status
+  - test -z "$(git status --porcelain)"
 notifications:
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
