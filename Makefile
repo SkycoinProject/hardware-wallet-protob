@@ -110,7 +110,12 @@ $(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR
 	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
 clean-c:
-	rm -rf $(PROTOB_C_DIR)/*.pb.c $(PROTOB_C_DIR)/*.pb.h $(PROTOB_C_DIR)/messages_map.h
+	rm -rf $(PROTOB_C_DIR)/messages_map.h \
+		$$( find $(PROTOB_C_DIR) -name '*.pb.c' ) \
+		$$( find $(PROTOB_C_DIR) -name '*.pb.h' ) \
+		$$( find $(PROTOB_C_DIR) -name '*.i' ) \
+		$$( find $(PROTOB_C_DIR) -name '*.s' ) \
+		$$( find $(PROTOB_C_DIR) -name '*.o' )
 
 #----------------
 # Python with nanopb
@@ -122,7 +127,11 @@ $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
 
 clean-py:
-	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py
+	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py \
+		$$( find $(PROTOB_PY_DIR) -name '*_pb2.py' ) \
+		$$( find $(PROTOB_PY_DIR) -name '*.pyc' ) \
+		$$( find $(PROTOB_PY_DIR) -name '*.pyd' ) \
+		$$( find $(PROTOB_PY_DIR) -name '*.pyo' )
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
