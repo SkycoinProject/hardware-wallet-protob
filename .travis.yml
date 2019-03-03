@@ -40,7 +40,7 @@ install:
     fi
 script:
   - make build-go
-  - make build-nanopb
+  - make build-c
   - make build-py
   - make build-js
 notifications:

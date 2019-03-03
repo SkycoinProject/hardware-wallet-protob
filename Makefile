@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 .PHONY: help all
-.PHONY: build-go build-js build-nanopb build-py
+.PHONY: build-go build-js build-c build-py
 .PHONY: install-deps-go install-deps-js install-deps-nanopb install-protoc
 
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -41,7 +41,7 @@ PROTOB_MSG_JS    = $(patsubst %,$(PROTOB_JS_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.
 PROTOB_MSG_PY    = $(patsubst %,$(PROTOB_PY_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=_pb2.py)))
 PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.c)))
 
-all: build-go build-js build-nanopb ## Generate protobuf classes for all languages
+all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
 
 install-protoc: /usr/local/bin/protoc
 
@@ -88,7 +88,7 @@ build-js: install-deps-js ## Generate protobuf classes for javascript
 install-deps-nanopb: ## Install tools to generate protobuf classes for C with nanopb
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 
-build-nanopb: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## Generate protobuf classes for C with nanopb
+build-c: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## Generate protobuf classes for C with nanopb
 
 $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py $< -L '#include "%s"' -T
