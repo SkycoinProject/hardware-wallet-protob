@@ -1,7 +1,8 @@
 .DEFAULT_GOAL := help
-.PHONY: help all
+.PHONY: help all clean
 .PHONY: build-go build-js build-c build-py
 .PHONY: install-deps-go install-deps-js install-deps-nanopb install-protoc
+.PHONY: clean-go clean-js clean-c clean-py
 
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
@@ -43,6 +44,8 @@ PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.p
 
 all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
 
+clean: clean-go clean-js clean-c clean-py ## Delete temporary and output files
+
 install-protoc: /usr/local/bin/protoc
 
 /usr/local/bin/protoc:
@@ -71,6 +74,9 @@ build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go l
 $(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
 
+clean-go:
+	rm $(PROTOB_GO_DIR)/*.pb.go
+
 #----------------
 # Javascript
 #----------------
@@ -80,6 +86,9 @@ install-deps-js: ## Install tools to generate protobuf classes for javascript
 
 build-js: install-deps-js ## Generate protobuf classes for javascript
 	cd $(REPO_ROOT)/js && npm run gen-proto
+
+clean-js:
+	rm -rf $(PROTOB_JS_DIR)/skycoin.js $(PROTOB_JS_DIR)/node-modules
 
 #----------------
 # C with nanopb
@@ -100,6 +109,9 @@ $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 $(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py $(PROTOB_PY_DIR)/descriptor_pb2.py
 	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
+clean-c:
+	rm -rf $(PROTOB_C_DIR)/*.pb.{c,h} $(PROTOB_C_DIR)/messages_map.h
+
 #----------------
 # Python with nanopb
 #----------------
@@ -108,6 +120,9 @@ build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for 
 
 $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
+
+clean-py:
+	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

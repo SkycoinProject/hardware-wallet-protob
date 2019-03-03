@@ -43,7 +43,8 @@ script:
   - make build-c
   - make build-py
   - make build-js
-  - git status
+  - make clean
+  - if [ ! -z "$(git status)" ] ; then false ; fi
 notifications:
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
