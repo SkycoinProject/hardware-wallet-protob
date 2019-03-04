@@ -1,14 +1,17 @@
-/Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb_encode.o: \
-  /Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb_encode.c \
-  /Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/emulator/emulator.h \
-  /Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb.h \
-  /Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb_encode.h \
-  /Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb_common.h
+/mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb_encode.o: \
+ /mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb_encode.c \
+ /mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//emulator/emulator.h \
+ /mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//emulator/strl.h \
+ /mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb.h \
+ /mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb_encode.h \
+ /mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb_common.h
 
-/Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/emulator/emulator.h:
+/mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//emulator/emulator.h:
 
-/Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb.h:
+/mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//emulator/strl.h:
 
-/Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb_encode.h:
+/mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb.h:
 
-/Users/olemis/Downloads/_/projects/_git/skycoin/hardware-wallet/tiny-firmware/vendor/nanopb/pb_common.h:
+/mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb_encode.h:
+
+/mnt/WORK/SkyCoin/hardware-wallet/tiny-firmware//protob/nanopb/vendor/nanopb/pb_common.h:
