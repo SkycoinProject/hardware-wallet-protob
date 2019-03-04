@@ -109,7 +109,7 @@ $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 $(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
 	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
-clean-c:
+clean-c: clean-py
 	rm -rf $(PROTOB_C_DIR)/messages_map.h \
 		$$( find $(PROTOB_C_DIR) -name '*.pb.c' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.pb.h' ) \
