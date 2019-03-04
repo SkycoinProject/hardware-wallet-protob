@@ -72,7 +72,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
 
 $(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
 
 clean-go:
 	rm $(PROTOB_GO_DIR)/*.pb.go
@@ -106,7 +106,7 @@ $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
 
-$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py $(PROTOB_PY_DIR)/descriptor_pb2.py
+$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
 	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
 clean-c:
@@ -124,7 +124,7 @@ clean-c:
 build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for Python with nanopb
 
 $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
 
 clean-py:
 	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py \
