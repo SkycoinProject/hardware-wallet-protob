@@ -105,7 +105,9 @@ build-c: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## G
 
 $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 #c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
-	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py $< -L '#include "%s"' -T
+	$(eval PROTOBUF_FILE_OPTIONS := $(subst pb,options,$<))
+	$(eval PROTOBUF_FILE_OPTIONS = $(subst c/,,$(PROTOBUF_FILE_OPTIONS)))
+	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py -f $(PROTOB_MSG_DIR)/$(PROTOBUF_FILE_OPTIONS) $< -L '#include "%s"' -T
 
 $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
