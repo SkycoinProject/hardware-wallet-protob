@@ -45,6 +45,10 @@ PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.p
 all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
 
 clean: clean-go clean-js clean-c clean-py ## Delete temporary and output files
+	rm -rf \
+		$$( find . -name '*.swp' ) \
+		$$( find . -name '*.swo' ) \
+		$$( find . -name '*.orig' )
 
 install-protoc: /usr/local/bin/protoc
 
@@ -72,7 +76,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
 
 $(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
 
 clean-go:
 	rm $(PROTOB_GO_DIR)/*.pb.go
@@ -106,13 +110,14 @@ $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
 
-$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py $(PROTOB_PY_DIR)/descriptor_pb2.py
+$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
 	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
 
-clean-c:
+clean-c: clean-py
 	rm -rf $(PROTOB_C_DIR)/messages_map.h \
 		$$( find $(PROTOB_C_DIR) -name '*.pb.c' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.pb.h' ) \
+		$$( find $(PROTOB_C_DIR) -name '*.d' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.i' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.s' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.o' )
@@ -124,7 +129,7 @@ clean-c:
 build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for Python with nanopb
 
 $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
 
 clean-py:
 	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py \
