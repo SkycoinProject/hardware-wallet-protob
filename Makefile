@@ -45,6 +45,10 @@ PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.p
 all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
 
 clean: clean-go clean-js clean-c clean-py ## Delete temporary and output files
+	rm -rf \
+		$$( find . -name '*.swp' ) \
+		$$( find . -name '*.swo' ) \
+		$$( find . -name '*.orig' )
 
 install-protoc: /usr/local/bin/protoc
 
@@ -113,6 +117,7 @@ clean-c: clean-py
 	rm -rf $(PROTOB_C_DIR)/messages_map.h \
 		$$( find $(PROTOB_C_DIR) -name '*.pb.c' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.pb.h' ) \
+		$$( find $(PROTOB_C_DIR) -name '*.d' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.i' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.s' ) \
 		$$( find $(PROTOB_C_DIR) -name '*.o' )
