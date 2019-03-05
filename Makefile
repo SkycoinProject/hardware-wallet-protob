@@ -39,7 +39,6 @@ PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
 PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(notdir $(PROTOB_MSG_FILES)))
 PROTOB_MSG_GO    = $(patsubst %,$(PROTOB_GO_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.go)))
-PROTOB_MSG_JS    = $(patsubst %,$(PROTOB_JS_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.js)))
 PROTOB_MSG_PY    = $(patsubst %,$(PROTOB_PY_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=_pb2.py)))
 PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.c)))
 
@@ -97,10 +96,10 @@ clean-go:
 #----------------
 
 install-deps-js: ## Install tools to generate protobuf classes for javascript
-	cd $(REPO_ROOT)/js && npm install
+	cd $(REPO_ROOT)js && npm install
 
 build-js: install-deps-js ## Generate protobuf classes for javascript
-	cd $(REPO_ROOT)/js && npm run gen-proto
+	cd $(REPO_ROOT)js && npm run gen-proto
 
 clean-js:
 	rm -rf $(OUT_JS)/skycoin.js $(OUT_JS)/node_modules
