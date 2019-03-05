@@ -83,7 +83,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
+build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang, consider using GO_VENDOR_DIR variable from command line
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(GO_VENDOR_DIR) nanopb/vendor/nanopb/generator/proto/google/protobuf/descriptor.proto
 
 $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
