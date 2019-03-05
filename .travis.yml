@@ -14,8 +14,6 @@ matrix:
       env:
         - PROTOBUF_VERSION=3.6.1
 install:
-  - git --version
-  - exit 1
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     export PATH="$PATH:$HOME/bin" ;
     echo "PATH=$PATH";
