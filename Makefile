@@ -112,7 +112,7 @@ clean-js:
 install-deps-nanopb: ## Install tools to generate protobuf classes for C and Python with nanopb
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 
-build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
+build-c: install-deps-nanopb descriptor_pb2.py $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
 
 $(OUT_C)/%.pb.c: $(OUT_C)/%.pb $(PROTOB_MSG_DIR)/%.options
 #c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
@@ -124,7 +124,7 @@ $(OUT_C)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
 
 $(OUT_C)/messages_map.h: $(OUT_PY)/messages_map.py $(OUT_PY)/messages_pb2.py $(OUT_PY)/types_pb2.py
-	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(OUT_PY)" $(PYTHON) $< > $@
+	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)$(OUT_PY)" $(PYTHON) $< > $@
 
 clean-c: clean-py
 	rm -rf $(OUT_C)/messages_map.h \
@@ -138,6 +138,9 @@ clean-c: clean-py
 #----------------
 # Python with nanopb
 #----------------
+
+descriptor_pb2.py:
+	protoc -I$(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf descriptor.proto --python_out=$(OUT_PY)
 
 build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for Python with nanopb
 
