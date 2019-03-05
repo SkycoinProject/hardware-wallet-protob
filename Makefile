@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help all clean
+.PHONY: help all clean install
 .PHONY: build-go build-js build-c build-py
 .PHONY: install-deps-go install-deps-js install-deps-nanopb install-protoc
 .PHONY: clean-go clean-js clean-c clean-py
@@ -42,7 +42,16 @@ PROTOB_MSG_JS    = $(patsubst %,$(PROTOB_JS_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.
 PROTOB_MSG_PY    = $(patsubst %,$(PROTOB_PY_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=_pb2.py)))
 PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.c)))
 
+# Output dirs
+
+OUT_GO ?= $(PROTOB_GO_DIR)
+OUT_JS ?= $(PROTOB_JS_DIR)
+OUT_PY ?= $(PROTOB_PY_DIR)
+OUT_C  ?= $(PROTOB_C_DIR)
+
 all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
+
+install: install-deps-go install-deps-js install-deps-nanopb install-protoc ## Install protocol buffer tools
 
 clean: clean-go clean-js clean-c clean-py ## Delete temporary and output files
 	rm -rf \
@@ -75,11 +84,11 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
 
-$(PROTOB_GO_DIR)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(PROTOB_GO_DIR) $<
+$(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $<
 
 clean-go:
-	rm $(PROTOB_GO_DIR)/*.pb.go
+	rm $(OUT_GO)/*.pb.go
 
 #----------------
 # Javascript
@@ -92,37 +101,37 @@ build-js: install-deps-js ## Generate protobuf classes for javascript
 	cd $(REPO_ROOT)/js && npm run gen-proto
 
 clean-js:
-	rm -rf $(PROTOB_JS_DIR)/skycoin.js $(PROTOB_JS_DIR)/node_modules
+	rm -rf $(OUT_JS)/skycoin.js $(OUT_JS)/node_modules
 
 #----------------
 # C with nanopb
 #----------------
 
-install-deps-nanopb: ## Install tools to generate protobuf classes for C with nanopb
+install-deps-nanopb: ## Install tools to generate protobuf classes for C and Python with nanopb
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 
-build-c: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## Generate protobuf classes for C with nanopb
+build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
 
-$(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
+$(OUT_C)/%.pb.c: $(OUT_C)/%.pb $(PROTOB_MSG_DIR)/%.options
 #c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(eval PROTOBUF_FILE_OPTIONS := $(subst pb,options,$<))
 	$(eval PROTOBUF_FILE_OPTIONS = $(subst c/,,$(PROTOBUF_FILE_OPTIONS)))
 	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py -f $(PROTOB_MSG_DIR)/$(PROTOBUF_FILE_OPTIONS) $< -L '#include "%s"' -T
 
-$(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
+$(OUT_C)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
 
-$(PROTOB_C_DIR)/messages_map.h: $(PROTOB_PY_DIR)/messages_map.py $(PROTOB_PY_DIR)/messages_pb2.py $(PROTOB_PY_DIR)/types_pb2.py
-	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(PROTOB_PY_DIR)" $(PYTHON) $< > $@
+$(OUT_C)/messages_map.h: $(OUT_PY)/messages_map.py $(OUT_PY)/messages_pb2.py $(OUT_PY)/types_pb2.py
+	PYTHONPATH="$$PYTHONPATH:$(REPO_ROOT)/$(OUT_PY)" $(PYTHON) $< > $@
 
 clean-c: clean-py
-	rm -rf $(PROTOB_C_DIR)/messages_map.h \
-		$$( find $(PROTOB_C_DIR) -name '*.pb.c' ) \
-		$$( find $(PROTOB_C_DIR) -name '*.pb.h' ) \
-		$$( find $(PROTOB_C_DIR) -name '*.d' ) \
-		$$( find $(PROTOB_C_DIR) -name '*.i' ) \
-		$$( find $(PROTOB_C_DIR) -name '*.s' ) \
-		$$( find $(PROTOB_C_DIR) -name '*.o' )
+	rm -rf $(OUT_C)/messages_map.h \
+		$$( find $(OUT_C) -name '*.pb.c' ) \
+		$$( find $(OUT_C) -name '*.pb.h' ) \
+		$$( find $(OUT_C) -name '*.d' ) \
+		$$( find $(OUT_C) -name '*.i' ) \
+		$$( find $(OUT_C) -name '*.s' ) \
+		$$( find $(OUT_C) -name '*.o' )
 
 #----------------
 # Python with nanopb
@@ -130,8 +139,8 @@ clean-c: clean-py
 
 build-py: install-deps-nanopb $(PROTOB_MSG_PY) ## Generate protobuf classes for Python with nanopb
 
-$(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
-	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
+$(OUT_PY)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I./$(PROTOB_MSG_DIR) $< --python_out=$(OUT_PY)
 
 clean-py:
 	rm -rf \
