@@ -51,7 +51,7 @@ all                            Generate protobuf classes for all languages
 install                        Install protocol buffer tools
 clean                          Delete temporary and output files
 install-deps-go                Install tools to generate protobuf classes for go lang
-build-go                       Generate protobuf classes for go lang, consider using GO_VENDOR_DIR variable from command line
+build-go                       Generate protobuf classes for go lang
 install-deps-js                Install tools to generate protobuf classes for javascript
 build-js                       Generate protobuf classes for javascript
 install-deps-nanopb            Install tools to generate protobuf classes for C and Python with nanopb
