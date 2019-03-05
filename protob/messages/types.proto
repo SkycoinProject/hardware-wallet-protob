@@ -10,9 +10,9 @@ syntax = "proto2";
 // Sugar for easier handling in Java
 option java_package = "com.satoshilabs.trezor.lib.protobuf";
 option java_outer_classname = "TrezorType";
-option go_package = "messages";
+option go_package = "google_protobuf";
 
-import "google/protobuf/descriptor.proto";
+import "descriptor.proto";
 
 /**
  * Options for specifying message direction and type of wire (normal/debug)
