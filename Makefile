@@ -143,11 +143,12 @@ $(OUT_PY)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I./$(PROTOB_MSG_DIR) $< --python_out=$(OUT_PY)
 
 clean-py:
-	rm -rf $(OUT_PY)/__pycache__/ py/*_pb2.py \
-		$$( find $(OUT_PY) -name '*_pb2.py' ) \
-		$$( find $(OUT_PY) -name '*.pyc' ) \
-		$$( find $(OUT_PY) -name '*.pyd' ) \
-		$$( find $(OUT_PY) -name '*.pyo' )
+	rm -rf \
+		$$( find . -name '__pycache__' ) \
+		$$( find . -name '*_pb2.py' ) \
+		$$( find . -name '*.pyc' ) \
+		$$( find . -name '*.pyd' ) \
+		$$( find . -name '*.pyo' )
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
