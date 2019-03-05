@@ -91,6 +91,7 @@ $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 
 clean-go:
 	rm $(OUT_GO)/*.pb.go
+	rm $(GO_VENDOR_DIR)/google/protobuf/descriptor.pb.go
 
 #----------------
 # Javascript
