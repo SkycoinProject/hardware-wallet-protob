@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: help all clean
+.PHONY: help all clean install
 .PHONY: build-go build-js build-c build-py
 .PHONY: install-deps-go install-deps-js install-deps-nanopb install-protoc
 .PHONY: clean-go clean-js clean-c clean-py
@@ -50,6 +50,8 @@ OUT_PY ?= $(PROTOB_PY_DIR)
 OUT_C  ?= $(PROTOB_C_DIR)
 
 all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
+
+install: install-deps-go install-deps-js install-deps-nanopb install-protoc ## Install protocol buffer tools
 
 clean: clean-go clean-js clean-c clean-py ## Delete temporary and output files
 	rm -rf \
@@ -105,7 +107,7 @@ clean-js:
 # C with nanopb
 #----------------
 
-install-deps-nanopb: ## Install tools to generate protobuf classes for C with nanopb
+install-deps-nanopb: ## Install tools to generate protobuf classes for C and Python with nanopb
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 
 build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
