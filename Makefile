@@ -105,7 +105,9 @@ build-c: install-deps-nanopb $(PROTOB_MSG_C) $(PROTOB_C_DIR)/messages_map.h ## G
 
 $(PROTOB_C_DIR)/%.pb.c: $(PROTOB_C_DIR)/%.pb $(PROTOB_MSG_DIR)/%.options
 #c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
-	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py $< -L '#include "%s"' -T
+	$(eval PROTOBUF_FILE_OPTIONS := $(subst pb,options,$<))
+	$(eval PROTOBUF_FILE_OPTIONS = $(subst c/,,$(PROTOBUF_FILE_OPTIONS)))
+	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py -f $(PROTOB_MSG_DIR)/$(PROTOBUF_FILE_OPTIONS) $< -L '#include "%s"' -T
 
 $(PROTOB_C_DIR)/%.pb: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I. -I./$(PROTOB_MSG_DIR) $< -o $@
@@ -132,11 +134,12 @@ $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I./$(PROTOB_MSG_DIR) $< --python_out=$(PROTOB_PY_DIR)
 
 clean-py:
-	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py \
-		$$( find $(PROTOB_PY_DIR) -name '*_pb2.py' ) \
-		$$( find $(PROTOB_PY_DIR) -name '*.pyc' ) \
-		$$( find $(PROTOB_PY_DIR) -name '*.pyd' ) \
-		$$( find $(PROTOB_PY_DIR) -name '*.pyo' )
+	rm -rf \
+		$$( find . -name '__pycache__' ) \
+		$$( find . -name '*_pb2.py' ) \
+		$$( find . -name '*.pyc' ) \
+		$$( find . -name '*.pyd' ) \
+		$$( find . -name '*.pyo' )
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
