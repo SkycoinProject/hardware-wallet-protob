@@ -44,10 +44,10 @@ PROTOB_MSG_C     = $(patsubst %,$(PROTOB_C_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.p
 
 # Output dirs
 
-OUT_GO ?= PROTOB_GO_DIR
-OUT_JS ?= PROTOB_JS_DIR
-OUT_PY ?= PROTOB_PY_DIR
-OUT_C  ?= PROTOB_C_DIR
+OUT_GO ?= $(PROTOB_GO_DIR)
+OUT_JS ?= $(PROTOB_JS_DIR)
+OUT_PY ?= $(PROTOB_PY_DIR)
+OUT_C  ?= $(PROTOB_C_DIR)
 
 all: build-go build-js build-c build-py ## Generate protobuf classes for all languages
 
