@@ -135,6 +135,7 @@ $(PROTOB_PY_DIR)/%_pb2.py: $(PROTOB_MSG_DIR)/%.proto
 
 clean-py:
 	rm -rf $(PROTOB_PY_DIR)/__pycache__/ py/*_pb2.py \
+		$(PROTOC_NANOPBGEN_DIR)/proto/__pycache__/ $(PROTOC_NANOPBGEN_DIR)/proto/*_pb2.py \
 		$$( find $(PROTOB_PY_DIR) -name '*_pb2.py' ) \
 		$$( find $(PROTOB_PY_DIR) -name '*.pyc' ) \
 		$$( find $(PROTOB_PY_DIR) -name '*.pyd' ) \
