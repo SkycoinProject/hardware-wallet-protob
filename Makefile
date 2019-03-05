@@ -29,6 +29,7 @@ PROTOC_NANOPBGEN_DIR = nanopb/vendor/nanopb/generator
 PROTOB_SPEC_DIR = protob
 PROTOB_MSG_DIR  = $(PROTOB_SPEC_DIR)/messages
 
+GO_VENDOR_DIR ?= go
 PROTOB_GO_DIR = go
 PROTOB_JS_DIR = js
 PROTOB_PY_DIR = py
@@ -81,7 +82,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
+build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang, consider using GO_VENDOR_DIR variable from command line
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf --gogofast_out=$(OUT_GO) nanopb/vendor/nanopb/generator/proto/google/protobuf/descriptor.proto
 
 $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
