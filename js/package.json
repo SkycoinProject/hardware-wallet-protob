@@ -4,7 +4,7 @@
   "description": "[![Build Status](https://travis-ci.com/skycoin/hardware-wallet-nanopb.svg?branch=master)](https://travis-ci.com/skycoin/hardware-wallet-nanopb)",
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./*.js",
-    "gen-proto": "./node_modules/.bin/pbjs -p ../nanopb/vendor/nanopb/generator/proto/google/protobuf -t static-module -w commonjs -o ./skycoin.js ../protob/messages/messages.proto ../protob/messages/types.proto"
+    "gen-proto": "./node_modules/.bin/pbjs -t static-module -w commonjs -o ./skycoin.js ../protob/messages/messages.proto ../protob/messages/types.proto"
   },
   "repository": {
     "type": "git",
