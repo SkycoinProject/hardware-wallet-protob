@@ -25,6 +25,11 @@ PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 PROTOC_GOGO_URL      = github.com/gogo/protobuf
 PROTOC_NANOPBGEN_DIR = nanopb/vendor/nanopb/generator
+ifeq ($(UNAME_S),Linux)
+  SED_FLAGS = -i
+else ifeq ($(UNAME_S),Darwin)
+  SED_FLAGS = -i '' -e
+endif
 
 PROTOB_SPEC_DIR = protob
 PROTOB_MSG_DIR  = $(PROTOB_SPEC_DIR)/messages
@@ -82,13 +87,17 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang
+build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go ## Generate protobuf classes for go lang
+
+$(OUT_GO)/google/protobuf/descriptor.pb.go:
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
+	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"github\.com\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 
 $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $<
 
 clean-go:
-	rm $(OUT_GO)/*.pb.go
+	rm $$( find $(OUT_GO) -name '*.pb.go' )
 
 #----------------
 # Javascript
