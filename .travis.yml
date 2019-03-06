@@ -7,12 +7,8 @@ matrix:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-      env:
-        - PROTOBUF_VERSION=3.4.0
     - os: osx
       language: generic
-      env:
-        - PROTOBUF_VERSION=3.6.1
 install:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     export PATH="$PATH:$HOME/bin" ;
@@ -27,10 +23,6 @@ install:
     pyenv versions;
     python --version;
     fi
-  # Upgrade protobuf python
-  - pip3 install --upgrade protobuf
-  - pip3 install "protobuf==${PROTOBUF_VERSION}" ecdsa
-  - pip install --upgrade protobuf
   # Install go
   - eval "$(gimme 1.10)"
   - if [ -z "$GOPATH" ] ; then
