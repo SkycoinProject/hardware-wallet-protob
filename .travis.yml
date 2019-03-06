@@ -23,7 +23,7 @@ install:
     pyenv versions;
     python --version;
     fi
-  - sh "./ci-scripts/common.sh"
+  - sh "./ci-scripts/install-common.sh"
   # Install go
   - eval "$(gimme 1.10)"
   - if [ -z "$GOPATH" ] ; then
