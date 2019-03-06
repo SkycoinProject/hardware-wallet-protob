@@ -25,6 +25,10 @@ PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 PROTOC_GOGO_URL      = github.com/gogo/protobuf
 PROTOC_NANOPBGEN_DIR = nanopb/vendor/nanopb/generator
+SED_PREFIX_FOR_OSX  =
+ifeq ($(UNAME_S),Darwin)
+  SED_PREFIX_FOR_OSX  = '' -e
+endif
 
 PROTOB_SPEC_DIR = protob
 PROTOB_MSG_DIR  = $(PROTOB_SPEC_DIR)/messages
@@ -84,8 +88,8 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
 build-go: install-deps-go $(PROTOB_MSG_GO) ## Generate protobuf classes for go lang, consider using GO_VENDOR_DIR variable from command line
-	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(GO_VENDOR_DIR) nanopb/vendor/nanopb/generator/proto/google/protobuf/descriptor.proto
-	sed -i 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"github\.com\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(GO_VENDOR_DIR) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
+	sed -i $(SED_PREFIX_FOR_OSX) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"github\.com\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 	mkdir -p $(GO_VENDOR_DIR)/github.com
 	cp -r -p $(GO_VENDOR_DIR)/google $(GO_VENDOR_DIR)/github.com
 
