@@ -5,9 +5,9 @@ set -x
 # Upgrade protobuf python
 PROTOBUF_VERSION=3.6.0
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    PROTOBUF_VERSION=3.6.0
+    source ./protobuf-version-linux.sh
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    PROTOBUF_VERSION=3.4.0
+    source ./protobuf-version-osx.sh
 fi
 pip3 install --upgrade protobuf
 pip3 install "protobuf==${PROTOBUF_VERSION}" ecdsa
