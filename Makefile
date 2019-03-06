@@ -31,11 +31,6 @@ else ifeq ($(UNAME_S),Darwin)
   SED_FLAGS = -i '' -e
 endif
 
-SED_PREFIX_FOR_OSX =
-ifeq ($(UNAME_S),Darwin)
-  SED_PREFIX_FOR_OSX = '' -e
-endif
-
 PROTOB_SPEC_DIR = protob
 PROTOB_MSG_DIR  = $(PROTOB_SPEC_DIR)/messages
 
