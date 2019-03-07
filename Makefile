@@ -117,7 +117,7 @@ clean-js:
 # C with nanopb
 #----------------
 
-install-deps-nanopb: /usr/local/bin/protoc ## Install tools to generate protobuf classes for C and Python with nanopb
+install-deps-nanopb: install-protoc ## Install tools to generate protobuf classes for C and Python with nanopb
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 	pip3 install "protobuf==$(PROTOC_VERSION)" ecdsa
 
