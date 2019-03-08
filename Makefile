@@ -6,9 +6,10 @@
 
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
-UNAME_S = $(shell uname -s)
-PYTHON ?= python
-PIP    ?= pip3
+UNAME_S  = $(shell uname -s)
+PYTHON  ?= python
+PIP     ?= pip3
+PIPARGS ?= --user
 
 ifeq ($(TRAVIS),true)
   OS_NAME=$(TRAVIS_OS_NAME)
@@ -119,7 +120,7 @@ clean-js:
 
 install-deps-nanopb: install-protoc ## Install tools to generate protobuf classes for C and Python with nanopb
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
-	$(PIP) install "protobuf==$(PROTOC_VERSION)" ecdsa
+	$(PIP) install $(PIPARGS) "protobuf==$(PROTOC_VERSION)" ecdsa
 
 build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
 
