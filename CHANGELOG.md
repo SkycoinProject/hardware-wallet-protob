@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Custom library generation paths by setting `OUT_PY`, `OUT_C`, `OUT_GO`, `OUT_JS`
 
 ### Fixed
+- Make go folder a proper package
 
 ### Changed
 
