@@ -42,7 +42,7 @@ PROTOB_PY_DIR = py
 PROTOB_C_DIR  = c
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 
-GO_PREFIX_IMPORT_PATH ?= github.com\/skycoin\/hardware-wallet-go\/src\/device-wallet/messages
+GO_PREFIX_IMPORT_PATH ?= github.com\/skycoin\/hardware-wallet-go\/src\/device-wallet\/messages
 
 PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
 PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(notdir $(PROTOB_MSG_FILES)))
