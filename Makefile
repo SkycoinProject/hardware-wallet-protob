@@ -42,6 +42,8 @@ PROTOB_PY_DIR = py
 PROTOB_C_DIR  = c
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 
+GO_PREFIX_IMPORT_PATH ?= github.com\/skycoin\/hardware-wallet-go\/src\/device-wallet/messages
+
 PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
 PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(notdir $(PROTOB_MSG_FILES)))
 PROTOB_MSG_GO    = $(patsubst %,$(PROTOB_GO_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.go)))
@@ -93,7 +95,7 @@ build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.
 
 $(OUT_GO)/google/protobuf/descriptor.pb.go:
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
-	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"github\.com\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
+	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"$(GO_PREFIX_IMPORT_PATH)\/go\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 
 $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $<
