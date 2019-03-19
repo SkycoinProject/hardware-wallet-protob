@@ -106,7 +106,7 @@ $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $<
 
 clean-go:
-	rm $$( find $(OUT_GO) -name '*.pb.go' )
+	rm -rf $$( find $(OUT_GO) -name '*.pb.go' )
 
 #----------------
 # Javascript
