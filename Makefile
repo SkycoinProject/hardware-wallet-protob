@@ -42,6 +42,13 @@ PROTOB_PY_DIR = py
 PROTOB_C_DIR  = c
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 
+# Use default value when including this repository in vendor/ with dep
+# Set it explicitly either when generating to acustom location 
+# or when this repository is included at a subpath other than vendor
+# e.g. go library should set this to github.com/skycoin/hardware-wallet-go/src/device-wallet/messages
+GO_IMPORT ?= github.com/skycoin/hardware-wallet-protob
+GO_IMPORT_SED = $(shell echo $(GO_IMPORT) | sed 's/\//\\\//g')
+
 PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
 PROTOB_MSG_SPECS = $(patsubst %,$(PROTOB_MSG_DIR)/%,$(notdir $(PROTOB_MSG_FILES)))
 PROTOB_MSG_GO    = $(patsubst %,$(PROTOB_GO_DIR)/%,$(notdir $(PROTOB_MSG_FILES:.proto=.pb.go)))
@@ -93,13 +100,13 @@ build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.
 
 $(OUT_GO)/google/protobuf/descriptor.pb.go:
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
-	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"github\.com\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
+	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 
 $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $<
 
 clean-go:
-	rm $$( find $(OUT_GO) -name '*.pb.go' )
+	rm -rf $$( find $(OUT_GO) -name '*.pb.go' )
 
 #----------------
 # Javascript
