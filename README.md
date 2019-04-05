@@ -63,10 +63,12 @@ build-py                       Generate protobuf classes for Python with nanopb
 
 Code generation commands (i.e. `build-*` targets) can generate source code at any location should the following variables be properly set:
 
-- `OUT_C` env var allows to output protobuf C code onto a custom directory 
-- `OUT_GO` env var allows to output protobuf go code onto a custom directory 
-- `OUT_JS` env var allows to output protobuf js code onto a custom directory 
-- `OUT_PY` env var allows to output protobuf Python code onto a custom directory 
+- `OUT_C` env var allows to output protobuf C code onto a custom directory
+- `OUT_GO` env var allows to output protobuf go code onto a custom directory
+- `OUT_JS` env var allows to output protobuf js code onto a custom directory
+- `OUT_PY` env var allows to output protobuf Python code onto a custom directory
+
+- When using this projets as submodule of a go project foo.bar/my/project consider using the env var `GO_PREFIX_IMPORT_PATH` to `foo.bar/my/project/path/where/this/project/live/as/submodule`.
 
 ## Development setup
 

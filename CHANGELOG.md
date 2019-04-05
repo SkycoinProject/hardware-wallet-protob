@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Customize go import path using env var `GO_IMPORT`. Useful when project is a subfolder of a parent go project.
 - Generate protobuffer classes for go lang with `gogofast` plugin for `protoc`
 - Generate protobuffer classes for Javascript with `pbjs`
 - Generate protobuffer classes for C and Python with `nanopb` and Python plugin for `protoc`
