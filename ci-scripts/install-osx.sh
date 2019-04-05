@@ -17,5 +17,6 @@ fi
 brew install pyenv
 brew install pyenv-virtualenv
 echo "Installing Python=$PYTHON_VERSION"
-pyenv install $PYTHON_VERSION
+OPENSSL_PATH="$(brew --prefix openssl)"
+LDFLAGS="-L$OPENSSL_PATH/lib" CPPFLAGS="-I$OPENSSL_PATH/include" CFLAGS="-I$OPENSSL_PATH/include" pyenv install $PYTHON_VERSION
 
