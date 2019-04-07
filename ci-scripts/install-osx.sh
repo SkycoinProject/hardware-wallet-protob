@@ -15,6 +15,7 @@ if [ -z "$PYTHON_VERSION"] ; then
   export PYTHON_VERSION=3.5.0
 fi
 brew install openssl sqlite pyenv
+brew upgrade openssl sqlite pyenv
 brew link --force openssl
 brew link --force sqlite
 brew install pyenv-virtualenv
