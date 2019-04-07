@@ -18,11 +18,11 @@ install:
   - sh "./ci-scripts/install-${TRAVIS_OS_NAME}.sh"
   # Setup osx workspace
   # Run Python 3.5.0 by default
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-    pyenv global 3.5.0;
-    pyenv versions;
-    python --version;
-    fi
+#   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+#     pyenv global 3.5.0;
+#     pyenv versions;
+#     python --version;
+#     fi
   # Install go
   - eval "$(gimme 1.10)"
   - if [ -z "$GOPATH" ] ; then
