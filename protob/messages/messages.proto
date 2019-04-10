@@ -31,7 +31,7 @@ enum MessageType {
 	MessageType_PinMatrixRequest = 18 [(wire_out) = true];
 	MessageType_PinMatrixAck = 19 [(wire_in) = true, (wire_tiny) = true];
 	MessageType_Cancel = 20 [(wire_in) = true];
-    MessageType_ApplySettings = 25 [(wire_in) = true];
+	MessageType_ApplySettings = 25 [(wire_in) = true];
 	MessageType_ButtonRequest = 26 [(wire_out) = true];
 	MessageType_ButtonAck = 27 [(wire_in) = true, (wire_tiny) = true];
 	MessageType_BackupDevice = 34 [(wire_in) = true];
