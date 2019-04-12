@@ -292,6 +292,5 @@ dmypy.json
 # Output folders
 
 c/*
-go/*
 js/*
 py/*

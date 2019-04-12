@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Generate protobuffer classes for Javascript with `pbjs`
 - Generate protobuffer classes for C and Python with `nanopb` and Python plugin for `protoc`
 - Custom library generation paths by setting `OUT_PY`, `OUT_C`, `OUT_GO`, `OUT_JS`
+- Add generated go proto files into the `go` folder.
 
 ### Fixed
 - Make go folder a proper package
