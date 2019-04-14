@@ -77,14 +77,6 @@ message GetFeatures {
 }
 
 /**
- *
- */
-enum FirmwareFeatures {
-	GetEntropyConfirm = 1;
-	GetEntropyEnabled = 2;
-}
-
-/**
  * Response: Reports various information about the device
  * @prev Initialize
  * @prev GetFeatures
@@ -113,7 +105,7 @@ message Features {
 	optional string fw_vendor = 25;			// reported firmware vendor if in bootloader mode
 	optional bytes fw_vendor_keys = 26;		// reported firmware vendor keys (their hash)
 	optional bool unfinished_backup = 27;		// report unfinished backup (equals to Storage.unfinished_backup)
-	optional uint32 entropy_options = 28;     // report entropy options
+	optional uint32 entropy_options = 28;		// firmware build flags
 }
 
 /**
