@@ -105,7 +105,7 @@ message Features {
 	optional string fw_vendor = 25;			// reported firmware vendor if in bootloader mode
 	optional bytes fw_vendor_keys = 26;		// reported firmware vendor keys (their hash)
 	optional bool unfinished_backup = 27;		// report unfinished backup (equals to Storage.unfinished_backup)
-	optional uint32 entropy_options = 28;		// firmware build flags
+	optional uint32 firmware_features = 28;		// firmware build flags
 }
 
 /**
