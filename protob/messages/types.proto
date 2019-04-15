@@ -132,7 +132,7 @@ enum WordRequestType {
 enum FirmwareFeatures {
 	RequireGetEntropyConfirm = 1; // If set, user confirmation required prior to returning internal entropy
 	IsGetEntropyEnabled = 2;      // If set, enabled support for sending internal entropy back to the peer
-	IsEmulator = 3;				  // If set, emulator is the current device
+	IsEmulator = 4;				  // If set, emulator is the current device
 }
 
 /**
