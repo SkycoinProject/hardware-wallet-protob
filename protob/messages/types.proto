@@ -271,21 +271,29 @@ message IdentityType {
 
 /**
  * Ask trezor to generate a skycoin address
- * @used_in SkycoinAddress｛
+ * @used_in SkycoinAddress
  */
 enum SkycoinAddressType {
 	AddressTypeSkycoin = 1;
 	AddressTypeBitcoin = 2;
 }
 
+/**
+ * Skycoin transaction input
+ * @used_in TransactionSign
+ */
 message SkycoinTransactionInput {
-	required string hashIn = 1;
-	required uint32 index = 2;
+	required string hashIn = 1; // Input hash
+	optional uint32 index = 2;  // Skywallet address index for signing. May be omitted if spent output managed by another wallet
 }
 
+/**
+ * Skycoin transaction output
+ * @used_in TransactionSign
+ */
 message SkycoinTransactionOutput {
-	required string address = 1;
-	required uint64 coin = 2;
-	required uint64 hour = 3;
-	optional uint32 address_index = 4;
+	required string address = 1;       // Receiver address
+	required uint64 coin = 2;          // Amount of coins to transfer
+	required uint64 hour = 3;          // Coin hours involved during transaction
+	optional uint32 address_index = 4; // Receiver address index if managed by this Skywallet
 }
