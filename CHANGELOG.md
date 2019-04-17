@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Add `fw_version_head` field to features msg.
 - Add a `MessageType_GetMixedEntropy` rename `MessageType_GetEntropy` to `MessageType_GetRawEntropy`.
 - Customize go import path using env var `GO_IMPORT`. Useful when project is a subfolder of a parent go project.
 - Generate protobuffer classes for go lang with `gogofast` plugin for `protoc`
