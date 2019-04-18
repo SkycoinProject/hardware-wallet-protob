@@ -22,6 +22,10 @@ else
   endif
 endif
 
+ifndef ($(GOPATH))
+	GOPATH=$(HOME)/go
+endif
+
 PROTOC_VERSION      ?= 3.6.1
 PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)

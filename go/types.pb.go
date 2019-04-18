@@ -6,7 +6,7 @@ package messages
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import protobuf "google/protobuf"
+import protobuf "github.com/skycoin/hardware-wallet-protob/go/google/protobuf"
 
 import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
@@ -95,7 +95,7 @@ func (x *FailureType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (FailureType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{0}
+	return fileDescriptor_types_382bfc45c633dd89, []int{0}
 }
 
 // *
@@ -146,7 +146,7 @@ func (x *OutputScriptType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (OutputScriptType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{1}
+	return fileDescriptor_types_382bfc45c633dd89, []int{1}
 }
 
 // *
@@ -194,7 +194,7 @@ func (x *InputScriptType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (InputScriptType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{2}
+	return fileDescriptor_types_382bfc45c633dd89, []int{2}
 }
 
 // *
@@ -242,7 +242,7 @@ func (x *RequestType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (RequestType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{3}
+	return fileDescriptor_types_382bfc45c633dd89, []int{3}
 }
 
 // *
@@ -317,7 +317,7 @@ func (x *ButtonRequestType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (ButtonRequestType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{4}
+	return fileDescriptor_types_382bfc45c633dd89, []int{4}
 }
 
 // *
@@ -359,7 +359,7 @@ func (x *PinMatrixRequestType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (PinMatrixRequestType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{5}
+	return fileDescriptor_types_382bfc45c633dd89, []int{5}
 }
 
 // *
@@ -401,7 +401,7 @@ func (x *WordRequestType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (WordRequestType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{6}
+	return fileDescriptor_types_382bfc45c633dd89, []int{6}
 }
 
 // *
@@ -440,7 +440,7 @@ func (x *SkycoinAddressType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 func (SkycoinAddressType) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{7}
+	return fileDescriptor_types_382bfc45c633dd89, []int{7}
 }
 
 // *
@@ -466,7 +466,7 @@ func (m *HDNodeType) Reset()         { *m = HDNodeType{} }
 func (m *HDNodeType) String() string { return proto.CompactTextString(m) }
 func (*HDNodeType) ProtoMessage()    {}
 func (*HDNodeType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{0}
+	return fileDescriptor_types_382bfc45c633dd89, []int{0}
 }
 func (m *HDNodeType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -549,7 +549,7 @@ func (m *HDNodePathType) Reset()         { *m = HDNodePathType{} }
 func (m *HDNodePathType) String() string { return proto.CompactTextString(m) }
 func (*HDNodePathType) ProtoMessage()    {}
 func (*HDNodePathType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{1}
+	return fileDescriptor_types_382bfc45c633dd89, []int{1}
 }
 func (m *HDNodePathType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -616,7 +616,7 @@ func (m *CoinType) Reset()         { *m = CoinType{} }
 func (m *CoinType) String() string { return proto.CompactTextString(m) }
 func (*CoinType) ProtoMessage()    {}
 func (*CoinType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{2}
+	return fileDescriptor_types_382bfc45c633dd89, []int{2}
 }
 func (m *CoinType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -743,7 +743,7 @@ func (m *MultisigRedeemScriptType) Reset()         { *m = MultisigRedeemScriptTy
 func (m *MultisigRedeemScriptType) String() string { return proto.CompactTextString(m) }
 func (*MultisigRedeemScriptType) ProtoMessage()    {}
 func (*MultisigRedeemScriptType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{3}
+	return fileDescriptor_types_382bfc45c633dd89, []int{3}
 }
 func (m *MultisigRedeemScriptType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -817,7 +817,7 @@ func (m *TxInputType) Reset()         { *m = TxInputType{} }
 func (m *TxInputType) String() string { return proto.CompactTextString(m) }
 func (*TxInputType) ProtoMessage()    {}
 func (*TxInputType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{4}
+	return fileDescriptor_types_382bfc45c633dd89, []int{4}
 }
 func (m *TxInputType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -940,7 +940,7 @@ func (m *TxOutputType) Reset()         { *m = TxOutputType{} }
 func (m *TxOutputType) String() string { return proto.CompactTextString(m) }
 func (*TxOutputType) ProtoMessage()    {}
 func (*TxOutputType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{5}
+	return fileDescriptor_types_382bfc45c633dd89, []int{5}
 }
 func (m *TxOutputType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1034,7 +1034,7 @@ func (m *TxOutputBinType) Reset()         { *m = TxOutputBinType{} }
 func (m *TxOutputBinType) String() string { return proto.CompactTextString(m) }
 func (*TxOutputBinType) ProtoMessage()    {}
 func (*TxOutputBinType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{6}
+	return fileDescriptor_types_382bfc45c633dd89, []int{6}
 }
 func (m *TxOutputBinType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1107,7 +1107,7 @@ func (m *TransactionType) Reset()         { *m = TransactionType{} }
 func (m *TransactionType) String() string { return proto.CompactTextString(m) }
 func (*TransactionType) ProtoMessage()    {}
 func (*TransactionType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{7}
+	return fileDescriptor_types_382bfc45c633dd89, []int{7}
 }
 func (m *TransactionType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1223,7 +1223,7 @@ func (m *TxRequestDetailsType) Reset()         { *m = TxRequestDetailsType{} }
 func (m *TxRequestDetailsType) String() string { return proto.CompactTextString(m) }
 func (*TxRequestDetailsType) ProtoMessage()    {}
 func (*TxRequestDetailsType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{8}
+	return fileDescriptor_types_382bfc45c633dd89, []int{8}
 }
 func (m *TxRequestDetailsType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1296,7 +1296,7 @@ func (m *TxRequestSerializedType) Reset()         { *m = TxRequestSerializedType
 func (m *TxRequestSerializedType) String() string { return proto.CompactTextString(m) }
 func (*TxRequestSerializedType) ProtoMessage()    {}
 func (*TxRequestSerializedType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{9}
+	return fileDescriptor_types_382bfc45c633dd89, []int{9}
 }
 func (m *TxRequestSerializedType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1365,7 +1365,7 @@ func (m *IdentityType) Reset()         { *m = IdentityType{} }
 func (m *IdentityType) String() string { return proto.CompactTextString(m) }
 func (*IdentityType) ProtoMessage()    {}
 func (*IdentityType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{10}
+	return fileDescriptor_types_382bfc45c633dd89, []int{10}
 }
 func (m *IdentityType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1453,7 +1453,7 @@ func (m *SkycoinTransactionInput) Reset()         { *m = SkycoinTransactionInput
 func (m *SkycoinTransactionInput) String() string { return proto.CompactTextString(m) }
 func (*SkycoinTransactionInput) ProtoMessage()    {}
 func (*SkycoinTransactionInput) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{11}
+	return fileDescriptor_types_382bfc45c633dd89, []int{11}
 }
 func (m *SkycoinTransactionInput) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1513,7 +1513,7 @@ func (m *SkycoinTransactionOutput) Reset()         { *m = SkycoinTransactionOutp
 func (m *SkycoinTransactionOutput) String() string { return proto.CompactTextString(m) }
 func (*SkycoinTransactionOutput) ProtoMessage()    {}
 func (*SkycoinTransactionOutput) Descriptor() ([]byte, []int) {
-	return fileDescriptor_types_67cc2ef65e0529a7, []int{12}
+	return fileDescriptor_types_382bfc45c633dd89, []int{12}
 }
 func (m *SkycoinTransactionOutput) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -5571,9 +5571,9 @@ var (
 	ErrIntOverflowTypes   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("types.proto", fileDescriptor_types_67cc2ef65e0529a7) }
+func init() { proto.RegisterFile("types.proto", fileDescriptor_types_382bfc45c633dd89) }
 
-var fileDescriptor_types_67cc2ef65e0529a7 = []byte{
+var fileDescriptor_types_382bfc45c633dd89 = []byte{
 	// 2135 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x58, 0x4b, 0x6f, 0xdb, 0xca,
 	0xf5, 0x0f, 0x25, 0xd9, 0x96, 0x8e, 0x28, 0x9b, 0x9e, 0x3c, 0xcc, 0xdc, 0x9b, 0x87, 0xe2, 0x04,
