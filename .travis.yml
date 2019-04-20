@@ -24,6 +24,7 @@ install:
     export PATH="$PATH:$GOPATH/bin" ;
     fi
 script:
+  - make check-go
   - make build-c
   - make build-py
   - make build-js
