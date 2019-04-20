@@ -7,7 +7,8 @@ Features.label				max_size:33
 Features.bootloader_hash		max_size:32
 Features.model				max_size:17
 Features.fw_vendor			max_size:256
-Features.fw_vendor_keys			max_size:32
+Features.fw_vendor_keys		max_size:32
+Features.fw_version_head	max_size:33
 
 ApplySettings.language			max_size:17
 ApplySettings.label			max_size:33

@@ -1,17 +1,17 @@
 syntax = "proto2";
 
 /**
- * Messages for TREZOR communication
+ * Messages for Skywallet communication
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.trezor.lib.protobuf";
-option java_outer_classname = "TrezorMessage";
+option java_package = "net.skycoin.skywallet.protobuf";
+option java_outer_classname = "SkywalletMessage";
 
 import "types.proto";
 
 /**
- * Mapping between Trezor wire identifier (uint) and a protobuf message
+ * Mapping between Skywallet wire identifier (uint) and a protobuf message
  */
 enum MessageType {
 	MessageType_Initialize = 0 [(wire_in) = true];
@@ -82,7 +82,7 @@ message GetFeatures {
  * @prev GetFeatures
  */
 message Features {
-	optional string vendor = 1;			// name of the manufacturer, e.g. "trezor.io"
+	optional string vendor = 1;			// name of the manufacturer, e.g. "Skycoin Foundation"
 	optional uint32 major_version = 2;		// major version of the firmware/bootloader, e.g. 1
 	optional uint32 minor_version = 3;		// minor version of the firmware/bootloader, e.g. 0
 	optional uint32 patch_version = 4;		// patch version of the firmware/bootloader, e.g. 0
@@ -102,10 +102,11 @@ message Features {
 	optional uint32 fw_major = 22;			// reported firmware version if in bootloader mode
 	optional uint32 fw_minor = 23;			// reported firmware version if in bootloader mode
 	optional uint32 fw_patch = 24;			// reported firmware version if in bootloader mode
-	optional string fw_vendor = 25;			// reported firmware vendor if in bootloader mode
-	optional bytes fw_vendor_keys = 26;		// reported firmware vendor keys (their hash)
-	optional bool unfinished_backup = 27;		// report unfinished backup (equals to Storage.unfinished_backup)
-	optional uint32 firmware_features = 28;		// firmware build flags
+	optional string fw_version_head = 25;		// get the git point where the code come from when is not a full versioned release
+	optional string fw_vendor = 26;			// reported firmware vendor if in bootloader mode
+	optional bytes fw_vendor_keys = 27;		// reported firmware vendor keys (their hash)
+	optional bool unfinished_backup = 28;		// report unfinished backup (equals to Storage.unfinished_backup)
+	optional uint32 firmware_features = 29;		// firmware build flags
 }
 
 /**
