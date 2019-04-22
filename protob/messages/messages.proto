@@ -1,17 +1,17 @@
 syntax = "proto2";
 
 /**
- * Messages for TREZOR communication
+ * Messages for Skywallet communication
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.trezor.lib.protobuf";
-option java_outer_classname = "TrezorMessage";
+option java_package = "net.skycoin.skywallet.protobuf";
+option java_outer_classname = "SkywalletMessage";
 
 import "types.proto";
 
 /**
- * Mapping between Trezor wire identifier (uint) and a protobuf message
+ * Mapping between Skywallet wire identifier (uint) and a protobuf message
  */
 enum MessageType {
 	MessageType_Initialize = 0 [(wire_in) = true];
@@ -82,7 +82,7 @@ message GetFeatures {
  * @prev GetFeatures
  */
 message Features {
-	optional string vendor = 1;			// name of the manufacturer, e.g. "trezor.io"
+	optional string vendor = 1;			// name of the manufacturer, e.g. "Skycoin Foundation"
 	optional uint32 major_version = 2;		// major version of the firmware/bootloader, e.g. 1
 	optional uint32 minor_version = 3;		// minor version of the firmware/bootloader, e.g. 0
 	optional uint32 patch_version = 4;		// patch version of the firmware/bootloader, e.g. 0

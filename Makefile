@@ -22,6 +22,10 @@ else
   endif
 endif
 
+ifndef ($(GOPATH))
+	GOPATH=$(HOME)/go
+endif
+
 PROTOC_VERSION      ?= 3.6.1
 PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
@@ -98,7 +102,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 
 build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go ## Generate protobuf classes for go lang
 
-$(OUT_GO)/google/protobuf/descriptor.pb.go:
+$(OUT_GO)/google/protobuf/descriptor.pb.go: $(OUT_GO)/types.pb.go
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
 	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 
