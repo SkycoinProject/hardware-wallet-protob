@@ -8,16 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Add `fw_version_head` field to features msg.
 - Add a `MessageType_GetMixedEntropy` rename `MessageType_GetEntropy` to `MessageType_GetRawEntropy`.
 - Customize go import path using env var `GO_IMPORT`. Useful when project is a subfolder of a parent go project.
 - Generate protobuffer classes for go lang with `gogofast` plugin for `protoc`
 - Generate protobuffer classes for Javascript with `pbjs`
 - Generate protobuffer classes for C and Python with `nanopb` and Python plugin for `protoc`
 - Custom library generation paths by setting `OUT_PY`, `OUT_C`, `OUT_GO`, `OUT_JS`
-- Add generated go proto files into the `go` folder.
+- Add go code generated from proto files into the `go` folder.
+- Make go folder a proper package that can be vendor'ed from another package
+- Address `index` of `SkycoinTransactionInput` marked as optional.
 
 ### Fixed
-- Make go folder a proper package
+
 
 ### Changed
 

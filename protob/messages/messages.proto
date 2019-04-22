@@ -102,10 +102,11 @@ message Features {
 	optional uint32 fw_major = 22;			// reported firmware version if in bootloader mode
 	optional uint32 fw_minor = 23;			// reported firmware version if in bootloader mode
 	optional uint32 fw_patch = 24;			// reported firmware version if in bootloader mode
-	optional string fw_vendor = 25;			// reported firmware vendor if in bootloader mode
-	optional bytes fw_vendor_keys = 26;		// reported firmware vendor keys (their hash)
-	optional bool unfinished_backup = 27;		// report unfinished backup (equals to Storage.unfinished_backup)
-	optional uint32 firmware_features = 28;		// firmware build flags
+	optional string fw_version_head = 25;		// get the git point where the code come from when is not a full versioned release
+	optional string fw_vendor = 26;			// reported firmware vendor if in bootloader mode
+	optional bytes fw_vendor_keys = 27;		// reported firmware vendor keys (their hash)
+	optional bool unfinished_backup = 28;		// report unfinished backup (equals to Storage.unfinished_backup)
+	optional uint32 firmware_features = 29;		// firmware build flags
 }
 
 /**
