@@ -100,7 +100,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go ## Generate protobuf classes for go lang
+build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go check-go ## Generate protobuf classes for go lang
 
 $(OUT_GO)/google/protobuf/descriptor.pb.go: $(OUT_GO)/types.pb.go
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
@@ -111,6 +111,9 @@ $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 
 clean-go:
 	rm -rf $$( find $(OUT_GO) -name '*.pb.go' )
+
+check-go:
+	grep -xq 'import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"' $(OUT_GO)/types.pb.go || exit 1
 
 #----------------
 # Javascript
