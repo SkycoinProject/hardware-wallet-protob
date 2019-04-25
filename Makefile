@@ -9,7 +9,8 @@ REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 UNAME_S  = $(shell uname -s)
 PYTHON  ?= python
 PIP     ?= pip3
-PIPARGS ?= 
+PIPARGS ?=
+GOPATH  ?= $(HOME)/go
 
 ifeq ($(TRAVIS),true)
   OS_NAME=$(TRAVIS_OS_NAME)
@@ -20,10 +21,6 @@ else
   ifeq ($(UNAME_S),Darwin)
     OS_NAME=osx
   endif
-endif
-
-ifndef ($(GOPATH))
-	GOPATH=$(HOME)/go
 endif
 
 PROTOC_VERSION      ?= 3.6.1
@@ -115,7 +112,7 @@ clean-go:
 check-go: build-go
 	@if [ "$(shell git diff ./go/messages.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
 	@if [ "$(shell git diff ./go/types.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
-	@if [ "$(shell git diff ./go/protobuf/descriptor.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
+	@if [ "$(shell git diff ./go/google/protobuf/descriptor.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
 	grep -xq 'import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"' $(OUT_GO)/types.pb.go || exit 1
 
 #----------------
