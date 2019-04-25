@@ -112,7 +112,10 @@ $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 clean-go:
 	rm -rf $$( find $(OUT_GO) -name '*.pb.go' )
 
-check-go:
+check-go: build-go
+	@if [ "$(shell git diff ./go/messages.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
+	@if [ "$(shell git diff ./go/types.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
+	@if [ "$(shell git diff ./go/protobuf/descriptor.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
 	grep -xq 'import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"' $(OUT_GO)/types.pb.go || exit 1
 
 #----------------
