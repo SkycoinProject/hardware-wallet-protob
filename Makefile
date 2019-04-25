@@ -9,7 +9,8 @@ REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 UNAME_S  = $(shell uname -s)
 PYTHON  ?= python
 PIP     ?= pip3
-PIPARGS ?= 
+PIPARGS ?=
+GOPATH  ?= $(HOME)/go
 
 ifeq ($(TRAVIS),true)
   OS_NAME=$(TRAVIS_OS_NAME)
@@ -20,10 +21,6 @@ else
   ifeq ($(UNAME_S),Darwin)
     OS_NAME=osx
   endif
-endif
-
-ifndef ($(GOPATH))
-	GOPATH=$(HOME)/go
 endif
 
 PROTOC_VERSION      ?= 3.6.1
@@ -100,7 +97,7 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go check-go ## Generate protobuf classes for go lang
+build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go ## Generate protobuf classes for go lang
 
 $(OUT_GO)/google/protobuf/descriptor.pb.go: $(OUT_GO)/types.pb.go
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
@@ -112,7 +109,10 @@ $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 clean-go:
 	rm -rf $$( find $(OUT_GO) -name '*.pb.go' )
 
-check-go:
+check-go: build-go
+	@if [ "$(shell git diff ./go/messages.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
+	@if [ "$(shell git diff ./go/types.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
+	@if [ "$(shell git diff ./go/google/protobuf/descriptor.pb.go | wc -l | tr -d ' ')" != "0" ] ; then echo 'Changes detected after make build-go' ; exit 2 ; fi
 	grep -xq 'import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"' $(OUT_GO)/types.pb.go || exit 1
 
 #----------------
