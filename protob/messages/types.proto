@@ -132,11 +132,11 @@ enum WordRequestType {
  * @warning the new ones in a monotonic fashion as this can broke existing code.
  */
 enum FirmwareFeatures {
-	RequireGetEntropyConfirm = 1;            // If set, user confirmation required prior to returning internal entropy
-	IsGetEntropyEnabled = 2;                 // If set, enabled support for sending internal entropy back to the peer
-	IsEmulator = 4;				             // If set, emulator is the current device
-	FirmwareFeatures_RdpDebugDisabled = 8;   // Define two bits to represent the RDP level
-	FirmwareFeatures_RdpMemProtect = 16;     // posibel values are: 0, 1, 2
+	RequireGetEntropyConfirm = 1;			// If set, user confirmation required prior to returning internal entropy
+	IsGetEntropyEnabled = 2;				// If set, enabled support for sending internal entropy back to the peer
+	IsEmulator = 4;							// If set, emulator is the current device
+	FirmwareFeatures_RdpDebugDisabled = 8;	// Define two bits to represent the RDP level
+	FirmwareFeatures_RdpMemProtect = 16;	// posibel values are: 0, 1, 2
 }
 
 /**
