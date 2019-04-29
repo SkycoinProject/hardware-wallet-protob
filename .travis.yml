@@ -32,7 +32,7 @@ script:
   - make clean-c
   - make clean-py
   - git checkout -- js/package-lock.json && git status --ignored
-  - test -z "$(git status --porcelain --ignored | grep -v '[.]DS_Store')"
+  - test -z "$(git status --porcelain --ignored | grep -v [.]DS_Store | grep -v go/')"
 notifications:
   # https://github.com/kvld/travisci-telegram TravisCI Telegram Bot integration
   webhooks: https://fathomless-fjord-24024.herokuapp.com/notify
