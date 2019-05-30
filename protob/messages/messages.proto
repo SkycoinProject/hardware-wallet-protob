@@ -221,15 +221,17 @@ message Ping {
  * Response: Success of the previous request
  */
 message Success {
-	optional string message = 1;	// human readable description of action or request-specific payload
+	optional MessageType msg_type = 1; // Message type of the operation that succeded
+	optional string message = 2;	// human readable description of action or request-specific payload
 }
 
 /**
  * Response: Failure of the previous request
  */
 message Failure {
-	optional FailureType code = 1;	// computer-readable definition of the error state
-	optional string message = 2;	// human-readable message of the error state
+	optional MessageType msg_type = 1; // Message type of the operation that failed
+	optional FailureType code = 2;	// computer-readable definition of the error state
+	optional string message = 3;	// human-readable message of the error state
 }
 
 /**
