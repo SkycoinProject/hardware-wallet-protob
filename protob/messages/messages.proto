@@ -1,17 +1,17 @@
 syntax = "proto2";
 
 /**
- * Messages for TREZOR communication
+ * Messages for Skywallet communication
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.trezor.lib.protobuf";
-option java_outer_classname = "TrezorMessage";
+option java_package = "net.skycoin.skywallet.protobuf";
+option java_outer_classname = "SkywalletMessage";
 
 import "types.proto";
 
 /**
- * Mapping between Trezor wire identifier (uint) and a protobuf message
+ * Mapping between Skywallet wire identifier (uint) and a protobuf message
  */
 enum MessageType {
 	MessageType_Initialize = 0 [(wire_in) = true];
@@ -82,7 +82,7 @@ message GetFeatures {
  * @prev GetFeatures
  */
 message Features {
-	optional string vendor = 1;			// name of the manufacturer, e.g. "trezor.io"
+	optional string vendor = 1;			// name of the manufacturer, e.g. "Skycoin Foundation"
 	optional uint32 major_version = 2;		// major version of the firmware/bootloader, e.g. 1
 	optional uint32 minor_version = 3;		// minor version of the firmware/bootloader, e.g. 0
 	optional uint32 patch_version = 4;		// patch version of the firmware/bootloader, e.g. 0
@@ -102,9 +102,11 @@ message Features {
 	optional uint32 fw_major = 22;			// reported firmware version if in bootloader mode
 	optional uint32 fw_minor = 23;			// reported firmware version if in bootloader mode
 	optional uint32 fw_patch = 24;			// reported firmware version if in bootloader mode
-	optional string fw_vendor = 25;			// reported firmware vendor if in bootloader mode
-	optional bytes fw_vendor_keys = 26;		// reported firmware vendor keys (their hash)
-	optional bool unfinished_backup = 27;		// report unfinished backup (equals to Storage.unfinished_backup)
+	optional string fw_version_head = 25;		// get the git point where the code come from when is not a full versioned release
+	optional string fw_vendor = 26;			// reported firmware vendor if in bootloader mode
+	optional bytes fw_vendor_keys = 27;		// reported firmware vendor keys (their hash)
+	optional bool unfinished_backup = 28;		// report unfinished backup (equals to Storage.unfinished_backup)
+	optional uint32 firmware_features = 29;		// firmware build flags
 }
 
 /**
@@ -114,10 +116,10 @@ message Features {
  * @next Failure
  */
 message ApplySettings {
-    optional string language = 1;
-    optional string label = 2;
-    optional bool use_passphrase = 3;
-    optional bytes homescreen = 4;
+	optional string language = 1;
+	optional string label = 2;
+	optional bool use_passphrase = 3;
+	optional bytes homescreen = 4;
 }
 
 
@@ -126,15 +128,15 @@ message ApplySettings {
  * @next Success
  */
 message GenerateMnemonic {
- 	optional bool passphrase_protection = 1;
- 	optional uint32 word_count = 2; // number of words for seed
+	optional bool passphrase_protection = 1;
+	optional uint32 word_count = 2; // number of words for seed
 }
 
 /**
  * Request: Send a mnemonic to the device
  * @next Success
  */
- message SetMnemonic {
+message SetMnemonic {
 	required string mnemonic = 1; // mnemonic
 }
 
@@ -163,7 +165,7 @@ message SkycoinAddress {
  * Response: Return the generated skycoin address
  * @prev SkycoinAddress
  */
- message ResponseSkycoinAddress {
+message ResponseSkycoinAddress {
 	repeated string addresses = 1; // generated addresses in base58 format
 }
 
@@ -171,7 +173,7 @@ message SkycoinAddress {
  * Response: Return the signatures necessary for the transaction
  * @prev TransactionSign
  */
- message ResponseTransactionSign {
+message ResponseTransactionSign {
 	repeated string signatures = 1; // generated signatures in base58 format
 	required bool padding = 2;
 }
@@ -200,7 +202,7 @@ message SkycoinSignMessage {
  * Response: Return the generated skycoin address
  * @prev SkycoinAddress
  */
- message ResponseSkycoinSignMessage {
+message ResponseSkycoinSignMessage {
 	required string signed_message = 1; // generated addresses in base58 format
 }
 
@@ -440,7 +442,7 @@ message WordAck {
  * @next FirmwareRequest
  */
 message FirmwareErase {
-    optional uint32 length = 1; // length of new firmware
+	optional uint32 length = 1; // length of new firmware
 }
 
 /**
@@ -448,8 +450,8 @@ message FirmwareErase {
  * @next FirmwareUpload
  */
 message FirmwareRequest {
-    optional uint32 offset = 1; // offset of requested firmware chunk
-    optional uint32 length = 2; // length of requested firmware chunk
+	optional uint32 offset = 1; // offset of requested firmware chunk
+	optional uint32 length = 2; // length of requested firmware chunk
 }
 
 
@@ -458,9 +460,9 @@ message FirmwareRequest {
  * @start
  * @next FirmwareUpload
  */
- message FirmwareUpload {
-    optional bytes payload = 1; // offset of requested firmware chunk
-    optional bytes hash = 2; // length of requested firmware chunk
+message FirmwareUpload {
+	optional bytes payload = 1; // offset of requested firmware chunk
+	optional bytes hash = 2; // length of requested firmware chunk
 }
 
 /**
