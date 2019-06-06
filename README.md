@@ -125,6 +125,7 @@ After updating the submodule or depdency PR the changes in the respective respos
 
 ### Releases
 
+This repository is not meant to have release packages.
 
 #### Update the version
 
