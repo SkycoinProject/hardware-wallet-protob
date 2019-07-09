@@ -59,3 +59,13 @@ RecoveryDevice.language			max_size:17
 RecoveryDevice.label			max_size:33
 
 WordAck.word				max_size:12
+
+SignTx.tx_hash                                  max_size:32
+SignTx.coin_name                                max_size:32
+
+TxRequest.TxRequestDetailsType.tx_hash          max_size:32
+TxRequest.TxRequestSignResponseType.signature   max_size:131
+
+TxAck.TransactionType.TxInputType.hashIn        max_size:32
+
+TxAck.TransactionType.TxOutputType.address      max_size:32
