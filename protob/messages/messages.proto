@@ -55,6 +55,9 @@ enum MessageType {
 	MessageType_TransactionSign = 122 [(wire_in) = true];
 	MessageType_ResponseTransactionSign = 123 [(wire_out) = true];
 	MessageType_GetMixedEntropy = 124 [(wire_in) = true];
+    MessageType_SignTx = 125 [(wire_in) = true];
+    MessageType_TxRequest = 126 [(wire_out) = true];
+    MessageType_TxAck = 127 [(wire_in) = true];
 }
 
 ////////////////////
@@ -478,4 +481,74 @@ message TransactionSign {
 	repeated SkycoinTransactionInput transactionIn = 2;
 	required uint32 nbOut = 3;
 	repeated SkycoinTransactionOutput transactionOut = 4;
+}
+
+message SignTx {
+    required uint32 outputs_count = 1;              // number of transaction outputs
+    required uint32 inputs_count = 2;               // number of transaction inputs
+    optional string coin_name = 3 [default='SKY'];  // coin to use
+    optional uint32 version = 4 [default=1];        // transaction version
+    optional uint32 lock_time = 5 [default=0];      // transaction lock_time
+    optional bytes tx_hash = 6;                     // tx_hash of requested transaction
+}
+
+message TxRequest {
+    required RequestType request_type = 1;                 // what should be filled in TxAck message?
+    optional TxRequestDetailsType details = 2;             // request for tx details
+    repeated TxRequestSignResponseType sign_result = 3;    // serialized data and request for next
+    /**
+    * Type of information required by transaction signing process
+    */
+    enum RequestType {
+        TXINPUT = 0;
+        TXOUTPUT = 1;
+        TXMETA = 2;
+        TXFINISHED = 3;
+        TXEXTRADATA = 4;
+    }
+    /**
+    * Structure representing request details
+    */
+    message TxRequestDetailsType {
+        optional uint32 request_index = 1;      // device expects TxAck message from the computer
+        optional bytes tx_hash = 2;             // tx_hash of requested transaction
+    }
+    /**
+    * Structure representing serialized data
+    */
+    message TxRequestSignResponseType {
+        optional uint32 signature_index = 1;    // 'signature' field contains signed input of this index
+        optional bytes signature = 2;           // signature of the signature_index input
+    }
+}
+
+message TxAck {
+    optional TransactionType tx = 1;
+    /**
+    * Structure representing transaction
+    */
+    message TransactionType {
+        optional uint32 version = 1;
+        repeated TxInputType inputs = 2;
+        optional uint32 lock_time = 4;
+        repeated TxOutputType outputs = 5;
+        optional uint32 inputs_cnt = 6;
+        optional uint32 outputs_cnt = 7;
+        /**
+        * Structure representing transaction input
+        */
+        message TxInputType {
+            repeated uint32 address_n = 1;     // BIP-32 path to derive the key from master node
+            required bytes hashIn = 2;         // input hash
+        }
+        /**
+        * Structure representing transaction output
+        */
+        message TxOutputType {
+            required string address = 1;                // target coin address in Base58 encoding
+            repeated uint32 address_n = 2;              // BIP-32 path to derive the key from master node; has higher priority than "address"
+            required uint64 coins = 3;                  // amount of transaction output
+            required uint64 hours = 4;                  // accumulated hours
+        }
+    }
 }
