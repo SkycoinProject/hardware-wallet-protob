@@ -66,6 +66,9 @@ SignTx.coin_name                                max_size:32
 TxRequest.TxRequestDetailsType.tx_hash          max_size:32
 TxRequest.TxRequestSignResponseType.signature   max_size:131
 
+TxAck.TransactionType.inputs                    max_count:8
+TxAck.TransactionType.outputs                   max_count:8
 TxAck.TransactionType.TxInputType.hashIn        max_size:32
+TxAck.TransactionType.TxInputType.address_n     max_count:8
 
 TxAck.TransactionType.TxOutputType.address      max_size:32
