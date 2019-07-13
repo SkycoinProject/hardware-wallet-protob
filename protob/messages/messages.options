@@ -63,6 +63,7 @@ WordAck.word				max_size:12
 SignTx.tx_hash                                  max_size:32
 SignTx.coin_name                                max_size:32
 
+TxRequest.sign_result                           max_count:8
 TxRequest.TxRequestDetailsType.tx_hash          max_size:32
 TxRequest.TxRequestSignResponseType.signature   max_size:131
 
