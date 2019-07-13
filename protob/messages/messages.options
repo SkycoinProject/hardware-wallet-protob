@@ -72,3 +72,4 @@ TxAck.TransactionType.TxInputType.hashIn        max_size:32
 TxAck.TransactionType.TxInputType.address_n     max_count:8
 
 TxAck.TransactionType.TxOutputType.address      max_size:32
+TxAck.TransactionType.TxOutputType.address_n    max_count:8
