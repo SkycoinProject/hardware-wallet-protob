@@ -489,7 +489,7 @@ message SignTx {
     optional string coin_name = 3 [default='SKY'];  // coin to use
     optional uint32 version = 4 [default=1];        // transaction version
     optional uint32 lock_time = 5 [default=0];      // transaction lock_time
-    optional bytes tx_hash = 6;                     // tx_hash of requested transaction
+    optional string tx_hash = 6;                     // tx_hash of requested transaction
 }
 
 message TxRequest {
@@ -511,14 +511,14 @@ message TxRequest {
     */
     message TxRequestDetailsType {
         optional uint32 request_index = 1;      // device expects TxAck message from the computer
-        optional bytes tx_hash = 2;             // tx_hash of requested transaction
+        optional string tx_hash = 2;            // tx_hash of requested transaction
     }
     /**
     * Structure representing serialized data
     */
     message TxRequestSignResponseType {
         optional uint32 signature_index = 1;    // 'signature' field contains signed input of this index
-        optional bytes signature = 2;           // signature of the signature_index input
+        optional string signature = 2;           // signature of the signature_index input
     }
 }
 
@@ -539,7 +539,7 @@ message TxAck {
         */
         message TxInputType {
             repeated uint32 address_n = 1;     // BIP-32 path to derive the key from master node
-            required bytes hashIn = 2;         // input hash
+            required string hashIn = 2;        // input hash
         }
         /**
         * Structure representing transaction output
