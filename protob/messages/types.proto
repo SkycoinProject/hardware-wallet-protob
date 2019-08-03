@@ -44,6 +44,7 @@ enum FailureType {
 	Failure_NotInitialized = 11;
 	Failure_PinMismatch = 12;
 	Failure_AddressGeneration = 13;
+	Failure_FirmwarePanic = 14;
 	Failure_FirmwareError = 99;
 }
 
