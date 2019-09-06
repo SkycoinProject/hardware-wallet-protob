@@ -9,6 +9,8 @@ matrix:
             - ubuntu-toolchain-r-test
     - os: osx
       language: generic
+      env:
+        - PYTHON=python3
 install:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     export PATH="$PATH:$HOME/bin" ;
