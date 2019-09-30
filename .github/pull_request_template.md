@@ -10,7 +10,7 @@ Yes | No
 
 Related issues:
 
-PR skycoin/hardware-wallet# for issue skycoin/hardware-wallet#
-PR skycoin/hardware-wallet-js# for issue skycoin/hardware-wallet-js#
-PR skycoin/hardware-wallet-go# for issue skycoin/hardware-wallet-go#
+PR SkycoinProject/hardware-wallet# for issue SkycoinProject/hardware-wallet#
+PR SkycoinProject/hardware-wallet-js# for issue SkycoinProject/hardware-wallet-js#
+PR SkycoinProject/hardware-wallet-go# for issue SkycoinProject/hardware-wallet-go#
 
