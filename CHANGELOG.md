@@ -8,20 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-### Fixed
-
-### Changed
-
-### Removed
-
-### Fixed
-
-### Security
-
-## v1.0.0
-
-### Added
-
 - Add `RDP` level info in features msg.
 - Add `fw_version_head` field to features msg.
 - Add a `MessageType_GetMixedEntropy` rename `MessageType_GetEntropy` to `MessageType_GetRawEntropy`.
@@ -33,3 +19,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add go code generated from proto files into the `go` folder.
 - Make go folder a proper package that can be vendor'ed from another package
 - Address `index` of `SkycoinTransactionInput` marked as optional.
+- Added Windows support
+
+### Fixed
+
+
+### Changed
+
+### Removed
+
+### Fixed
+
+### Security
