@@ -14,17 +14,28 @@ GOPATH  ?= $(HOME)/go
 
 ifeq ($(TRAVIS),true)
   OS_NAME=$(TRAVIS_OS_NAME)
-else
-  ifeq ($(UNAME_S),Linux)
-    OS_NAME=linux
-  endif
-  ifeq ($(UNAME_S),Darwin)
-    OS_NAME=osx
-  endif
+	VERSION=-x86-64
+endif
+ifeq ($(OS_NAME), windows)
+	OS_NAME=win
+	VERSION=32
+endif
+
+ifeq ($(UNAME_S),Linux)
+  OS_NAME=linux
+  VERSION=-x86_64
+endif
+ifeq ($(UNAME_S),Darwin)
+  OS_NAME=osx
+  VERSION=-x86_64
+endif
+ifeq ($(OS),Windows_NT)
+  OS_NAME=win
+  VERSION=32
 endif
 
 PROTOC_VERSION      ?= 3.6.1
-PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
+PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)$(VERSION).zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 PROTOC_GOGO_URL      = github.com/gogo/protobuf
 PROTOC_NANOPBGEN_DIR = nanopb/vendor/nanopb/generator
@@ -44,7 +55,7 @@ PROTOB_C_DIR  = c
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 
 # Use default value when including this repository in vendor/ with dep
-# Set it explicitly either when generating to acustom location 
+# Set it explicitly either when generating to acustom location
 # or when this repository is included at a subpath other than vendor
 # e.g. go library should set this to github.com/skycoin/hardware-wallet-go/src/device-wallet/messages
 GO_IMPORT ?= github.com/skycoin/hardware-wallet-protob
@@ -80,9 +91,14 @@ install-protoc: /usr/local/bin/protoc
 	echo "Downloading protobuf from $(PROTOC_URL)"
 	curl -OL $(PROTOC_URL)
 	echo "Installing protoc"
-	sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
+	echo $(OS_NAME)
+  ifeq ($(OS_NAME), win)
+	  unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc.exe
+  else
+	  sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
+  endif
 	rm -f $(PROTOC_ZIP)
-
+	
 #----------------
 # Go lang
 #----------------
@@ -175,4 +191,3 @@ clean-py:
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-

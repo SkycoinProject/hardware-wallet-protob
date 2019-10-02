@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add go code generated from proto files into the `go` folder.
 - Make go folder a proper package that can be vendor'ed from another package
 - Address `index` of `SkycoinTransactionInput` marked as optional.
+- Added Windows support
 
 ### Fixed
 
@@ -30,4 +31,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 ### Security
-
