@@ -8,6 +8,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+### Fixed
+
+### Changed
+
+### Removed
+
+### Fixed
+
+### Security
+
+## v1.0.0
+
+### Added
+
 - Add `RDP` level info in features msg.
 - Add `fw_version_head` field to features msg.
 - Add a `MessageType_GetMixedEntropy` rename `MessageType_GetEntropy` to `MessageType_GetRawEntropy`.
