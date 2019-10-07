@@ -7,7 +7,7 @@
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 UNAME_S  = $(shell uname -s)
-PYTHON  ?= python
+PYTHON  ?= /usr/bin/env python3
 PIP     ?= pip3
 PIPARGS ?=
 GOPATH  ?= $(HOME)/go
