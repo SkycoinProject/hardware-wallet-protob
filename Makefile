@@ -149,10 +149,11 @@ install-deps-nanopb: install-protoc ## Install tools to generate protobuf classe
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 	$(PIP) install $(PIPARGS) "protobuf==$(PROTOC_VERSION)" ecdsa
 
-build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
+build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h build-py ## Generate protobuf classes for C with nanopb
+
+$(info )
 
 $(OUT_C)/%.pb.c: $(OUT_C)/%.pb $(PROTOB_MSG_DIR)/%.options
-#c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(eval PROTOBUF_FILE_OPTIONS := $(subst pb,options,$<))
 	$(eval PROTOBUF_FILE_OPTIONS = $(subst c/,,$(PROTOBUF_FILE_OPTIONS)))
 	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py -f $(PROTOB_MSG_DIR)/$(PROTOBUF_FILE_OPTIONS) $< -L '#include "%s"' -T
