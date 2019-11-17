@@ -9,7 +9,6 @@ option java_package = "net.skycoin.skywallet.protobuf";
 option java_outer_classname = "SkywalletMessage";
 
 import "types.proto";
-import "bitcoin_messages.proto";
 
 /**
  * Mapping between Skywallet wire identifier (uint) and a protobuf message

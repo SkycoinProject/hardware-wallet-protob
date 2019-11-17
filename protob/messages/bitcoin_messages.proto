@@ -1,12 +1,13 @@
 syntax = "proto2";
 
 /**
- * Types for Skywallet communication for Bitcoin
+ * Messages for Skywallet communication for Bitcoin
  */
 
 // Sugar for easier handling in Java
-option java_package = "com.satoshilabs.Skywallet.lib.protobuf";
+option java_package = "net.skycoin.skywallet.protobuf";
 option java_outer_classname = "SkywalletType";
+option go_package = "messages";
 
 import "bitcoin_types.proto";
 
