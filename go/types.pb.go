@@ -6,7 +6,7 @@ package messages
 import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import google_protobuf "github.com/SkycoinProject/hardware-wallet-protob/go/google/protobuf"
+import protobuf "github.com/SkycoinProject/hardware-wallet-protob/go/google/protobuf"
 
 import io "io"
 
@@ -1208,7 +1208,7 @@ func (m *SkycoinTransactionOutput) GetAddressIndex() uint32 {
 }
 
 var E_WireIn = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*protobuf.EnumValueOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         50002,
 	Name:          "wire_in",
@@ -1217,7 +1217,7 @@ var E_WireIn = &proto.ExtensionDesc{
 }
 
 var E_WireOut = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*protobuf.EnumValueOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         50003,
 	Name:          "wire_out",
@@ -1226,7 +1226,7 @@ var E_WireOut = &proto.ExtensionDesc{
 }
 
 var E_WireDebugIn = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*protobuf.EnumValueOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         50004,
 	Name:          "wire_debug_in",
@@ -1235,7 +1235,7 @@ var E_WireDebugIn = &proto.ExtensionDesc{
 }
 
 var E_WireDebugOut = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*protobuf.EnumValueOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         50005,
 	Name:          "wire_debug_out",
@@ -1244,7 +1244,7 @@ var E_WireDebugOut = &proto.ExtensionDesc{
 }
 
 var E_WireTiny = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*protobuf.EnumValueOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         50006,
 	Name:          "wire_tiny",
@@ -1253,7 +1253,7 @@ var E_WireTiny = &proto.ExtensionDesc{
 }
 
 var E_WireBootloader = &proto.ExtensionDesc{
-	ExtendedType:  (*google_protobuf.EnumValueOptions)(nil),
+	ExtendedType:  (*protobuf.EnumValueOptions)(nil),
 	ExtensionType: (*bool)(nil),
 	Field:         50007,
 	Name:          "wire_bootloader",
