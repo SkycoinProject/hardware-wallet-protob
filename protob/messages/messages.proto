@@ -58,6 +58,8 @@ enum MessageType {
     MessageType_SignTx = 125 [(wire_in) = true];
     MessageType_TxRequest = 126 [(wire_out) = true];
     MessageType_TxAck = 127 [(wire_in) = true];
+	MessageType_BitcoinTxAck = 128 [(wire_in) = true];
+	MessageType_BitcoinAddress = 129 [(wire_in) = true];
 }
 
 ////////////////////
