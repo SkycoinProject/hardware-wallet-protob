@@ -1,6 +1,4 @@
-EthereumTransactionInput.prev_hash       max_size:32
-
 EthereumTransactionOutput.address        max_size:36
 
-EthereumTransactionType.inputs           max_count:8
-EthereumTransactionType.outputs          max_count:8
+EthereumTransactionType.inputs           max_count:1
+EthereumTransactionType.outputs          max_count:1
