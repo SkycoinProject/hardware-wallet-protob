@@ -15,8 +15,8 @@ option go_package = "messages";
 message BitcoinTransactionInput {
 	required uint32 address_n = 1;	// Deterministic path to private/public keypair
 	required bytes prev_hash = 2;	// Hash of transaction, from which output will be used
-	required uint32 index = 3;		// Index of output in previous transaction, which will be spended
-	required uint64 value = 4;		// Amount of money to be spent
+	// required uint32 index = 3;		// Index of output in previous transaction, which will be spended
+	optional uint64 value = 4;		// Amount of money to be spent
 	reserved 5 to 15;				// Will be used for MultiSignature and SegWit transactions
 }
 
