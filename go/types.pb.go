@@ -8,12 +8,20 @@ import fmt "fmt"
 import math "math"
 import protobuf "github.com/SkycoinProject/hardware-wallet-protob/go/google/protobuf"
 
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 
 // *
 // Type of failures returned by Failure message
@@ -89,7 +97,9 @@ func (x *FailureType) UnmarshalJSON(data []byte) error {
 	*x = FailureType(value)
 	return nil
 }
-func (FailureType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
+func (FailureType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{0}
+}
 
 // *
 // Type of script which will be used for transaction output
@@ -138,7 +148,9 @@ func (x *OutputScriptType) UnmarshalJSON(data []byte) error {
 	*x = OutputScriptType(value)
 	return nil
 }
-func (OutputScriptType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{1} }
+func (OutputScriptType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{1}
+}
 
 // *
 // Type of script which will be used for transaction output
@@ -184,7 +196,9 @@ func (x *InputScriptType) UnmarshalJSON(data []byte) error {
 	*x = InputScriptType(value)
 	return nil
 }
-func (InputScriptType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
+func (InputScriptType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{2}
+}
 
 // *
 // Type of information required by transaction signing process
@@ -230,7 +244,9 @@ func (x *RequestType) UnmarshalJSON(data []byte) error {
 	*x = RequestType(value)
 	return nil
 }
-func (RequestType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
+func (RequestType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{3}
+}
 
 // *
 // Type of button request
@@ -303,7 +319,9 @@ func (x *ButtonRequestType) UnmarshalJSON(data []byte) error {
 	*x = ButtonRequestType(value)
 	return nil
 }
-func (ButtonRequestType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
+func (ButtonRequestType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{4}
+}
 
 // *
 // Type of PIN request
@@ -343,7 +361,9 @@ func (x *PinMatrixRequestType) UnmarshalJSON(data []byte) error {
 	*x = PinMatrixRequestType(value)
 	return nil
 }
-func (PinMatrixRequestType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{5} }
+func (PinMatrixRequestType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{5}
+}
 
 // *
 // Type of Recovery Word request
@@ -383,7 +403,9 @@ func (x *WordRequestType) UnmarshalJSON(data []byte) error {
 	*x = WordRequestType(value)
 	return nil
 }
-func (WordRequestType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{6} }
+func (WordRequestType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{6}
+}
 
 // *
 // Flags used to build firmware
@@ -431,7 +453,9 @@ func (x *FirmwareFeatures) UnmarshalJSON(data []byte) error {
 	*x = FirmwareFeatures(value)
 	return nil
 }
-func (FirmwareFeatures) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{7} }
+func (FirmwareFeatures) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{7}
+}
 
 // *
 // Ask Skywallet to generate a skycoin address
@@ -468,7 +492,9 @@ func (x *SkycoinAddressType) UnmarshalJSON(data []byte) error {
 	*x = SkycoinAddressType(value)
 	return nil
 }
-func (SkycoinAddressType) EnumDescriptor() ([]byte, []int) { return fileDescriptorTypes, []int{8} }
+func (SkycoinAddressType) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{8}
+}
 
 // *
 // Structure representing BIP32 (hierarchical deterministic) node
@@ -478,19 +504,49 @@ func (SkycoinAddressType) EnumDescriptor() ([]byte, []int) { return fileDescript
 // @used_in DebugLinkState
 // @used_in Storage
 type HDNodeType struct {
-	Depth            *uint32 `protobuf:"varint,1,req,name=depth" json:"depth,omitempty"`
-	Fingerprint      *uint32 `protobuf:"varint,2,req,name=fingerprint" json:"fingerprint,omitempty"`
-	ChildNum         *uint32 `protobuf:"varint,3,req,name=child_num,json=childNum" json:"child_num,omitempty"`
-	ChainCode        []byte  `protobuf:"bytes,4,req,name=chain_code,json=chainCode" json:"chain_code,omitempty"`
-	PrivateKey       []byte  `protobuf:"bytes,5,opt,name=private_key,json=privateKey" json:"private_key,omitempty"`
-	PublicKey        []byte  `protobuf:"bytes,6,opt,name=public_key,json=publicKey" json:"public_key,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Depth                *uint32  `protobuf:"varint,1,req,name=depth" json:"depth,omitempty"`
+	Fingerprint          *uint32  `protobuf:"varint,2,req,name=fingerprint" json:"fingerprint,omitempty"`
+	ChildNum             *uint32  `protobuf:"varint,3,req,name=child_num,json=childNum" json:"child_num,omitempty"`
+	ChainCode            []byte   `protobuf:"bytes,4,req,name=chain_code,json=chainCode" json:"chain_code,omitempty"`
+	PrivateKey           []byte   `protobuf:"bytes,5,opt,name=private_key,json=privateKey" json:"private_key,omitempty"`
+	PublicKey            []byte   `protobuf:"bytes,6,opt,name=public_key,json=publicKey" json:"public_key,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *HDNodeType) Reset()                    { *m = HDNodeType{} }
-func (m *HDNodeType) String() string            { return proto.CompactTextString(m) }
-func (*HDNodeType) ProtoMessage()               {}
-func (*HDNodeType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{0} }
+func (m *HDNodeType) Reset()         { *m = HDNodeType{} }
+func (m *HDNodeType) String() string { return proto.CompactTextString(m) }
+func (*HDNodeType) ProtoMessage()    {}
+func (*HDNodeType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{0}
+}
+func (m *HDNodeType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *HDNodeType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_HDNodeType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *HDNodeType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HDNodeType.Merge(dst, src)
+}
+func (m *HDNodeType) XXX_Size() int {
+	return m.Size()
+}
+func (m *HDNodeType) XXX_DiscardUnknown() {
+	xxx_messageInfo_HDNodeType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_HDNodeType proto.InternalMessageInfo
 
 func (m *HDNodeType) GetDepth() uint32 {
 	if m != nil && m.Depth != nil {
@@ -535,15 +591,45 @@ func (m *HDNodeType) GetPublicKey() []byte {
 }
 
 type HDNodePathType struct {
-	Node             *HDNodeType `protobuf:"bytes,1,req,name=node" json:"node,omitempty"`
-	AddressN         []uint32    `protobuf:"varint,2,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Node                 *HDNodeType `protobuf:"bytes,1,req,name=node" json:"node,omitempty"`
+	AddressN             []uint32    `protobuf:"varint,2,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
+	XXX_unrecognized     []byte      `json:"-"`
+	XXX_sizecache        int32       `json:"-"`
 }
 
-func (m *HDNodePathType) Reset()                    { *m = HDNodePathType{} }
-func (m *HDNodePathType) String() string            { return proto.CompactTextString(m) }
-func (*HDNodePathType) ProtoMessage()               {}
-func (*HDNodePathType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{1} }
+func (m *HDNodePathType) Reset()         { *m = HDNodePathType{} }
+func (m *HDNodePathType) String() string { return proto.CompactTextString(m) }
+func (*HDNodePathType) ProtoMessage()    {}
+func (*HDNodePathType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{1}
+}
+func (m *HDNodePathType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *HDNodePathType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_HDNodePathType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *HDNodePathType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_HDNodePathType.Merge(dst, src)
+}
+func (m *HDNodePathType) XXX_Size() int {
+	return m.Size()
+}
+func (m *HDNodePathType) XXX_DiscardUnknown() {
+	xxx_messageInfo_HDNodePathType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_HDNodePathType proto.InternalMessageInfo
 
 func (m *HDNodePathType) GetNode() *HDNodeType {
 	if m != nil {
@@ -563,24 +649,54 @@ func (m *HDNodePathType) GetAddressN() []uint32 {
 // Structure representing Coin
 // @used_in Features
 type CoinType struct {
-	CoinName            *string `protobuf:"bytes,1,opt,name=coin_name,json=coinName" json:"coin_name,omitempty"`
-	CoinShortcut        *string `protobuf:"bytes,2,opt,name=coin_shortcut,json=coinShortcut" json:"coin_shortcut,omitempty"`
-	AddressType         *uint32 `protobuf:"varint,3,opt,name=address_type,json=addressType,def=0" json:"address_type,omitempty"`
-	MaxfeeKb            *uint64 `protobuf:"varint,4,opt,name=maxfee_kb,json=maxfeeKb" json:"maxfee_kb,omitempty"`
-	AddressTypeP2Sh     *uint32 `protobuf:"varint,5,opt,name=address_type_p2sh,json=addressTypeP2sh,def=5" json:"address_type_p2sh,omitempty"`
-	SignedMessageHeader *string `protobuf:"bytes,8,opt,name=signed_message_header,json=signedMessageHeader" json:"signed_message_header,omitempty"`
-	XpubMagic           *uint32 `protobuf:"varint,9,opt,name=xpub_magic,json=xpubMagic,def=76067358" json:"xpub_magic,omitempty"`
-	XprvMagic           *uint32 `protobuf:"varint,10,opt,name=xprv_magic,json=xprvMagic,def=76066276" json:"xprv_magic,omitempty"`
-	Segwit              *bool   `protobuf:"varint,11,opt,name=segwit" json:"segwit,omitempty"`
-	Forkid              *uint32 `protobuf:"varint,12,opt,name=forkid" json:"forkid,omitempty"`
-	ForceBip143         *bool   `protobuf:"varint,13,opt,name=force_bip143,json=forceBip143" json:"force_bip143,omitempty"`
-	XXX_unrecognized    []byte  `json:"-"`
+	CoinName             *string  `protobuf:"bytes,1,opt,name=coin_name,json=coinName" json:"coin_name,omitempty"`
+	CoinShortcut         *string  `protobuf:"bytes,2,opt,name=coin_shortcut,json=coinShortcut" json:"coin_shortcut,omitempty"`
+	AddressType          *uint32  `protobuf:"varint,3,opt,name=address_type,json=addressType,def=0" json:"address_type,omitempty"`
+	MaxfeeKb             *uint64  `protobuf:"varint,4,opt,name=maxfee_kb,json=maxfeeKb" json:"maxfee_kb,omitempty"`
+	AddressTypeP2Sh      *uint32  `protobuf:"varint,5,opt,name=address_type_p2sh,json=addressTypeP2sh,def=5" json:"address_type_p2sh,omitempty"`
+	SignedMessageHeader  *string  `protobuf:"bytes,8,opt,name=signed_message_header,json=signedMessageHeader" json:"signed_message_header,omitempty"`
+	XpubMagic            *uint32  `protobuf:"varint,9,opt,name=xpub_magic,json=xpubMagic,def=76067358" json:"xpub_magic,omitempty"`
+	XprvMagic            *uint32  `protobuf:"varint,10,opt,name=xprv_magic,json=xprvMagic,def=76066276" json:"xprv_magic,omitempty"`
+	Segwit               *bool    `protobuf:"varint,11,opt,name=segwit" json:"segwit,omitempty"`
+	Forkid               *uint32  `protobuf:"varint,12,opt,name=forkid" json:"forkid,omitempty"`
+	ForceBip143          *bool    `protobuf:"varint,13,opt,name=force_bip143,json=forceBip143" json:"force_bip143,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CoinType) Reset()                    { *m = CoinType{} }
-func (m *CoinType) String() string            { return proto.CompactTextString(m) }
-func (*CoinType) ProtoMessage()               {}
-func (*CoinType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{2} }
+func (m *CoinType) Reset()         { *m = CoinType{} }
+func (m *CoinType) String() string { return proto.CompactTextString(m) }
+func (*CoinType) ProtoMessage()    {}
+func (*CoinType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{2}
+}
+func (m *CoinType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *CoinType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_CoinType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *CoinType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CoinType.Merge(dst, src)
+}
+func (m *CoinType) XXX_Size() int {
+	return m.Size()
+}
+func (m *CoinType) XXX_DiscardUnknown() {
+	xxx_messageInfo_CoinType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CoinType proto.InternalMessageInfo
 
 const Default_CoinType_AddressType uint32 = 0
 const Default_CoinType_AddressTypeP2Sh uint32 = 5
@@ -668,16 +784,46 @@ func (m *CoinType) GetForceBip143() bool {
 // Type of redeem script used in input
 // @used_in TxInputType
 type MultisigRedeemScriptType struct {
-	Pubkeys          []*HDNodePathType `protobuf:"bytes,1,rep,name=pubkeys" json:"pubkeys,omitempty"`
-	Signatures       [][]byte          `protobuf:"bytes,2,rep,name=signatures" json:"signatures,omitempty"`
-	M                *uint32           `protobuf:"varint,3,opt,name=m" json:"m,omitempty"`
-	XXX_unrecognized []byte            `json:"-"`
+	Pubkeys              []*HDNodePathType `protobuf:"bytes,1,rep,name=pubkeys" json:"pubkeys,omitempty"`
+	Signatures           [][]byte          `protobuf:"bytes,2,rep,name=signatures" json:"signatures,omitempty"`
+	M                    *uint32           `protobuf:"varint,3,opt,name=m" json:"m,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
+	XXX_unrecognized     []byte            `json:"-"`
+	XXX_sizecache        int32             `json:"-"`
 }
 
-func (m *MultisigRedeemScriptType) Reset()                    { *m = MultisigRedeemScriptType{} }
-func (m *MultisigRedeemScriptType) String() string            { return proto.CompactTextString(m) }
-func (*MultisigRedeemScriptType) ProtoMessage()               {}
-func (*MultisigRedeemScriptType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{3} }
+func (m *MultisigRedeemScriptType) Reset()         { *m = MultisigRedeemScriptType{} }
+func (m *MultisigRedeemScriptType) String() string { return proto.CompactTextString(m) }
+func (*MultisigRedeemScriptType) ProtoMessage()    {}
+func (*MultisigRedeemScriptType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{3}
+}
+func (m *MultisigRedeemScriptType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MultisigRedeemScriptType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MultisigRedeemScriptType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *MultisigRedeemScriptType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MultisigRedeemScriptType.Merge(dst, src)
+}
+func (m *MultisigRedeemScriptType) XXX_Size() int {
+	return m.Size()
+}
+func (m *MultisigRedeemScriptType) XXX_DiscardUnknown() {
+	xxx_messageInfo_MultisigRedeemScriptType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MultisigRedeemScriptType proto.InternalMessageInfo
 
 func (m *MultisigRedeemScriptType) GetPubkeys() []*HDNodePathType {
 	if m != nil {
@@ -705,23 +851,53 @@ func (m *MultisigRedeemScriptType) GetM() uint32 {
 // @used_in SimpleSignTx
 // @used_in TransactionType
 type TxInputType struct {
-	AddressN            []uint32                  `protobuf:"varint,1,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
-	PrevHash            []byte                    `protobuf:"bytes,2,req,name=prev_hash,json=prevHash" json:"prev_hash,omitempty"`
-	PrevIndex           *uint32                   `protobuf:"varint,3,req,name=prev_index,json=prevIndex" json:"prev_index,omitempty"`
-	ScriptSig           []byte                    `protobuf:"bytes,4,opt,name=script_sig,json=scriptSig" json:"script_sig,omitempty"`
-	Sequence            *uint32                   `protobuf:"varint,5,opt,name=sequence,def=4294967295" json:"sequence,omitempty"`
-	ScriptType          *InputScriptType          `protobuf:"varint,6,opt,name=script_type,json=scriptType,enum=InputScriptType,def=0" json:"script_type,omitempty"`
-	Multisig            *MultisigRedeemScriptType `protobuf:"bytes,7,opt,name=multisig" json:"multisig,omitempty"`
-	Amount              *uint64                   `protobuf:"varint,8,opt,name=amount" json:"amount,omitempty"`
-	DecredTree          *uint32                   `protobuf:"varint,9,opt,name=decred_tree,json=decredTree" json:"decred_tree,omitempty"`
-	DecredScriptVersion *uint32                   `protobuf:"varint,10,opt,name=decred_script_version,json=decredScriptVersion" json:"decred_script_version,omitempty"`
-	XXX_unrecognized    []byte                    `json:"-"`
+	AddressN             []uint32                  `protobuf:"varint,1,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
+	PrevHash             []byte                    `protobuf:"bytes,2,req,name=prev_hash,json=prevHash" json:"prev_hash,omitempty"`
+	PrevIndex            *uint32                   `protobuf:"varint,3,req,name=prev_index,json=prevIndex" json:"prev_index,omitempty"`
+	ScriptSig            []byte                    `protobuf:"bytes,4,opt,name=script_sig,json=scriptSig" json:"script_sig,omitempty"`
+	Sequence             *uint32                   `protobuf:"varint,5,opt,name=sequence,def=4294967295" json:"sequence,omitempty"`
+	ScriptType           *InputScriptType          `protobuf:"varint,6,opt,name=script_type,json=scriptType,enum=InputScriptType,def=0" json:"script_type,omitempty"`
+	Multisig             *MultisigRedeemScriptType `protobuf:"bytes,7,opt,name=multisig" json:"multisig,omitempty"`
+	Amount               *uint64                   `protobuf:"varint,8,opt,name=amount" json:"amount,omitempty"`
+	DecredTree           *uint32                   `protobuf:"varint,9,opt,name=decred_tree,json=decredTree" json:"decred_tree,omitempty"`
+	DecredScriptVersion  *uint32                   `protobuf:"varint,10,opt,name=decred_script_version,json=decredScriptVersion" json:"decred_script_version,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
 }
 
-func (m *TxInputType) Reset()                    { *m = TxInputType{} }
-func (m *TxInputType) String() string            { return proto.CompactTextString(m) }
-func (*TxInputType) ProtoMessage()               {}
-func (*TxInputType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{4} }
+func (m *TxInputType) Reset()         { *m = TxInputType{} }
+func (m *TxInputType) String() string { return proto.CompactTextString(m) }
+func (*TxInputType) ProtoMessage()    {}
+func (*TxInputType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{4}
+}
+func (m *TxInputType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TxInputType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TxInputType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *TxInputType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxInputType.Merge(dst, src)
+}
+func (m *TxInputType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxInputType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxInputType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxInputType proto.InternalMessageInfo
 
 const Default_TxInputType_Sequence uint32 = 4294967295
 const Default_TxInputType_ScriptType InputScriptType = InputScriptType_SPENDADDRESS
@@ -801,20 +977,50 @@ func (m *TxInputType) GetDecredScriptVersion() uint32 {
 // @used_in SimpleSignTx
 // @used_in TransactionType
 type TxOutputType struct {
-	Address             *string                   `protobuf:"bytes,1,opt,name=address" json:"address,omitempty"`
-	AddressN            []uint32                  `protobuf:"varint,2,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
-	Amount              *uint64                   `protobuf:"varint,3,req,name=amount" json:"amount,omitempty"`
-	ScriptType          *OutputScriptType         `protobuf:"varint,4,req,name=script_type,json=scriptType,enum=OutputScriptType" json:"script_type,omitempty"`
-	Multisig            *MultisigRedeemScriptType `protobuf:"bytes,5,opt,name=multisig" json:"multisig,omitempty"`
-	OpReturnData        []byte                    `protobuf:"bytes,6,opt,name=op_return_data,json=opReturnData" json:"op_return_data,omitempty"`
-	DecredScriptVersion *uint32                   `protobuf:"varint,7,opt,name=decred_script_version,json=decredScriptVersion" json:"decred_script_version,omitempty"`
-	XXX_unrecognized    []byte                    `json:"-"`
+	Address              *string                   `protobuf:"bytes,1,opt,name=address" json:"address,omitempty"`
+	AddressN             []uint32                  `protobuf:"varint,2,rep,name=address_n,json=addressN" json:"address_n,omitempty"`
+	Amount               *uint64                   `protobuf:"varint,3,req,name=amount" json:"amount,omitempty"`
+	ScriptType           *OutputScriptType         `protobuf:"varint,4,req,name=script_type,json=scriptType,enum=OutputScriptType" json:"script_type,omitempty"`
+	Multisig             *MultisigRedeemScriptType `protobuf:"bytes,5,opt,name=multisig" json:"multisig,omitempty"`
+	OpReturnData         []byte                    `protobuf:"bytes,6,opt,name=op_return_data,json=opReturnData" json:"op_return_data,omitempty"`
+	DecredScriptVersion  *uint32                   `protobuf:"varint,7,opt,name=decred_script_version,json=decredScriptVersion" json:"decred_script_version,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                  `json:"-"`
+	XXX_unrecognized     []byte                    `json:"-"`
+	XXX_sizecache        int32                     `json:"-"`
 }
 
-func (m *TxOutputType) Reset()                    { *m = TxOutputType{} }
-func (m *TxOutputType) String() string            { return proto.CompactTextString(m) }
-func (*TxOutputType) ProtoMessage()               {}
-func (*TxOutputType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{5} }
+func (m *TxOutputType) Reset()         { *m = TxOutputType{} }
+func (m *TxOutputType) String() string { return proto.CompactTextString(m) }
+func (*TxOutputType) ProtoMessage()    {}
+func (*TxOutputType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{5}
+}
+func (m *TxOutputType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TxOutputType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TxOutputType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *TxOutputType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxOutputType.Merge(dst, src)
+}
+func (m *TxOutputType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxOutputType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxOutputType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxOutputType proto.InternalMessageInfo
 
 func (m *TxOutputType) GetAddress() string {
 	if m != nil && m.Address != nil {
@@ -869,16 +1075,46 @@ func (m *TxOutputType) GetDecredScriptVersion() uint32 {
 // Structure representing compiled transaction output
 // @used_in TransactionType
 type TxOutputBinType struct {
-	Amount              *uint64 `protobuf:"varint,1,req,name=amount" json:"amount,omitempty"`
-	ScriptPubkey        []byte  `protobuf:"bytes,2,req,name=script_pubkey,json=scriptPubkey" json:"script_pubkey,omitempty"`
-	DecredScriptVersion *uint32 `protobuf:"varint,3,opt,name=decred_script_version,json=decredScriptVersion" json:"decred_script_version,omitempty"`
-	XXX_unrecognized    []byte  `json:"-"`
+	Amount               *uint64  `protobuf:"varint,1,req,name=amount" json:"amount,omitempty"`
+	ScriptPubkey         []byte   `protobuf:"bytes,2,req,name=script_pubkey,json=scriptPubkey" json:"script_pubkey,omitempty"`
+	DecredScriptVersion  *uint32  `protobuf:"varint,3,opt,name=decred_script_version,json=decredScriptVersion" json:"decred_script_version,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *TxOutputBinType) Reset()                    { *m = TxOutputBinType{} }
-func (m *TxOutputBinType) String() string            { return proto.CompactTextString(m) }
-func (*TxOutputBinType) ProtoMessage()               {}
-func (*TxOutputBinType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{6} }
+func (m *TxOutputBinType) Reset()         { *m = TxOutputBinType{} }
+func (m *TxOutputBinType) String() string { return proto.CompactTextString(m) }
+func (*TxOutputBinType) ProtoMessage()    {}
+func (*TxOutputBinType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{6}
+}
+func (m *TxOutputBinType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TxOutputBinType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TxOutputBinType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *TxOutputBinType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxOutputBinType.Merge(dst, src)
+}
+func (m *TxOutputBinType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxOutputBinType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxOutputBinType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxOutputBinType proto.InternalMessageInfo
 
 func (m *TxOutputBinType) GetAmount() uint64 {
 	if m != nil && m.Amount != nil {
@@ -905,23 +1141,53 @@ func (m *TxOutputBinType) GetDecredScriptVersion() uint32 {
 // Structure representing transaction
 // @used_in SimpleSignTx
 type TransactionType struct {
-	Version          *uint32            `protobuf:"varint,1,opt,name=version" json:"version,omitempty"`
-	Inputs           []*TxInputType     `protobuf:"bytes,2,rep,name=inputs" json:"inputs,omitempty"`
-	BinOutputs       []*TxOutputBinType `protobuf:"bytes,3,rep,name=bin_outputs,json=binOutputs" json:"bin_outputs,omitempty"`
-	Outputs          []*TxOutputType    `protobuf:"bytes,5,rep,name=outputs" json:"outputs,omitempty"`
-	LockTime         *uint32            `protobuf:"varint,4,opt,name=lock_time,json=lockTime" json:"lock_time,omitempty"`
-	InputsCnt        *uint32            `protobuf:"varint,6,opt,name=inputs_cnt,json=inputsCnt" json:"inputs_cnt,omitempty"`
-	OutputsCnt       *uint32            `protobuf:"varint,7,opt,name=outputs_cnt,json=outputsCnt" json:"outputs_cnt,omitempty"`
-	ExtraData        []byte             `protobuf:"bytes,8,opt,name=extra_data,json=extraData" json:"extra_data,omitempty"`
-	ExtraDataLen     *uint32            `protobuf:"varint,9,opt,name=extra_data_len,json=extraDataLen" json:"extra_data_len,omitempty"`
-	DecredExpiry     *uint32            `protobuf:"varint,10,opt,name=decred_expiry,json=decredExpiry" json:"decred_expiry,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Version              *uint32            `protobuf:"varint,1,opt,name=version" json:"version,omitempty"`
+	Inputs               []*TxInputType     `protobuf:"bytes,2,rep,name=inputs" json:"inputs,omitempty"`
+	BinOutputs           []*TxOutputBinType `protobuf:"bytes,3,rep,name=bin_outputs,json=binOutputs" json:"bin_outputs,omitempty"`
+	Outputs              []*TxOutputType    `protobuf:"bytes,5,rep,name=outputs" json:"outputs,omitempty"`
+	LockTime             *uint32            `protobuf:"varint,4,opt,name=lock_time,json=lockTime" json:"lock_time,omitempty"`
+	InputsCnt            *uint32            `protobuf:"varint,6,opt,name=inputs_cnt,json=inputsCnt" json:"inputs_cnt,omitempty"`
+	OutputsCnt           *uint32            `protobuf:"varint,7,opt,name=outputs_cnt,json=outputsCnt" json:"outputs_cnt,omitempty"`
+	ExtraData            []byte             `protobuf:"bytes,8,opt,name=extra_data,json=extraData" json:"extra_data,omitempty"`
+	ExtraDataLen         *uint32            `protobuf:"varint,9,opt,name=extra_data_len,json=extraDataLen" json:"extra_data_len,omitempty"`
+	DecredExpiry         *uint32            `protobuf:"varint,10,opt,name=decred_expiry,json=decredExpiry" json:"decred_expiry,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
+	XXX_unrecognized     []byte             `json:"-"`
+	XXX_sizecache        int32              `json:"-"`
 }
 
-func (m *TransactionType) Reset()                    { *m = TransactionType{} }
-func (m *TransactionType) String() string            { return proto.CompactTextString(m) }
-func (*TransactionType) ProtoMessage()               {}
-func (*TransactionType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{7} }
+func (m *TransactionType) Reset()         { *m = TransactionType{} }
+func (m *TransactionType) String() string { return proto.CompactTextString(m) }
+func (*TransactionType) ProtoMessage()    {}
+func (*TransactionType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{7}
+}
+func (m *TransactionType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TransactionType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TransactionType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *TransactionType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TransactionType.Merge(dst, src)
+}
+func (m *TransactionType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TransactionType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TransactionType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TransactionType proto.InternalMessageInfo
 
 func (m *TransactionType) GetVersion() uint32 {
 	if m != nil && m.Version != nil {
@@ -997,17 +1263,47 @@ func (m *TransactionType) GetDecredExpiry() uint32 {
 // Structure representing request details
 // @used_in TxRequest
 type TxRequestDetailsType struct {
-	RequestIndex     *uint32 `protobuf:"varint,1,opt,name=request_index,json=requestIndex" json:"request_index,omitempty"`
-	TxHash           []byte  `protobuf:"bytes,2,opt,name=tx_hash,json=txHash" json:"tx_hash,omitempty"`
-	ExtraDataLen     *uint32 `protobuf:"varint,3,opt,name=extra_data_len,json=extraDataLen" json:"extra_data_len,omitempty"`
-	ExtraDataOffset  *uint32 `protobuf:"varint,4,opt,name=extra_data_offset,json=extraDataOffset" json:"extra_data_offset,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	RequestIndex         *uint32  `protobuf:"varint,1,opt,name=request_index,json=requestIndex" json:"request_index,omitempty"`
+	TxHash               []byte   `protobuf:"bytes,2,opt,name=tx_hash,json=txHash" json:"tx_hash,omitempty"`
+	ExtraDataLen         *uint32  `protobuf:"varint,3,opt,name=extra_data_len,json=extraDataLen" json:"extra_data_len,omitempty"`
+	ExtraDataOffset      *uint32  `protobuf:"varint,4,opt,name=extra_data_offset,json=extraDataOffset" json:"extra_data_offset,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *TxRequestDetailsType) Reset()                    { *m = TxRequestDetailsType{} }
-func (m *TxRequestDetailsType) String() string            { return proto.CompactTextString(m) }
-func (*TxRequestDetailsType) ProtoMessage()               {}
-func (*TxRequestDetailsType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{8} }
+func (m *TxRequestDetailsType) Reset()         { *m = TxRequestDetailsType{} }
+func (m *TxRequestDetailsType) String() string { return proto.CompactTextString(m) }
+func (*TxRequestDetailsType) ProtoMessage()    {}
+func (*TxRequestDetailsType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{8}
+}
+func (m *TxRequestDetailsType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TxRequestDetailsType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TxRequestDetailsType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *TxRequestDetailsType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxRequestDetailsType.Merge(dst, src)
+}
+func (m *TxRequestDetailsType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxRequestDetailsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxRequestDetailsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxRequestDetailsType proto.InternalMessageInfo
 
 func (m *TxRequestDetailsType) GetRequestIndex() uint32 {
 	if m != nil && m.RequestIndex != nil {
@@ -1041,16 +1337,46 @@ func (m *TxRequestDetailsType) GetExtraDataOffset() uint32 {
 // Structure representing serialized data
 // @used_in TxRequest
 type TxRequestSerializedType struct {
-	SignatureIndex   *uint32 `protobuf:"varint,1,opt,name=signature_index,json=signatureIndex" json:"signature_index,omitempty"`
-	Signature        []byte  `protobuf:"bytes,2,opt,name=signature" json:"signature,omitempty"`
-	SerializedTx     []byte  `protobuf:"bytes,3,opt,name=serialized_tx,json=serializedTx" json:"serialized_tx,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	SignatureIndex       *uint32  `protobuf:"varint,1,opt,name=signature_index,json=signatureIndex" json:"signature_index,omitempty"`
+	Signature            []byte   `protobuf:"bytes,2,opt,name=signature" json:"signature,omitempty"`
+	SerializedTx         []byte   `protobuf:"bytes,3,opt,name=serialized_tx,json=serializedTx" json:"serialized_tx,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *TxRequestSerializedType) Reset()                    { *m = TxRequestSerializedType{} }
-func (m *TxRequestSerializedType) String() string            { return proto.CompactTextString(m) }
-func (*TxRequestSerializedType) ProtoMessage()               {}
-func (*TxRequestSerializedType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{9} }
+func (m *TxRequestSerializedType) Reset()         { *m = TxRequestSerializedType{} }
+func (m *TxRequestSerializedType) String() string { return proto.CompactTextString(m) }
+func (*TxRequestSerializedType) ProtoMessage()    {}
+func (*TxRequestSerializedType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{9}
+}
+func (m *TxRequestSerializedType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TxRequestSerializedType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TxRequestSerializedType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *TxRequestSerializedType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxRequestSerializedType.Merge(dst, src)
+}
+func (m *TxRequestSerializedType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxRequestSerializedType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxRequestSerializedType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxRequestSerializedType proto.InternalMessageInfo
 
 func (m *TxRequestSerializedType) GetSignatureIndex() uint32 {
 	if m != nil && m.SignatureIndex != nil {
@@ -1077,19 +1403,49 @@ func (m *TxRequestSerializedType) GetSerializedTx() []byte {
 // Structure representing identity data
 // @used_in IdentityType
 type IdentityType struct {
-	Proto            *string `protobuf:"bytes,1,opt,name=proto" json:"proto,omitempty"`
-	User             *string `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
-	Host             *string `protobuf:"bytes,3,opt,name=host" json:"host,omitempty"`
-	Port             *string `protobuf:"bytes,4,opt,name=port" json:"port,omitempty"`
-	Path             *string `protobuf:"bytes,5,opt,name=path" json:"path,omitempty"`
-	Index            *uint32 `protobuf:"varint,6,opt,name=index,def=0" json:"index,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Proto                *string  `protobuf:"bytes,1,opt,name=proto" json:"proto,omitempty"`
+	User                 *string  `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
+	Host                 *string  `protobuf:"bytes,3,opt,name=host" json:"host,omitempty"`
+	Port                 *string  `protobuf:"bytes,4,opt,name=port" json:"port,omitempty"`
+	Path                 *string  `protobuf:"bytes,5,opt,name=path" json:"path,omitempty"`
+	Index                *uint32  `protobuf:"varint,6,opt,name=index,def=0" json:"index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *IdentityType) Reset()                    { *m = IdentityType{} }
-func (m *IdentityType) String() string            { return proto.CompactTextString(m) }
-func (*IdentityType) ProtoMessage()               {}
-func (*IdentityType) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{10} }
+func (m *IdentityType) Reset()         { *m = IdentityType{} }
+func (m *IdentityType) String() string { return proto.CompactTextString(m) }
+func (*IdentityType) ProtoMessage()    {}
+func (*IdentityType) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{10}
+}
+func (m *IdentityType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *IdentityType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_IdentityType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *IdentityType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IdentityType.Merge(dst, src)
+}
+func (m *IdentityType) XXX_Size() int {
+	return m.Size()
+}
+func (m *IdentityType) XXX_DiscardUnknown() {
+	xxx_messageInfo_IdentityType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_IdentityType proto.InternalMessageInfo
 
 const Default_IdentityType_Index uint32 = 0
 
@@ -1139,15 +1495,45 @@ func (m *IdentityType) GetIndex() uint32 {
 // Skycoin transaction input
 // @used_in TransactionSign
 type SkycoinTransactionInput struct {
-	HashIn           *string `protobuf:"bytes,1,req,name=hashIn" json:"hashIn,omitempty"`
-	Index            *uint32 `protobuf:"varint,2,opt,name=index" json:"index,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	HashIn               *string  `protobuf:"bytes,1,req,name=hashIn" json:"hashIn,omitempty"`
+	Index                *uint32  `protobuf:"varint,2,opt,name=index" json:"index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SkycoinTransactionInput) Reset()                    { *m = SkycoinTransactionInput{} }
-func (m *SkycoinTransactionInput) String() string            { return proto.CompactTextString(m) }
-func (*SkycoinTransactionInput) ProtoMessage()               {}
-func (*SkycoinTransactionInput) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{11} }
+func (m *SkycoinTransactionInput) Reset()         { *m = SkycoinTransactionInput{} }
+func (m *SkycoinTransactionInput) String() string { return proto.CompactTextString(m) }
+func (*SkycoinTransactionInput) ProtoMessage()    {}
+func (*SkycoinTransactionInput) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{11}
+}
+func (m *SkycoinTransactionInput) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SkycoinTransactionInput) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SkycoinTransactionInput.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *SkycoinTransactionInput) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SkycoinTransactionInput.Merge(dst, src)
+}
+func (m *SkycoinTransactionInput) XXX_Size() int {
+	return m.Size()
+}
+func (m *SkycoinTransactionInput) XXX_DiscardUnknown() {
+	xxx_messageInfo_SkycoinTransactionInput.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SkycoinTransactionInput proto.InternalMessageInfo
 
 func (m *SkycoinTransactionInput) GetHashIn() string {
 	if m != nil && m.HashIn != nil {
@@ -1167,17 +1553,47 @@ func (m *SkycoinTransactionInput) GetIndex() uint32 {
 // Skycoin transaction output
 // @used_in TransactionSign
 type SkycoinTransactionOutput struct {
-	Address          *string `protobuf:"bytes,1,req,name=address" json:"address,omitempty"`
-	Coin             *uint64 `protobuf:"varint,2,req,name=coin" json:"coin,omitempty"`
-	Hour             *uint64 `protobuf:"varint,3,req,name=hour" json:"hour,omitempty"`
-	AddressIndex     *uint32 `protobuf:"varint,4,opt,name=address_index,json=addressIndex" json:"address_index,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Address              *string  `protobuf:"bytes,1,req,name=address" json:"address,omitempty"`
+	Coin                 *uint64  `protobuf:"varint,2,req,name=coin" json:"coin,omitempty"`
+	Hour                 *uint64  `protobuf:"varint,3,req,name=hour" json:"hour,omitempty"`
+	AddressIndex         *uint32  `protobuf:"varint,4,opt,name=address_index,json=addressIndex" json:"address_index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *SkycoinTransactionOutput) Reset()                    { *m = SkycoinTransactionOutput{} }
-func (m *SkycoinTransactionOutput) String() string            { return proto.CompactTextString(m) }
-func (*SkycoinTransactionOutput) ProtoMessage()               {}
-func (*SkycoinTransactionOutput) Descriptor() ([]byte, []int) { return fileDescriptorTypes, []int{12} }
+func (m *SkycoinTransactionOutput) Reset()         { *m = SkycoinTransactionOutput{} }
+func (m *SkycoinTransactionOutput) String() string { return proto.CompactTextString(m) }
+func (*SkycoinTransactionOutput) ProtoMessage()    {}
+func (*SkycoinTransactionOutput) Descriptor() ([]byte, []int) {
+	return fileDescriptor_types_63732f330a59de3b, []int{12}
+}
+func (m *SkycoinTransactionOutput) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *SkycoinTransactionOutput) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_SkycoinTransactionOutput.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *SkycoinTransactionOutput) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SkycoinTransactionOutput.Merge(dst, src)
+}
+func (m *SkycoinTransactionOutput) XXX_Size() int {
+	return m.Size()
+}
+func (m *SkycoinTransactionOutput) XXX_DiscardUnknown() {
+	xxx_messageInfo_SkycoinTransactionOutput.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_SkycoinTransactionOutput proto.InternalMessageInfo
 
 func (m *SkycoinTransactionOutput) GetAddress() string {
 	if m != nil && m.Address != nil {
@@ -1307,28 +1723,28 @@ func (m *HDNodeType) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Depth == nil {
-		return 0, proto.NewRequiredNotSetError("depth")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("depth")
 	} else {
 		dAtA[i] = 0x8
 		i++
 		i = encodeVarintTypes(dAtA, i, uint64(*m.Depth))
 	}
 	if m.Fingerprint == nil {
-		return 0, proto.NewRequiredNotSetError("fingerprint")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("fingerprint")
 	} else {
 		dAtA[i] = 0x10
 		i++
 		i = encodeVarintTypes(dAtA, i, uint64(*m.Fingerprint))
 	}
 	if m.ChildNum == nil {
-		return 0, proto.NewRequiredNotSetError("child_num")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("child_num")
 	} else {
 		dAtA[i] = 0x18
 		i++
 		i = encodeVarintTypes(dAtA, i, uint64(*m.ChildNum))
 	}
 	if m.ChainCode == nil {
-		return 0, proto.NewRequiredNotSetError("chain_code")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("chain_code")
 	} else {
 		dAtA[i] = 0x22
 		i++
@@ -1369,7 +1785,7 @@ func (m *HDNodePathType) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Node == nil {
-		return 0, proto.NewRequiredNotSetError("node")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("node")
 	} else {
 		dAtA[i] = 0xa
 		i++
@@ -1551,7 +1967,7 @@ func (m *TxInputType) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.PrevHash == nil {
-		return 0, proto.NewRequiredNotSetError("prev_hash")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_hash")
 	} else {
 		dAtA[i] = 0x12
 		i++
@@ -1559,7 +1975,7 @@ func (m *TxInputType) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], m.PrevHash)
 	}
 	if m.PrevIndex == nil {
-		return 0, proto.NewRequiredNotSetError("prev_index")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_index")
 	} else {
 		dAtA[i] = 0x18
 		i++
@@ -1641,14 +2057,14 @@ func (m *TxOutputType) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.Amount == nil {
-		return 0, proto.NewRequiredNotSetError("amount")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("amount")
 	} else {
 		dAtA[i] = 0x18
 		i++
 		i = encodeVarintTypes(dAtA, i, uint64(*m.Amount))
 	}
 	if m.ScriptType == nil {
-		return 0, proto.NewRequiredNotSetError("script_type")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("script_type")
 	} else {
 		dAtA[i] = 0x20
 		i++
@@ -1697,14 +2113,14 @@ func (m *TxOutputBinType) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Amount == nil {
-		return 0, proto.NewRequiredNotSetError("amount")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("amount")
 	} else {
 		dAtA[i] = 0x8
 		i++
 		i = encodeVarintTypes(dAtA, i, uint64(*m.Amount))
 	}
 	if m.ScriptPubkey == nil {
-		return 0, proto.NewRequiredNotSetError("script_pubkey")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("script_pubkey")
 	} else {
 		dAtA[i] = 0x12
 		i++
@@ -1967,7 +2383,7 @@ func (m *SkycoinTransactionInput) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.HashIn == nil {
-		return 0, proto.NewRequiredNotSetError("hashIn")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("hashIn")
 	} else {
 		dAtA[i] = 0xa
 		i++
@@ -2001,7 +2417,7 @@ func (m *SkycoinTransactionOutput) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Address == nil {
-		return 0, proto.NewRequiredNotSetError("address")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("address")
 	} else {
 		dAtA[i] = 0xa
 		i++
@@ -2009,14 +2425,14 @@ func (m *SkycoinTransactionOutput) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], *m.Address)
 	}
 	if m.Coin == nil {
-		return 0, proto.NewRequiredNotSetError("coin")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("coin")
 	} else {
 		dAtA[i] = 0x10
 		i++
 		i = encodeVarintTypes(dAtA, i, uint64(*m.Coin))
 	}
 	if m.Hour == nil {
-		return 0, proto.NewRequiredNotSetError("hour")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("hour")
 	} else {
 		dAtA[i] = 0x18
 		i++
@@ -2043,6 +2459,9 @@ func encodeVarintTypes(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 func (m *HDNodeType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Depth != nil {
@@ -2073,6 +2492,9 @@ func (m *HDNodeType) Size() (n int) {
 }
 
 func (m *HDNodePathType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Node != nil {
@@ -2091,6 +2513,9 @@ func (m *HDNodePathType) Size() (n int) {
 }
 
 func (m *CoinType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.CoinName != nil {
@@ -2136,6 +2561,9 @@ func (m *CoinType) Size() (n int) {
 }
 
 func (m *MultisigRedeemScriptType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.Pubkeys) > 0 {
@@ -2160,6 +2588,9 @@ func (m *MultisigRedeemScriptType) Size() (n int) {
 }
 
 func (m *TxInputType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if len(m.AddressN) > 0 {
@@ -2204,6 +2635,9 @@ func (m *TxInputType) Size() (n int) {
 }
 
 func (m *TxOutputType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Address != nil {
@@ -2239,6 +2673,9 @@ func (m *TxOutputType) Size() (n int) {
 }
 
 func (m *TxOutputBinType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Amount != nil {
@@ -2258,6 +2695,9 @@ func (m *TxOutputBinType) Size() (n int) {
 }
 
 func (m *TransactionType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Version != nil {
@@ -2307,6 +2747,9 @@ func (m *TransactionType) Size() (n int) {
 }
 
 func (m *TxRequestDetailsType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.RequestIndex != nil {
@@ -2329,6 +2772,9 @@ func (m *TxRequestDetailsType) Size() (n int) {
 }
 
 func (m *TxRequestSerializedType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.SignatureIndex != nil {
@@ -2349,6 +2795,9 @@ func (m *TxRequestSerializedType) Size() (n int) {
 }
 
 func (m *IdentityType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Proto != nil {
@@ -2381,6 +2830,9 @@ func (m *IdentityType) Size() (n int) {
 }
 
 func (m *SkycoinTransactionInput) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.HashIn != nil {
@@ -2397,6 +2849,9 @@ func (m *SkycoinTransactionInput) Size() (n int) {
 }
 
 func (m *SkycoinTransactionOutput) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Address != nil {
@@ -2635,16 +3090,16 @@ func (m *HDNodeType) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("depth")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("depth")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("fingerprint")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("fingerprint")
 	}
 	if hasFields[0]&uint64(0x00000004) == 0 {
-		return proto.NewRequiredNotSetError("child_num")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("child_num")
 	}
 	if hasFields[0]&uint64(0x00000008) == 0 {
-		return proto.NewRequiredNotSetError("chain_code")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("chain_code")
 	}
 
 	if iNdEx > l {
@@ -2757,6 +3212,17 @@ func (m *HDNodePathType) Unmarshal(dAtA []byte) error {
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.AddressN) == 0 {
+					m.AddressN = make([]uint32, 0, elementCount)
+				}
 				for iNdEx < postIndex {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
@@ -2795,7 +3261,7 @@ func (m *HDNodePathType) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("node")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("node")
 	}
 
 	if iNdEx > l {
@@ -3308,6 +3774,17 @@ func (m *TxInputType) Unmarshal(dAtA []byte) error {
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
 				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.AddressN) == 0 {
+					m.AddressN = make([]uint32, 0, elementCount)
+				}
 				for iNdEx < postIndex {
 					var v uint32
 					for shift := uint(0); ; shift += 7 {
@@ -3563,10 +4040,10 @@ func (m *TxInputType) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("prev_hash")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_hash")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("prev_index")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_index")
 	}
 
 	if iNdEx > l {
@@ -3674,6 +4151,17 @@ func (m *TxOutputType) Unmarshal(dAtA []byte) error {
 				postIndex := iNdEx + packedLen
 				if postIndex > l {
 					return io.ErrUnexpectedEOF
+				}
+				var elementCount int
+				var count int
+				for _, integer := range dAtA {
+					if integer < 128 {
+						count++
+					}
+				}
+				elementCount = count
+				if elementCount != 0 && len(m.AddressN) == 0 {
+					m.AddressN = make([]uint32, 0, elementCount)
 				}
 				for iNdEx < postIndex {
 					var v uint32
@@ -3839,10 +4327,10 @@ func (m *TxOutputType) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("amount")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("amount")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("script_type")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("script_type")
 	}
 
 	if iNdEx > l {
@@ -3970,10 +4458,10 @@ func (m *TxOutputBinType) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("amount")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("amount")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("script_pubkey")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("script_pubkey")
 	}
 
 	if iNdEx > l {
@@ -4870,7 +5358,7 @@ func (m *SkycoinTransactionInput) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("hashIn")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("hashIn")
 	}
 
 	if iNdEx > l {
@@ -5018,13 +5506,13 @@ func (m *SkycoinTransactionOutput) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("address")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("address")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("coin")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("coin")
 	}
 	if hasFields[0]&uint64(0x00000004) == 0 {
-		return proto.NewRequiredNotSetError("hour")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("hour")
 	}
 
 	if iNdEx > l {
@@ -5137,9 +5625,9 @@ var (
 	ErrIntOverflowTypes   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("types.proto", fileDescriptorTypes) }
+func init() { proto.RegisterFile("types.proto", fileDescriptor_types_63732f330a59de3b) }
 
-var fileDescriptorTypes = []byte{
+var fileDescriptor_types_63732f330a59de3b = []byte{
 	// 2209 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x58, 0xcb, 0x73, 0x1b, 0x49,
 	0x19, 0xcf, 0x48, 0xb2, 0x2d, 0x7d, 0x1a, 0xd9, 0x9d, 0xc9, 0xc3, 0x93, 0xdd, 0xc4, 0x51, 0x9c,
