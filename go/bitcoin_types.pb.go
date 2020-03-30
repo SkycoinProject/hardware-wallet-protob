@@ -7,6 +7,8 @@ import proto "github.com/gogo/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
+import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
+
 import io "io"
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -14,22 +16,56 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the proto package it is being compiled against.
+// A compilation error at this line likely means your copy of the
+// proto package needs to be updated.
+const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+
 // *
 // Structure representing Bitcoin transaction input
 type BitcoinTransactionInput struct {
 	AddressN *uint32 `protobuf:"varint,1,req,name=address_n,json=addressN" json:"address_n,omitempty"`
 	PrevHash []byte  `protobuf:"bytes,2,req,name=prev_hash,json=prevHash" json:"prev_hash,omitempty"`
 	// required uint32 index = 3;		// Index of output in previous transaction, which will be spended
-	Value            *uint64 `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Value                *uint64  `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *BitcoinTransactionInput) Reset()         { *m = BitcoinTransactionInput{} }
 func (m *BitcoinTransactionInput) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTransactionInput) ProtoMessage()    {}
 func (*BitcoinTransactionInput) Descriptor() ([]byte, []int) {
-	return fileDescriptorBitcoinTypes, []int{0}
+	return fileDescriptor_bitcoin_types_f7101fa5507edc16, []int{0}
 }
+func (m *BitcoinTransactionInput) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BitcoinTransactionInput) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BitcoinTransactionInput.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *BitcoinTransactionInput) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BitcoinTransactionInput.Merge(dst, src)
+}
+func (m *BitcoinTransactionInput) XXX_Size() int {
+	return m.Size()
+}
+func (m *BitcoinTransactionInput) XXX_DiscardUnknown() {
+	xxx_messageInfo_BitcoinTransactionInput.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BitcoinTransactionInput proto.InternalMessageInfo
 
 func (m *BitcoinTransactionInput) GetAddressN() uint32 {
 	if m != nil && m.AddressN != nil {
@@ -55,18 +91,46 @@ func (m *BitcoinTransactionInput) GetValue() uint64 {
 // *
 // Structure representing transaction output
 type BitcoinTransactionOutput struct {
-	Address          *string `protobuf:"bytes,1,req,name=address" json:"address,omitempty"`
-	Coin             *uint64 `protobuf:"varint,2,req,name=coin" json:"coin,omitempty"`
-	AddressIndex     *uint32 `protobuf:"varint,3,opt,name=address_index,json=addressIndex" json:"address_index,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
+	Address              *string  `protobuf:"bytes,1,req,name=address" json:"address,omitempty"`
+	Coin                 *uint64  `protobuf:"varint,2,req,name=coin" json:"coin,omitempty"`
+	AddressIndex         *uint32  `protobuf:"varint,3,opt,name=address_index,json=addressIndex" json:"address_index,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *BitcoinTransactionOutput) Reset()         { *m = BitcoinTransactionOutput{} }
 func (m *BitcoinTransactionOutput) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTransactionOutput) ProtoMessage()    {}
 func (*BitcoinTransactionOutput) Descriptor() ([]byte, []int) {
-	return fileDescriptorBitcoinTypes, []int{1}
+	return fileDescriptor_bitcoin_types_f7101fa5507edc16, []int{1}
 }
+func (m *BitcoinTransactionOutput) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BitcoinTransactionOutput) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BitcoinTransactionOutput.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *BitcoinTransactionOutput) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BitcoinTransactionOutput.Merge(dst, src)
+}
+func (m *BitcoinTransactionOutput) XXX_Size() int {
+	return m.Size()
+}
+func (m *BitcoinTransactionOutput) XXX_DiscardUnknown() {
+	xxx_messageInfo_BitcoinTransactionOutput.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BitcoinTransactionOutput proto.InternalMessageInfo
 
 func (m *BitcoinTransactionOutput) GetAddress() string {
 	if m != nil && m.Address != nil {
@@ -92,19 +156,47 @@ func (m *BitcoinTransactionOutput) GetAddressIndex() uint32 {
 // *
 // Structure representing transaction
 type BitcoinTransactionType struct {
-	InputsCnt        *uint32                     `protobuf:"varint,2,opt,name=inputs_cnt,json=inputsCnt" json:"inputs_cnt,omitempty"`
-	Inputs           []*BitcoinTransactionInput  `protobuf:"bytes,3,rep,name=inputs" json:"inputs,omitempty"`
-	OutputsCnt       *uint32                     `protobuf:"varint,4,opt,name=outputs_cnt,json=outputsCnt" json:"outputs_cnt,omitempty"`
-	Outputs          []*BitcoinTransactionOutput `protobuf:"bytes,5,rep,name=outputs" json:"outputs,omitempty"`
-	XXX_unrecognized []byte                      `json:"-"`
+	InputsCnt            *uint32                     `protobuf:"varint,2,opt,name=inputs_cnt,json=inputsCnt" json:"inputs_cnt,omitempty"`
+	Inputs               []*BitcoinTransactionInput  `protobuf:"bytes,3,rep,name=inputs" json:"inputs,omitempty"`
+	OutputsCnt           *uint32                     `protobuf:"varint,4,opt,name=outputs_cnt,json=outputsCnt" json:"outputs_cnt,omitempty"`
+	Outputs              []*BitcoinTransactionOutput `protobuf:"bytes,5,rep,name=outputs" json:"outputs,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
+	XXX_unrecognized     []byte                      `json:"-"`
+	XXX_sizecache        int32                       `json:"-"`
 }
 
 func (m *BitcoinTransactionType) Reset()         { *m = BitcoinTransactionType{} }
 func (m *BitcoinTransactionType) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTransactionType) ProtoMessage()    {}
 func (*BitcoinTransactionType) Descriptor() ([]byte, []int) {
-	return fileDescriptorBitcoinTypes, []int{2}
+	return fileDescriptor_bitcoin_types_f7101fa5507edc16, []int{2}
 }
+func (m *BitcoinTransactionType) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *BitcoinTransactionType) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_BitcoinTransactionType.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalTo(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (dst *BitcoinTransactionType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_BitcoinTransactionType.Merge(dst, src)
+}
+func (m *BitcoinTransactionType) XXX_Size() int {
+	return m.Size()
+}
+func (m *BitcoinTransactionType) XXX_DiscardUnknown() {
+	xxx_messageInfo_BitcoinTransactionType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_BitcoinTransactionType proto.InternalMessageInfo
 
 func (m *BitcoinTransactionType) GetInputsCnt() uint32 {
 	if m != nil && m.InputsCnt != nil {
@@ -155,14 +247,14 @@ func (m *BitcoinTransactionInput) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.AddressN == nil {
-		return 0, proto.NewRequiredNotSetError("address_n")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("address_n")
 	} else {
 		dAtA[i] = 0x8
 		i++
 		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.AddressN))
 	}
 	if m.PrevHash == nil {
-		return 0, proto.NewRequiredNotSetError("prev_hash")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_hash")
 	} else {
 		dAtA[i] = 0x12
 		i++
@@ -196,7 +288,7 @@ func (m *BitcoinTransactionOutput) MarshalTo(dAtA []byte) (int, error) {
 	var l int
 	_ = l
 	if m.Address == nil {
-		return 0, proto.NewRequiredNotSetError("address")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("address")
 	} else {
 		dAtA[i] = 0xa
 		i++
@@ -204,7 +296,7 @@ func (m *BitcoinTransactionOutput) MarshalTo(dAtA []byte) (int, error) {
 		i += copy(dAtA[i:], *m.Address)
 	}
 	if m.Coin == nil {
-		return 0, proto.NewRequiredNotSetError("coin")
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("coin")
 	} else {
 		dAtA[i] = 0x10
 		i++
@@ -286,6 +378,9 @@ func encodeVarintBitcoinTypes(dAtA []byte, offset int, v uint64) int {
 	return offset + 1
 }
 func (m *BitcoinTransactionInput) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.AddressN != nil {
@@ -305,6 +400,9 @@ func (m *BitcoinTransactionInput) Size() (n int) {
 }
 
 func (m *BitcoinTransactionOutput) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.Address != nil {
@@ -324,6 +422,9 @@ func (m *BitcoinTransactionOutput) Size() (n int) {
 }
 
 func (m *BitcoinTransactionType) Size() (n int) {
+	if m == nil {
+		return 0
+	}
 	var l int
 	_ = l
 	if m.InputsCnt != nil {
@@ -483,10 +584,10 @@ func (m *BitcoinTransactionInput) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("address_n")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("address_n")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("prev_hash")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_hash")
 	}
 
 	if iNdEx > l {
@@ -613,10 +714,10 @@ func (m *BitcoinTransactionOutput) Unmarshal(dAtA []byte) error {
 		}
 	}
 	if hasFields[0]&uint64(0x00000001) == 0 {
-		return proto.NewRequiredNotSetError("address")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("address")
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
-		return proto.NewRequiredNotSetError("coin")
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("coin")
 	}
 
 	if iNdEx > l {
@@ -882,9 +983,9 @@ var (
 	ErrIntOverflowBitcoinTypes   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("bitcoin_types.proto", fileDescriptorBitcoinTypes) }
+func init() { proto.RegisterFile("bitcoin_types.proto", fileDescriptor_bitcoin_types_f7101fa5507edc16) }
 
-var fileDescriptorBitcoinTypes = []byte{
+var fileDescriptor_bitcoin_types_f7101fa5507edc16 = []byte{
 	// 329 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0xbf, 0x4e, 0xf3, 0x30,
 	0x14, 0xc5, 0xe5, 0x34, 0xfd, 0x9a, 0xde, 0x36, 0x52, 0xe5, 0x0f, 0x81, 0x11, 0x22, 0x44, 0x65,
