@@ -7,24 +7,35 @@
 REPO_ROOT := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 UNAME_S  = $(shell uname -s)
-PYTHON  ?= python
+PYTHON  ?= /usr/bin/env python3
 PIP     ?= pip3
 PIPARGS ?=
 GOPATH  ?= $(HOME)/go
 
 ifeq ($(TRAVIS),true)
   OS_NAME=$(TRAVIS_OS_NAME)
-else
-  ifeq ($(UNAME_S),Linux)
-    OS_NAME=linux
-  endif
-  ifeq ($(UNAME_S),Darwin)
-    OS_NAME=osx
-  endif
+	VERSION=-x86-64
+endif
+ifeq ($(OS_NAME), windows)
+	OS_NAME=win
+	VERSION=32
 endif
 
-PROTOC_VERSION      ?= 3.6.1
-PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)-x86_64.zip
+ifeq ($(UNAME_S),Linux)
+  OS_NAME=linux
+  VERSION=-x86_64
+endif
+ifeq ($(UNAME_S),Darwin)
+  OS_NAME=osx
+  VERSION=-x86_64
+endif
+ifeq ($(OS),Windows_NT)
+  OS_NAME=win
+  VERSION=32
+endif
+
+PROTOC_VERSION      ?= 3.12.4
+PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)$(VERSION).zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 PROTOC_GOGO_URL      = github.com/gogo/protobuf
 PROTOC_NANOPBGEN_DIR = nanopb/vendor/nanopb/generator
@@ -44,10 +55,10 @@ PROTOB_C_DIR  = c
 PROTOB_SRC_DIR  = $(GOPATH)/src/$(PROTOC_GOGO_URL)
 
 # Use default value when including this repository in vendor/ with dep
-# Set it explicitly either when generating to acustom location 
+# Set it explicitly either when generating to acustom location
 # or when this repository is included at a subpath other than vendor
-# e.g. go library should set this to github.com/skycoin/hardware-wallet-go/src/device-wallet/messages
-GO_IMPORT ?= github.com/skycoin/hardware-wallet-protob
+# e.g. go library should set this to github.com/SkycoinProject/hardware-wallet-go/src/device-wallet/messages
+GO_IMPORT ?= github.com/SkycoinProject/hardware-wallet-protob
 GO_IMPORT_SED = $(shell echo $(GO_IMPORT) | sed 's/\//\\\//g')
 
 PROTOB_MSG_FILES = $(shell ls -1 $(PROTOB_MSG_DIR)/*.proto)
@@ -79,8 +90,12 @@ install-protoc: /usr/local/bin/protoc
 /usr/local/bin/protoc:
 	echo "Downloading protobuf from $(PROTOC_URL)"
 	curl -OL $(PROTOC_URL)
-	echo "Installing protoc"
-	sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
+  ifeq ($(OS_NAME), win)
+	  unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc.exe
+  else
+	  sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
+	  sudo chmod -R +x /usr/local/bin/protoc
+  endif
 	rm -f $(PROTOC_ZIP)
 
 #----------------
@@ -97,11 +112,12 @@ install-deps-go: install-protoc ## Install tools to generate protobuf classes fo
 	fi
 	( cd $(PROTOB_SRC_DIR)/protoc-gen-gogofast && go install )
 
-build-go: install-deps-go $(PROTOB_MSG_GO) $(OUT_GO)/google/protobuf/descriptor.pb.go ## Generate protobuf classes for go lang
+build-go: install-deps-go $(OUT_GO)/google/protobuf/descriptor.pb.go ## Generate protobuf classes for go lang
+	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $(PROTOB_MSG_FILES)
+	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 
 $(OUT_GO)/google/protobuf/descriptor.pb.go: $(OUT_GO)/types.pb.go
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto --gogofast_out=$(OUT_GO) $(PROTOC_NANOPBGEN_DIR)/proto/google/protobuf/descriptor.proto
-	sed $(SED_FLAGS) 's/import\ protobuf\ \"google\/protobuf\"/import\ protobuf\ \"$(GO_IMPORT_SED)\/go\/google\/protobuf\"/g' $(OUT_GO)/types.pb.go
 
 $(OUT_GO)/%.pb.go: $(PROTOB_MSG_DIR)/%.proto
 	protoc -I./$(PROTOC_NANOPBGEN_DIR)/proto/ -I protob/messages --gogofast_out=$(OUT_GO) $<
@@ -133,10 +149,11 @@ install-deps-nanopb: install-protoc ## Install tools to generate protobuf classe
 	make -C $(PROTOC_NANOPBGEN_DIR)/proto/
 	$(PIP) install $(PIPARGS) "protobuf==$(PROTOC_VERSION)" ecdsa
 
-build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h ## Generate protobuf classes for C with nanopb
+build-c: install-deps-nanopb $(PROTOB_MSG_C) $(OUT_C)/messages_map.h build-py ## Generate protobuf classes for C with nanopb
+
+$(info )
 
 $(OUT_C)/%.pb.c: $(OUT_C)/%.pb $(PROTOB_MSG_DIR)/%.options
-#c/%.pb.c: c/%.pb $(PROTOB_MSG_DIR)/%.options
 	$(eval PROTOBUF_FILE_OPTIONS := $(subst pb,options,$<))
 	$(eval PROTOBUF_FILE_OPTIONS = $(subst c/,,$(PROTOBUF_FILE_OPTIONS)))
 	$(PYTHON) $(PROTOC_NANOPBGEN_DIR)/nanopb_generator.py -f $(PROTOB_MSG_DIR)/$(PROTOBUF_FILE_OPTIONS) $< -L '#include "%s"' -T
@@ -175,4 +192,3 @@ clean-py:
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-

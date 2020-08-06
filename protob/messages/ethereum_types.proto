@@ -1,0 +1,38 @@
+syntax = "proto2";
+
+/**
+ * Types for Skywallet communication for Ethereum
+ */
+
+// Sugar for easier handling in Java
+option java_package = "net.skycoin.skywallet.protobuf";
+option java_outer_classname = "SkywalletType";
+option go_package = "messages";
+
+/**
+ * Structure representing Ethereum transaction input
+ */
+message EthereumTransactionInput {
+	required uint32 address_n = 1;	// Deterministic path to private/public keypair
+	required uint32 index = 2;		// Index of output in previous transaction, which will be spended
+	reserved 3 to 13;				// Will be used for MultiSignature transactions
+}
+
+/**
+ * Structure representing transaction output
+ */
+message EthereumTransactionOutput {
+	required string address = 1;		// Address of recipient
+	required uint64 coin = 2;				// Amount of coins, that will be sent
+	optional uint32 address_index = 3;	// Receiver address index if managed by this Skywallet
+}
+
+/**
+* Structure representing transaction
+*/
+message EthereumTransactionType {
+	optional uint32 inputs_cnt = 2;
+	repeated EthereumTransactionInput inputs = 3;
+	optional uint32 outputs_cnt = 4;
+	repeated EthereumTransactionOutput outputs = 5;
+}
