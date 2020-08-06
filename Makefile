@@ -90,14 +90,12 @@ install-protoc: /usr/local/bin/protoc
 /usr/local/bin/protoc:
 	echo "Downloading protobuf from $(PROTOC_URL)"
 	curl -OL $(PROTOC_URL)
-	echo "Installing protoc"
-	echo $(OS_NAME)
   ifeq ($(OS_NAME), win)
 	  unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc.exe
   else
 	  sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
 		ifeq ($(OS_NAME), linux)
-			chmod +x /usr/local/bin/protoc
+		  chmod +x /usr/local/bin/protoc
 		endif
   endif
 	rm -f $(PROTOC_ZIP)
