@@ -96,6 +96,9 @@ install-protoc: /usr/local/bin/protoc
 	  unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc.exe
   else
 	  sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
+		ifeq ($(OS_NAME), linux)
+			chmod +x /usr/local/bin/protoc
+		endif
   endif
 	rm -f $(PROTOC_ZIP)
 
