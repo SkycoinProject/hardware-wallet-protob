@@ -34,7 +34,7 @@ ifeq ($(OS),Windows_NT)
   VERSION=32
 endif
 
-PROTOC_VERSION      ?= 3.6.1
+PROTOC_VERSION      ?= 3.12.4
 PROTOC_ZIP          ?= protoc-$(PROTOC_VERSION)-$(OS_NAME)$(VERSION).zip
 PROTOC_URL          ?= https://github.com/google/protobuf/releases/download/v$(PROTOC_VERSION)/$(PROTOC_ZIP)
 PROTOC_GOGO_URL      = github.com/gogo/protobuf
@@ -98,7 +98,7 @@ install-protoc: /usr/local/bin/protoc
 	  sudo unzip -o $(PROTOC_ZIP) -d /usr/local bin/protoc
   endif
 	rm -f $(PROTOC_ZIP)
-	
+
 #----------------
 # Go lang
 #----------------
