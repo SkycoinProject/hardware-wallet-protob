@@ -498,6 +498,7 @@ message TxRequest {
     required RequestType request_type = 1;                 // what should be filled in TxAck message?
     optional TxRequestDetailsType details = 2;             // request for tx details
     repeated TxRequestSignResponseType sign_result = 3;    // serialized data and request for next
+    optional TxRequestSerializedType serialized_data = 4;  // serialized data of signatures and tx hash
     /**
     * Type of information required by transaction signing process
     */

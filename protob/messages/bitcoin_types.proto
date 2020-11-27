@@ -16,8 +16,7 @@ message BitcoinTransactionInput {
 	required uint32 address_n = 1;	// Deterministic path to private/public keypair
 	required bytes prev_hash = 2;	// Hash of transaction, from which output will be used
 	required uint32 index = 3;		// Index of output in previous transaction, which will be spended
-	required uint64 value = 4;		// Amount of money to be spent
-	reserved 5 to 15;				// Will be used for MultiSignature and SegWit transactions
+	reserved 4 to 15;				// Will be used for MultiSignature and SegWit transactions
 }
 
 /**
@@ -33,8 +32,12 @@ message BitcoinTransactionOutput {
 * Structure representing transaction
 */
 message BitcoinTransactionType {
+  optional uint32 version = 1;
 	optional uint32 inputs_cnt = 2;
-	repeated BitcoinTransactionInput inputs = 3;
-	optional uint32 outputs_cnt = 4;
-	repeated BitcoinTransactionOutput outputs = 5;
+  optional uint32 lock_time = 3;
+	repeated BitcoinTransactionInput inputs = 4;
+	optional uint32 outputs_cnt = 5;
+	repeated BitcoinTransactionOutput outputs = 6;
+  optional bool has_change_address = 7;
+  optional uint32 change_address_index = 8;
 }
