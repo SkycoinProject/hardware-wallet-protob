@@ -66,6 +66,8 @@ func (m *BitcoinTransactionInput) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BitcoinTransactionInput proto.InternalMessageInfo
 
+var xxx_messageInfo_BitcoinTransactionInput proto.InternalMessageInfo
+
 func (m *BitcoinTransactionInput) GetAddressN() uint32 {
 	if m != nil && m.AddressN != nil {
 		return *m.AddressN
@@ -207,6 +209,8 @@ func (m *BitcoinTransactionType) GetVersion() uint32 {
 	}
 	return 0
 }
+
+var xxx_messageInfo_BitcoinTransactionType proto.InternalMessageInfo
 
 func (m *BitcoinTransactionType) GetInputsCnt() uint32 {
 	if m != nil && m.InputsCnt != nil {
@@ -621,7 +625,6 @@ func (m *BitcoinTransactionInput) Unmarshal(dAtA []byte) error {
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
 			}
-			var v uint32
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowBitcoinTypes

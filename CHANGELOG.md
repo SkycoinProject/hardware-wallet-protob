@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Make go folder a proper package that can be vendor'ed from another package
 - Address `index` of `SkycoinTransactionInput` marked as optional.
 - Added Windows support
+- Added messages for Bitcoin and Ethereum
 
 ### Fixed
 

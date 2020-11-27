@@ -1277,7 +1277,6 @@ func (m *TxRequestDetailsType) String() string { return proto.CompactTextString(
 func (*TxRequestDetailsType) ProtoMessage()    {}
 func (*TxRequestDetailsType) Descriptor() ([]byte, []int) {
 	return fileDescriptor_types_af9a8174656675d6, []int{8}
-}
 func (m *TxRequestDetailsType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }

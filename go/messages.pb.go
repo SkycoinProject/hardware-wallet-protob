@@ -73,6 +73,9 @@ const (
 	MessageType_MessageType_TxAck                        MessageType = 127
 	MessageType_MessageType_BitcoinTxAck                 MessageType = 128
 	MessageType_MessageType_BitcoinAddress               MessageType = 129
+	MessageType_MessageType_EthereumTxAck                MessageType = 130
+	MessageType_MessageType_EthereumAddress              MessageType = 131
+	MessageType_MessageType_ResponseEthereumAddress      MessageType = 132
 )
 
 var MessageType_name = map[int32]string{
@@ -121,6 +124,9 @@ var MessageType_name = map[int32]string{
 	127: "MessageType_TxAck",
 	128: "MessageType_BitcoinTxAck",
 	129: "MessageType_BitcoinAddress",
+	130: "MessageType_EthereumTxAck",
+	131: "MessageType_EthereumAddress",
+	132: "MessageType_ResponseEthereumAddress",
 }
 var MessageType_value = map[string]int32{
 	"MessageType_Initialize":                   0,
@@ -168,6 +174,9 @@ var MessageType_value = map[string]int32{
 	"MessageType_TxAck":                        127,
 	"MessageType_BitcoinTxAck":                 128,
 	"MessageType_BitcoinAddress":               129,
+	"MessageType_EthereumTxAck":                130,
+	"MessageType_EthereumAddress":              131,
+	"MessageType_ResponseEthereumAddress":      132,
 }
 
 func (x MessageType) Enum() *MessageType {
@@ -1024,6 +1033,8 @@ func (m *SkycoinCheckMessageSignature) XXX_Size() int {
 func (m *SkycoinCheckMessageSignature) XXX_DiscardUnknown() {
 	xxx_messageInfo_SkycoinCheckMessageSignature.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_SkycoinCheckMessageSignature proto.InternalMessageInfo
 
 var xxx_messageInfo_SkycoinCheckMessageSignature proto.InternalMessageInfo
 
@@ -2997,6 +3008,11 @@ func (m *TxRequest_TxRequestDetailsType) XXX_Size() int {
 func (m *TxRequest_TxRequestDetailsType) XXX_DiscardUnknown() {
 	xxx_messageInfo_TxRequest_TxRequestDetailsType.DiscardUnknown(m)
 }
+func (m *TxRequest_TxRequestDetailsType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxRequest_TxRequestDetailsType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxRequest_TxRequestDetailsType proto.InternalMessageInfo
 
 var xxx_messageInfo_TxRequest_TxRequestDetailsType proto.InternalMessageInfo
 
@@ -3054,6 +3070,17 @@ func (m *TxRequest_TxRequestSignResponseType) XXX_Size() int {
 func (m *TxRequest_TxRequestSignResponseType) XXX_DiscardUnknown() {
 	xxx_messageInfo_TxRequest_TxRequestSignResponseType.DiscardUnknown(m)
 }
+func (dst *TxRequest_TxRequestSignResponseType) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TxRequest_TxRequestSignResponseType.Merge(dst, src)
+}
+func (m *TxRequest_TxRequestSignResponseType) XXX_Size() int {
+	return m.Size()
+}
+func (m *TxRequest_TxRequestSignResponseType) XXX_DiscardUnknown() {
+	xxx_messageInfo_TxRequest_TxRequestSignResponseType.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TxRequest_TxRequestSignResponseType proto.InternalMessageInfo
 
 var xxx_messageInfo_TxRequest_TxRequestSignResponseType proto.InternalMessageInfo
 
@@ -3165,6 +3192,8 @@ func (m *TxAck_TransactionType) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TxAck_TransactionType proto.InternalMessageInfo
 
+var xxx_messageInfo_TxAck_TransactionType proto.InternalMessageInfo
+
 func (m *TxAck_TransactionType) GetVersion() uint32 {
 	if m != nil && m.Version != nil {
 		return *m.Version
@@ -3250,6 +3279,8 @@ func (m *TxAck_TransactionType_TxInputType) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_TxAck_TransactionType_TxInputType proto.InternalMessageInfo
 
+var xxx_messageInfo_TxAck_TransactionType_TxInputType proto.InternalMessageInfo
+
 func (m *TxAck_TransactionType_TxInputType) GetAddressN() []uint32 {
 	if m != nil {
 		return m.AddressN
@@ -3306,6 +3337,8 @@ func (m *TxAck_TransactionType_TxOutputType) XXX_Size() int {
 func (m *TxAck_TransactionType_TxOutputType) XXX_DiscardUnknown() {
 	xxx_messageInfo_TxAck_TransactionType_TxOutputType.DiscardUnknown(m)
 }
+
+var xxx_messageInfo_TxAck_TransactionType_TxOutputType proto.InternalMessageInfo
 
 var xxx_messageInfo_TxAck_TransactionType_TxOutputType proto.InternalMessageInfo
 
