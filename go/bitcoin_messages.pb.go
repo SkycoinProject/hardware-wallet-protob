@@ -39,7 +39,7 @@ func (m *BitcoinAddress) Reset()         { *m = BitcoinAddress{} }
 func (m *BitcoinAddress) String() string { return proto.CompactTextString(m) }
 func (*BitcoinAddress) ProtoMessage()    {}
 func (*BitcoinAddress) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bitcoin_messages_d60ec06df2c3ff8c, []int{0}
+	return fileDescriptor_bitcoin_messages_1860aa168909c222, []int{0}
 }
 func (m *BitcoinAddress) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -104,7 +104,7 @@ func (m *BitcoinTxAck) Reset()         { *m = BitcoinTxAck{} }
 func (m *BitcoinTxAck) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTxAck) ProtoMessage()    {}
 func (*BitcoinTxAck) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bitcoin_messages_d60ec06df2c3ff8c, []int{1}
+	return fileDescriptor_bitcoin_messages_1860aa168909c222, []int{1}
 }
 func (m *BitcoinTxAck) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -584,10 +584,10 @@ var (
 )
 
 func init() {
-	proto.RegisterFile("bitcoin_messages.proto", fileDescriptor_bitcoin_messages_d60ec06df2c3ff8c)
+	proto.RegisterFile("bitcoin_messages.proto", fileDescriptor_bitcoin_messages_1860aa168909c222)
 }
 
-var fileDescriptor_bitcoin_messages_d60ec06df2c3ff8c = []byte{
+var fileDescriptor_bitcoin_messages_1860aa168909c222 = []byte{
 	// 246 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4b, 0xca, 0x2c, 0x49,
 	0xce, 0xcf, 0xcc, 0x8b, 0xcf, 0x4d, 0x2d, 0x2e, 0x4e, 0x4c, 0x4f, 0x2d, 0xd6, 0x2b, 0x28, 0xca,

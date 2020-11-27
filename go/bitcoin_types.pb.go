@@ -25,10 +25,9 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 // *
 // Structure representing Bitcoin transaction input
 type BitcoinTransactionInput struct {
-	AddressN *uint32 `protobuf:"varint,1,req,name=address_n,json=addressN" json:"address_n,omitempty"`
-	PrevHash []byte  `protobuf:"bytes,2,req,name=prev_hash,json=prevHash" json:"prev_hash,omitempty"`
-	// required uint32 index = 3;		// Index of output in previous transaction, which will be spended
-	Value                *uint64  `protobuf:"varint,4,opt,name=value" json:"value,omitempty"`
+	AddressN             *uint32  `protobuf:"varint,1,req,name=address_n,json=addressN" json:"address_n,omitempty"`
+	PrevHash             []byte   `protobuf:"bytes,2,req,name=prev_hash,json=prevHash" json:"prev_hash,omitempty"`
+	Index                *uint32  `protobuf:"varint,3,req,name=index" json:"index,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -38,7 +37,7 @@ func (m *BitcoinTransactionInput) Reset()         { *m = BitcoinTransactionInput
 func (m *BitcoinTransactionInput) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTransactionInput) ProtoMessage()    {}
 func (*BitcoinTransactionInput) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bitcoin_types_f7101fa5507edc16, []int{0}
+	return fileDescriptor_bitcoin_types_b2c794fc5e4c08ca, []int{0}
 }
 func (m *BitcoinTransactionInput) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -67,6 +66,8 @@ func (m *BitcoinTransactionInput) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BitcoinTransactionInput proto.InternalMessageInfo
 
+var xxx_messageInfo_BitcoinTransactionInput proto.InternalMessageInfo
+
 func (m *BitcoinTransactionInput) GetAddressN() uint32 {
 	if m != nil && m.AddressN != nil {
 		return *m.AddressN
@@ -81,9 +82,9 @@ func (m *BitcoinTransactionInput) GetPrevHash() []byte {
 	return nil
 }
 
-func (m *BitcoinTransactionInput) GetValue() uint64 {
-	if m != nil && m.Value != nil {
-		return *m.Value
+func (m *BitcoinTransactionInput) GetIndex() uint32 {
+	if m != nil && m.Index != nil {
+		return *m.Index
 	}
 	return 0
 }
@@ -103,7 +104,7 @@ func (m *BitcoinTransactionOutput) Reset()         { *m = BitcoinTransactionOutp
 func (m *BitcoinTransactionOutput) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTransactionOutput) ProtoMessage()    {}
 func (*BitcoinTransactionOutput) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bitcoin_types_f7101fa5507edc16, []int{1}
+	return fileDescriptor_bitcoin_types_b2c794fc5e4c08ca, []int{1}
 }
 func (m *BitcoinTransactionOutput) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -156,10 +157,14 @@ func (m *BitcoinTransactionOutput) GetAddressIndex() uint32 {
 // *
 // Structure representing transaction
 type BitcoinTransactionType struct {
+	Version              *uint32                     `protobuf:"varint,1,opt,name=version" json:"version,omitempty"`
 	InputsCnt            *uint32                     `protobuf:"varint,2,opt,name=inputs_cnt,json=inputsCnt" json:"inputs_cnt,omitempty"`
-	Inputs               []*BitcoinTransactionInput  `protobuf:"bytes,3,rep,name=inputs" json:"inputs,omitempty"`
-	OutputsCnt           *uint32                     `protobuf:"varint,4,opt,name=outputs_cnt,json=outputsCnt" json:"outputs_cnt,omitempty"`
-	Outputs              []*BitcoinTransactionOutput `protobuf:"bytes,5,rep,name=outputs" json:"outputs,omitempty"`
+	LockTime             *uint32                     `protobuf:"varint,3,opt,name=lock_time,json=lockTime" json:"lock_time,omitempty"`
+	Inputs               []*BitcoinTransactionInput  `protobuf:"bytes,4,rep,name=inputs" json:"inputs,omitempty"`
+	OutputsCnt           *uint32                     `protobuf:"varint,5,opt,name=outputs_cnt,json=outputsCnt" json:"outputs_cnt,omitempty"`
+	Outputs              []*BitcoinTransactionOutput `protobuf:"bytes,6,rep,name=outputs" json:"outputs,omitempty"`
+	HasChangeAddress     *bool                       `protobuf:"varint,7,opt,name=has_change_address,json=hasChangeAddress" json:"has_change_address,omitempty"`
+	ChangeAddressIndex   *uint32                     `protobuf:"varint,8,opt,name=change_address_index,json=changeAddressIndex" json:"change_address_index,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                    `json:"-"`
 	XXX_unrecognized     []byte                      `json:"-"`
 	XXX_sizecache        int32                       `json:"-"`
@@ -169,7 +174,7 @@ func (m *BitcoinTransactionType) Reset()         { *m = BitcoinTransactionType{}
 func (m *BitcoinTransactionType) String() string { return proto.CompactTextString(m) }
 func (*BitcoinTransactionType) ProtoMessage()    {}
 func (*BitcoinTransactionType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_bitcoin_types_f7101fa5507edc16, []int{2}
+	return fileDescriptor_bitcoin_types_b2c794fc5e4c08ca, []int{2}
 }
 func (m *BitcoinTransactionType) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -198,9 +203,25 @@ func (m *BitcoinTransactionType) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_BitcoinTransactionType proto.InternalMessageInfo
 
+func (m *BitcoinTransactionType) GetVersion() uint32 {
+	if m != nil && m.Version != nil {
+		return *m.Version
+	}
+	return 0
+}
+
+var xxx_messageInfo_BitcoinTransactionType proto.InternalMessageInfo
+
 func (m *BitcoinTransactionType) GetInputsCnt() uint32 {
 	if m != nil && m.InputsCnt != nil {
 		return *m.InputsCnt
+	}
+	return 0
+}
+
+func (m *BitcoinTransactionType) GetLockTime() uint32 {
+	if m != nil && m.LockTime != nil {
+		return *m.LockTime
 	}
 	return 0
 }
@@ -224,6 +245,20 @@ func (m *BitcoinTransactionType) GetOutputs() []*BitcoinTransactionOutput {
 		return m.Outputs
 	}
 	return nil
+}
+
+func (m *BitcoinTransactionType) GetHasChangeAddress() bool {
+	if m != nil && m.HasChangeAddress != nil {
+		return *m.HasChangeAddress
+	}
+	return false
+}
+
+func (m *BitcoinTransactionType) GetChangeAddressIndex() uint32 {
+	if m != nil && m.ChangeAddressIndex != nil {
+		return *m.ChangeAddressIndex
+	}
+	return 0
 }
 
 func init() {
@@ -261,10 +296,12 @@ func (m *BitcoinTransactionInput) MarshalTo(dAtA []byte) (int, error) {
 		i = encodeVarintBitcoinTypes(dAtA, i, uint64(len(m.PrevHash)))
 		i += copy(dAtA[i:], m.PrevHash)
 	}
-	if m.Value != nil {
-		dAtA[i] = 0x20
+	if m.Index == nil {
+		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("index")
+	} else {
+		dAtA[i] = 0x18
 		i++
-		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.Value))
+		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.Index))
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -328,14 +365,24 @@ func (m *BitcoinTransactionType) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.Version != nil {
+		dAtA[i] = 0x8
+		i++
+		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.Version))
+	}
 	if m.InputsCnt != nil {
 		dAtA[i] = 0x10
 		i++
 		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.InputsCnt))
 	}
+	if m.LockTime != nil {
+		dAtA[i] = 0x18
+		i++
+		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.LockTime))
+	}
 	if len(m.Inputs) > 0 {
 		for _, msg := range m.Inputs {
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x22
 			i++
 			i = encodeVarintBitcoinTypes(dAtA, i, uint64(msg.Size()))
 			n, err := msg.MarshalTo(dAtA[i:])
@@ -346,13 +393,13 @@ func (m *BitcoinTransactionType) MarshalTo(dAtA []byte) (int, error) {
 		}
 	}
 	if m.OutputsCnt != nil {
-		dAtA[i] = 0x20
+		dAtA[i] = 0x28
 		i++
 		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.OutputsCnt))
 	}
 	if len(m.Outputs) > 0 {
 		for _, msg := range m.Outputs {
-			dAtA[i] = 0x2a
+			dAtA[i] = 0x32
 			i++
 			i = encodeVarintBitcoinTypes(dAtA, i, uint64(msg.Size()))
 			n, err := msg.MarshalTo(dAtA[i:])
@@ -361,6 +408,21 @@ func (m *BitcoinTransactionType) MarshalTo(dAtA []byte) (int, error) {
 			}
 			i += n
 		}
+	}
+	if m.HasChangeAddress != nil {
+		dAtA[i] = 0x38
+		i++
+		if *m.HasChangeAddress {
+			dAtA[i] = 1
+		} else {
+			dAtA[i] = 0
+		}
+		i++
+	}
+	if m.ChangeAddressIndex != nil {
+		dAtA[i] = 0x40
+		i++
+		i = encodeVarintBitcoinTypes(dAtA, i, uint64(*m.ChangeAddressIndex))
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -390,8 +452,8 @@ func (m *BitcoinTransactionInput) Size() (n int) {
 		l = len(m.PrevHash)
 		n += 1 + l + sovBitcoinTypes(uint64(l))
 	}
-	if m.Value != nil {
-		n += 1 + sovBitcoinTypes(uint64(*m.Value))
+	if m.Index != nil {
+		n += 1 + sovBitcoinTypes(uint64(*m.Index))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -427,8 +489,14 @@ func (m *BitcoinTransactionType) Size() (n int) {
 	}
 	var l int
 	_ = l
+	if m.Version != nil {
+		n += 1 + sovBitcoinTypes(uint64(*m.Version))
+	}
 	if m.InputsCnt != nil {
 		n += 1 + sovBitcoinTypes(uint64(*m.InputsCnt))
+	}
+	if m.LockTime != nil {
+		n += 1 + sovBitcoinTypes(uint64(*m.LockTime))
 	}
 	if len(m.Inputs) > 0 {
 		for _, e := range m.Inputs {
@@ -444,6 +512,12 @@ func (m *BitcoinTransactionType) Size() (n int) {
 			l = e.Size()
 			n += 1 + l + sovBitcoinTypes(uint64(l))
 		}
+	}
+	if m.HasChangeAddress != nil {
+		n += 2
+	}
+	if m.ChangeAddressIndex != nil {
+		n += 1 + sovBitcoinTypes(uint64(*m.ChangeAddressIndex))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -547,11 +621,10 @@ func (m *BitcoinTransactionInput) Unmarshal(dAtA []byte) error {
 			}
 			iNdEx = postIndex
 			hasFields[0] |= uint64(0x00000002)
-		case 4:
+		case 3:
 			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Value", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
 			}
-			var v uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowBitcoinTypes
@@ -561,12 +634,13 @@ func (m *BitcoinTransactionInput) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (uint64(b) & 0x7F) << shift
+				v |= (uint32(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Value = &v
+			m.Index = &v
+			hasFields[0] |= uint64(0x00000004)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipBitcoinTypes(dAtA[iNdEx:])
@@ -588,6 +662,9 @@ func (m *BitcoinTransactionInput) Unmarshal(dAtA []byte) error {
 	}
 	if hasFields[0]&uint64(0x00000002) == 0 {
 		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("prev_hash")
+	}
+	if hasFields[0]&uint64(0x00000004) == 0 {
+		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("index")
 	}
 
 	if iNdEx > l {
@@ -754,6 +831,26 @@ func (m *BitcoinTransactionType) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: BitcoinTransactionType: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Version", wireType)
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBitcoinTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.Version = &v
 		case 2:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field InputsCnt", wireType)
@@ -775,6 +872,26 @@ func (m *BitcoinTransactionType) Unmarshal(dAtA []byte) error {
 			}
 			m.InputsCnt = &v
 		case 3:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field LockTime", wireType)
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBitcoinTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.LockTime = &v
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Inputs", wireType)
 			}
@@ -805,7 +922,7 @@ func (m *BitcoinTransactionType) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
-		case 4:
+		case 5:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field OutputsCnt", wireType)
 			}
@@ -825,7 +942,7 @@ func (m *BitcoinTransactionType) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.OutputsCnt = &v
-		case 5:
+		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Outputs", wireType)
 			}
@@ -856,6 +973,47 @@ func (m *BitcoinTransactionType) Unmarshal(dAtA []byte) error {
 				return err
 			}
 			iNdEx = postIndex
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HasChangeAddress", wireType)
+			}
+			var v int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBitcoinTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (int(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			b := bool(v != 0)
+			m.HasChangeAddress = &b
+		case 8:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ChangeAddressIndex", wireType)
+			}
+			var v uint32
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowBitcoinTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				v |= (uint32(b) & 0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			m.ChangeAddressIndex = &v
 		default:
 			iNdEx = preIndex
 			skippy, err := skipBitcoinTypes(dAtA[iNdEx:])
@@ -983,29 +1141,33 @@ var (
 	ErrIntOverflowBitcoinTypes   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("bitcoin_types.proto", fileDescriptor_bitcoin_types_f7101fa5507edc16) }
+func init() { proto.RegisterFile("bitcoin_types.proto", fileDescriptor_bitcoin_types_b2c794fc5e4c08ca) }
 
-var fileDescriptor_bitcoin_types_f7101fa5507edc16 = []byte{
-	// 329 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0xbf, 0x4e, 0xf3, 0x30,
-	0x14, 0xc5, 0xe5, 0x34, 0xfd, 0x9a, 0xde, 0x36, 0x52, 0xe5, 0x0f, 0x81, 0x11, 0x22, 0x44, 0x65,
-	0xc9, 0x14, 0x21, 0x78, 0x83, 0x22, 0x24, 0xca, 0x00, 0x92, 0xe9, 0xc4, 0x12, 0xb9, 0xad, 0xa1,
-	0x11, 0xad, 0x13, 0xc5, 0x4e, 0xa1, 0x4f, 0xc7, 0xca, 0xc8, 0x23, 0xa0, 0x3c, 0x09, 0xf2, 0x9f,
-	0x4c, 0x55, 0xa7, 0xe4, 0xfc, 0x7c, 0xef, 0x39, 0xbe, 0xd7, 0xf0, 0x7f, 0x9e, 0xab, 0x45, 0x91,
-	0x8b, 0x4c, 0xed, 0x4a, 0x2e, 0xd3, 0xb2, 0x2a, 0x54, 0x31, 0x2e, 0xe0, 0x64, 0x62, 0xf1, 0xac,
-	0x62, 0x42, 0xb2, 0x85, 0xca, 0x0b, 0x31, 0x15, 0x65, 0xad, 0xf0, 0x19, 0xf4, 0xd9, 0x72, 0x59,
-	0x71, 0x29, 0x33, 0x41, 0x50, 0xec, 0x25, 0x21, 0x0d, 0x1c, 0x78, 0xd4, 0x87, 0x65, 0xc5, 0xb7,
-	0xd9, 0x8a, 0xc9, 0x15, 0xf1, 0x62, 0x2f, 0x19, 0xd2, 0x40, 0x83, 0x7b, 0x26, 0x57, 0xf8, 0x08,
-	0xba, 0x5b, 0xb6, 0xae, 0x39, 0xf1, 0x63, 0x94, 0xf8, 0xd4, 0x8a, 0x07, 0x3f, 0xe8, 0x8e, 0x46,
-	0xe3, 0x0d, 0x90, 0xfd, 0xc0, 0xa7, 0x5a, 0xe9, 0x44, 0x02, 0x3d, 0x17, 0x60, 0xf2, 0xfa, 0xb4,
-	0x95, 0x18, 0x83, 0xaf, 0x5b, 0x4c, 0x92, 0x4f, 0xcd, 0x3f, 0xbe, 0x84, 0xb0, 0xbd, 0x5f, 0x2e,
-	0x96, 0xfc, 0x93, 0x74, 0x62, 0x94, 0x84, 0x74, 0xe8, 0xe0, 0x54, 0xb3, 0xf1, 0x17, 0x82, 0xe3,
-	0xfd, 0xbc, 0xd9, 0xae, 0xe4, 0xf8, 0x1c, 0x20, 0xd7, 0x83, 0xca, 0x6c, 0x21, 0x14, 0xf1, 0x4c,
-	0x73, 0xdf, 0x92, 0x5b, 0xa1, 0xf0, 0x15, 0xfc, 0xb3, 0x82, 0x74, 0xe2, 0x4e, 0x32, 0xb8, 0x26,
-	0xe9, 0x81, 0x45, 0x51, 0x57, 0x87, 0x2f, 0x60, 0x50, 0x98, 0x41, 0xac, 0xa3, 0x6f, 0x1c, 0xc1,
-	0x21, 0x6d, 0x79, 0x03, 0x3d, 0xa7, 0x48, 0xd7, 0x78, 0x9e, 0xa6, 0x87, 0x76, 0x41, 0xdb, 0xca,
-	0xc9, 0xdd, 0x77, 0x13, 0xa1, 0x9f, 0x26, 0x42, 0xbf, 0x4d, 0x84, 0x20, 0x12, 0x5c, 0xa5, 0xf2,
-	0x7d, 0xa7, 0x9b, 0xf4, 0xf7, 0x83, 0xad, 0xd7, 0x5c, 0xd9, 0xc7, 0x9c, 0xd7, 0xaf, 0x93, 0xf0,
-	0xb9, 0x65, 0x7a, 0xc6, 0x97, 0x60, 0xc3, 0xa5, 0x64, 0x6f, 0x5c, 0xfe, 0x05, 0x00, 0x00, 0xff,
-	0xff, 0x4f, 0x28, 0x69, 0x9e, 0xfe, 0x01, 0x00, 0x00,
+var fileDescriptor_bitcoin_types_b2c794fc5e4c08ca = []byte{
+	// 392 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0x41, 0xcf, 0xd2, 0x30,
+	0x18, 0xc7, 0xb3, 0x31, 0x60, 0x3c, 0xb0, 0x84, 0x54, 0xa2, 0x35, 0xc6, 0xb9, 0xe0, 0x65, 0x07,
+	0xb3, 0x10, 0xfd, 0x04, 0x42, 0x4c, 0xc4, 0x83, 0x26, 0x95, 0x93, 0x97, 0xa5, 0x8c, 0xca, 0x1a,
+	0x58, 0xbb, 0xac, 0x05, 0xe5, 0x1b, 0x7a, 0xf4, 0xe4, 0xd9, 0xf0, 0x49, 0xde, 0xb4, 0xeb, 0x92,
+	0xf7, 0x0d, 0xe1, 0xb4, 0x3d, 0xff, 0xe7, 0xff, 0xf4, 0xf7, 0xf4, 0x9f, 0xc2, 0xb3, 0x2d, 0xd7,
+	0x85, 0xe4, 0x22, 0xd7, 0x97, 0x9a, 0xa9, 0xac, 0x6e, 0xa4, 0x96, 0x73, 0x09, 0x2f, 0x96, 0xad,
+	0xbc, 0x69, 0xa8, 0x50, 0xb4, 0xd0, 0x5c, 0x8a, 0xb5, 0xa8, 0x4f, 0x1a, 0xbd, 0x82, 0x11, 0xdd,
+	0xed, 0x1a, 0xa6, 0x54, 0x2e, 0xb0, 0x97, 0xf8, 0x69, 0x44, 0x42, 0x27, 0x7c, 0x35, 0xcd, 0xba,
+	0x61, 0xe7, 0xbc, 0xa4, 0xaa, 0xc4, 0x7e, 0xe2, 0xa7, 0x13, 0x12, 0x1a, 0xe1, 0x33, 0x55, 0x25,
+	0x9a, 0x41, 0x9f, 0x8b, 0x1d, 0xfb, 0x8d, 0x7b, 0x76, 0xaa, 0x2d, 0xbe, 0x04, 0x61, 0x30, 0x9d,
+	0xce, 0x2b, 0xc0, 0xb7, 0xc0, 0x6f, 0x27, 0x6d, 0x88, 0x18, 0x86, 0x0e, 0x60, 0x79, 0x23, 0xd2,
+	0x95, 0x08, 0x41, 0x60, 0x46, 0x2c, 0x29, 0x20, 0xf6, 0x1f, 0xbd, 0x85, 0xa8, 0xdb, 0xaf, 0xa3,
+	0x79, 0x69, 0x44, 0x26, 0x4e, 0x5c, 0x1b, 0x6d, 0xfe, 0xcf, 0x87, 0xe7, 0xb7, 0xbc, 0xcd, 0xa5,
+	0x66, 0x86, 0x76, 0x66, 0x8d, 0xe2, 0xd2, 0xdc, 0xce, 0x4c, 0x76, 0x25, 0x7a, 0x0d, 0xc0, 0x4d,
+	0x04, 0x2a, 0x2f, 0x84, 0xc6, 0xbe, 0x6d, 0x8e, 0x5a, 0x65, 0x25, 0x6c, 0x30, 0x47, 0x59, 0x1c,
+	0x72, 0xcd, 0x2b, 0xe6, 0xa0, 0xa1, 0x11, 0x36, 0xbc, 0x62, 0x68, 0x01, 0x83, 0xd6, 0x89, 0x83,
+	0xa4, 0x97, 0x8e, 0xdf, 0xe3, 0xec, 0x4e, 0xbe, 0xc4, 0xf9, 0xd0, 0x1b, 0x18, 0x4b, 0x7b, 0xff,
+	0x16, 0xd7, 0xb7, 0x07, 0x82, 0x93, 0x0c, 0xef, 0x03, 0x0c, 0x5d, 0x85, 0x07, 0xf6, 0xcc, 0x97,
+	0xd9, 0xbd, 0x08, 0x49, 0xe7, 0x44, 0xef, 0x00, 0x95, 0x54, 0xe5, 0x45, 0x49, 0xc5, 0x9e, 0xe5,
+	0x5d, 0xac, 0xc3, 0xc4, 0x4b, 0x43, 0x32, 0x2d, 0xa9, 0x5a, 0xd9, 0xc6, 0x47, 0x97, 0xef, 0x02,
+	0x66, 0x4f, 0x9d, 0x2e, 0xd2, 0xd0, 0x2e, 0x83, 0x8a, 0xc7, 0x66, 0x1b, 0xec, 0xf2, 0xd3, 0x9f,
+	0x6b, 0xec, 0xfd, 0xbd, 0xc6, 0xde, 0xff, 0x6b, 0xec, 0x41, 0x2c, 0x98, 0xce, 0xd4, 0xe1, 0x62,
+	0x96, 0x32, 0xdf, 0x5f, 0xf4, 0x78, 0x64, 0xba, 0x7d, 0x63, 0xdb, 0xd3, 0xcf, 0x65, 0xf4, 0xbd,
+	0xd3, 0x4c, 0xf4, 0x3f, 0xc2, 0x8a, 0x29, 0x45, 0xf7, 0x4c, 0x3d, 0x04, 0x00, 0x00, 0xff, 0xff,
+	0xd1, 0xd5, 0x5f, 0xc9, 0x95, 0x02, 0x00, 0x00,
 }
